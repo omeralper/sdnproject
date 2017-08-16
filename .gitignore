@@ -34,8 +34,6 @@ node_modules
 config/runtime.yaml
 
 #both of the following definitions are nedded
-client
-client/
 
 **/npm-debug*.log
 /ssl/signed-freessl/milat.info/b/
