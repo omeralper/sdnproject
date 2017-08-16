@@ -17,6 +17,8 @@
     "postinstall": "cd client && npm install && ng build --aot -prod"
   },
   "dependencies": {
+    "@angular/cli": "1.2.4",
+    "@angular/compiler-cli": "~4.0.0",
     "amqplib": "^0.4.1",
     "body-parser": "^1.13.3",
     "caller-id": "^0.1.0",
