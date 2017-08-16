@@ -1,7 +1,7 @@
 {
   "port": 5000,
   "ssl": {
-    "enabled": true,
+    "enabled": false,
     "port": 443,
     "self-signed-key": "ssl/ayb-self-signed/key.pem",
     "self-signed-cert": "ssl/ayb-self-signed/crt.cert",
