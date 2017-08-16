@@ -1,5 +1,5 @@
 {
-  "port": 10010,
+  "port": 5000,
   "ssl": {
     "enabled": true,
     "port": 443,
