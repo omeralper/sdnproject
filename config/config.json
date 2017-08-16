@@ -1,0 +1,579 @@
+{
+  "port": 10010,
+  "ssl": {
+    "enabled": true,
+    "port": 443,
+    "self-signed-key": "ssl/ayb-self-signed/key.pem",
+    "self-signed-cert": "ssl/ayb-self-signed/crt.cert",
+    "milat-info-key": "ssl/signed-freessl/milat.info/domain-key.pem",
+    "milat-info-cert": "ssl/signed-freessl/milat.info/domain-cert.pem",
+    "milat-online-key": "ssl/signed-freessl/milat.online/domain-key.pem",
+    "milat-online-cert": "ssl/signed-freessl/milat.online/domain-cert.pem",
+    "key": "ssl/signed-freessl/milat.merged/domain-key.pem",
+    "cert": "ssl/signed-freessl/milat.merged/domain-cert.pem"
+  },
+  "proj": {
+    "id": "AYB",
+    "name": "Milat AYB"
+  },
+  "build_date": "",
+  "cors": {
+    "methods": [
+      "GET",
+      "OPTIONS",
+      "POST"
+    ],
+    "credentials": true,
+    "preflightContinue": false,
+    "origin": true
+  },
+  "log4js": {
+    "config_reload": 0,
+    "log_dir": ""
+  },
+  "express": {
+    "log": true,
+    "swagger_ui": true
+  },
+  "dir_logs": {
+    "enabled": true,
+    "path": "/logs"
+  },
+  "process": {
+    "title": "MILAT-WEB",
+    "delay": {
+      "close": 1000,
+      "close_fin": 200,
+      "close_max": 10000
+    }
+  },
+  "if_localhost_only": {
+    "stop": true,
+    "rmq": false
+  },
+  "services": {
+    "version": "0.3.1",
+    "disabled_mode": "proxy",
+    "mode": "mockup",
+    "AAAPermissions": {
+      "aaaPermListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/perm/list"
+      },
+      "aaaPermSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/perm/search"
+      },
+      "aaaPermGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/perm/get"
+      }
+    },
+    "AAARoles": {
+      "aaaRoleDeletePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/role/delete"
+      },
+      "aaaRoleGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/role/get"
+      },
+      "aaaRoleListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/role/list"
+      },
+      "aaaRoleSavePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/role/save"
+      },
+      "aaaRoleSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/role/search"
+      }
+    },
+    "AAA": {
+      "aaaLoginPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/login"
+      },
+      "aaaLogoutPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/logout"
+      },
+      "aaaLostpwdPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/lostpwd"
+      }
+    },
+    "AAAUsers": {
+      "aaaUserChangepwdPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/user/changepwd"
+      },
+      "aaaUserCheckusrPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/user/checkusr"
+      },
+      "aaaUserDeletePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/user/delete"
+      },
+      "aaaUserGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/user/get"
+      },
+      "aaaUserListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/user/list"
+      },
+      "aaaUserSavePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/user/save"
+      },
+      "aaaUserSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/user/search"
+      },
+      "aaaUserSetpwdPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/capi/aaa/user/setpwd"
+      }
+    },
+    "Flows": {
+      "flowDeletePOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/flow/delete"
+      },
+      "flowListPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/flow/list"
+      },
+      "flowSearchPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/flow/list"
+      }
+    },
+    "Log": {
+      "logLevelListPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/log/levelList"
+      },
+      "logLevelUpdatePOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/log/levelUpdate"
+      },
+      "logSavePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/log/save"
+      },
+      "logSaveListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/log/saveList"
+      }
+    },
+    "Paths": {
+      "pathDeletePOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/path/delete"
+      },
+      "pathGetPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/path/get"
+      },
+      "pathListPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/path/list"
+      },
+      "pathSavePOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/path/save"
+      }
+    },
+    "PrognetVersionList": {
+      "versionListPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/version/list"
+      }
+    },
+    "Stats": {
+      "statsHostPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/stats/host"
+      },
+      "statsLinkPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/stats/link"
+      },
+      "statsPortPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/stats/port"
+      },
+      "statsSwitchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/stats/switch"
+      }
+    },
+    "Topology": {
+      "topologyDeletePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/delete"
+      },
+      "topologyGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/get"
+      },
+      "topologyListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/list"
+      },
+      "topologySwitchDeletePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/switch/delete"
+      },
+      "topologySwitchGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/switch/get"
+      },
+      "topologySwitchListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/switch/list"
+      },
+      "topologySwitchSavePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/switch/save"
+      },
+      "topologySwitchSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/switch/search"
+      },
+      "topologyLinkDeletePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/link/delete"
+      },
+      "topologyLinkGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/link/get"
+      },
+      "topologyLinkListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/link/list"
+      },
+      "topologyLinkSavePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/link/save"
+      },
+      "topologyLinkSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/link/search"
+      }
+    },
+    "SubTopology": {
+      "topologyGetSubPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/topology/get/sub"
+      }
+    },
+    "NacAuth": {
+      "loginPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/login"
+      },
+      "logoutPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/logout"
+      },
+      "lostpwdPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/lostpwd"
+      }
+    },
+    "NacGroup": {
+      "groupDeletePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/group/delete"
+      },
+      "groupGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/group/get"
+      },
+      "groupListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/group/list"
+      },
+      "groupSavePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/group/save"
+      },
+      "groupSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/group/search"
+      }
+    },
+    "NacDevice": {
+      "deviceDeletePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/device/delete"
+      },
+      "deviceGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/device/get"
+      },
+      "deviceListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/device/list"
+      },
+      "deviceSavePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/device/save"
+      },
+      "deviceSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/device/search"
+      }
+    },
+    "NacUserDevice": {
+      "userDeviceDeletePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/device/delete"
+      },
+      "userDeviceGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/device/get"
+      },
+      "userDeviceListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/device/list"
+      },
+      "userDeviceSavePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/device/save"
+      },
+      "userDeviceSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/device/search"
+      }
+    },
+    "NacUser": {
+      "userChangepwdPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/changepwd"
+      },
+      "userCheckusrPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/checkusr"
+      },
+      "userDeletePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/delete"
+      },
+      "userGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/get"
+      },
+      "userListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/list"
+      },
+      "userSavePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/save"
+      },
+      "userSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/search"
+      },
+      "userSetpwdPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/nas/user/setpwd"
+      }
+    },
+    "Mvtn": {
+      "virtualCreateVtnPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/virtual/create-vtn"
+      },
+      "virtualListDeviceProfilesPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/virtual/list-device-profiles"
+      }
+    },
+    "Alarm": {
+      "alarmGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/alarm/get"
+      },
+      "alarmListPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/alarm/list"
+      },
+      "alarmSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/alarm/search"
+      },
+      "alarmLogGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/alarm/log/get"
+      },
+      "alarmLogListPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/alarm/log/list"
+      },
+      "alarmLogSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/alarm/log/search"
+      }
+    },
+    "TSDB": {
+      "tsdbMetricsNtagsPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7171/prognetnm/api/{version}/ctrl/tsdb/metricsNtags"
+      },
+      "tsdbQueryPOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7171/prognetnm/api/0.3.1/ctrl/tsdb/query"
+      },
+      "tsdbDevicePOST": {
+        "real": true,
+        "url": "http://192.168.3.113:7171/prognetnm/api/0.3.1/lite-controller/list"
+      }
+    },
+    "Policy": {
+      "policyProfileCountPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/policy/count"
+      },
+      "policyProfileDeletePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/policy/delete"
+      },
+      "policyProfileGetPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/policy/get"
+      },
+      "policyProfileListPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/policy/list"
+      },
+      "policyProfileSavePOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/policy/save"
+      },
+      "policyProfileSearchPOST": {
+        "real": false,
+        "url": "http://192.168.3.113:7172/prognetnm/api/{version}/ctrl/policy/search"
+      }
+    },
+    "topology_rmq": {
+      "enabled": false,
+      "process": {
+        "title": "MILAT-TOPO",
+        "log_name": "TOPO",
+        "pass_name": "topo"
+      },
+      "delay": {
+        "init": 2000,
+        "close": 1000
+      },
+      "delay_random": {
+        "min_sec": 30,
+        "max_sec": 90
+      },
+      "trace": {
+        "args": true,
+        "data": false
+      },
+      "info": {
+        "rmq": true
+      },
+      "amqp": {
+        "connection": "amqp://prognet:prognet@192.168.3.113:5672",
+        "exchange": {
+          "name": "topologyEvents",
+          "type": "fanout",
+          "assert": {
+            "options": {
+              "durable": false
+            }
+          }
+        },
+        "channel": {
+          "prefetch": {
+            "count": 1,
+            "global": false
+          }
+        },
+        "queue": {
+          "name": "milat_tnq_{{ip}}",
+          "assert": {
+            "options": {
+              "durable": true,
+              "exclusive": true
+            }
+          },
+          "pattern": "",
+          "consume": {
+            "options": {
+              "noAck": false
+            }
+          }
+        }
+      }
+    },
+    "alarm_rmq": {
+      "enabled": false,
+      "process": {
+        "title": "MILAT-ALARM",
+        "log_name": "ALARM",
+        "pass_name": "alarm"
+      },
+      "delay": {
+        "init": 2000,
+        "close": 1000
+      },
+      "delay_random": {
+        "min_sec": 30,
+        "max_sec": 90
+      },
+      "trace": {
+        "args": true,
+        "data": true
+      },
+      "info": {
+        "rmq": true
+      },
+      "amqp": {
+        "connection": "amqp://prognet:prognet@192.168.3.113:5672",
+        "exchange": {
+          "name": "alarmEvents",
+          "type": "fanout",
+          "assert": {
+            "options": {
+              "durable": false
+            }
+          }
+        },
+        "channel": {
+          "prefetch": {
+            "count": 1,
+            "global": false
+          }
+        },
+        "queue": {
+          "name": "milat_alq_{{ip}}",
+          "assert": {
+            "options": {
+              "durable": true,
+              "exclusive": true
+            }
+          },
+          "pattern": "",
+          "consume": {
+            "options": {
+              "noAck": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

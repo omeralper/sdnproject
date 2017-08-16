@@ -1,0 +1,87 @@
+{
+    "comments": [
+        "for more info - https://github.com/nomiddlename/log4js-node",
+        "category - groups appenders",
+        "type - console, file, smtp, hookio, gelf, multiprocess",
+        "layouts - colored, messagePassThrough, basic, pattern",
+        "add pattern - 'layout': {'type': 'pattern', 'pattern' : '%d{ISO8601} : %-5p : %-5c - %m'}",
+        "levels - ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF",
+        "log - logs to console and rotating file",
+        "logstash - https://github.com/nomiddlename/log4js-node/blob/master/examples/logstashUDP.js",
+        "amqp - https://github.com/maxnachlinger/log4js-node-amqp"
+    ],
+    "appenders": [
+        {
+            "category": "log",
+            "type": "console",
+            "layout": {
+                "type": "colored"
+            }
+        },
+        {
+            "category": "log",
+            "type": "file",
+            "absolute": false,
+            "filename": "logs/server.txt",
+            "maxLogSize": 11288576,
+            "backups": 10,
+            "pollInterval": 15,
+            "layout": {
+                "type": "pattern",
+                "pattern": "%d{ISO8601} : %-5p : %m"
+            }
+        },
+        {
+            "category": "log",
+            "type": "log4js-node-amqp",
+            "connection": {
+                "url": "amqp://localhost:5672",
+                "clientProperties": {
+                    "product": "log4js"
+                }
+            },
+            "exchange": {
+                "name": "logExchange",
+                "type": "fanout",
+                "durable": true,
+                "autoDelete": false
+            },
+            "queue": {
+                "name": "uiQueue",
+                "durable": true,
+                "autoDelete": false
+            },
+            "publish": {
+                "mandatory": true,
+                "deliveryMode": 2,
+                "routingKey": "msg"
+            },
+            "sendInterval": 0,
+            "layout": {
+                "type": "messagePassThrough"
+            },
+            "additionalInfo": {
+                "machine":  "",
+                "application-name": "Node.js Web UI"
+            }
+        },
+        {
+            "category": "elastic",
+            "type": "logstashUDP",
+            "host": "127.0.0.1",
+            "port": 12345,
+            "logType": "jsUDP",
+            "fields": {
+                "sender": "swagger-app"
+            },
+            "layout": {
+                "type": "pattern",
+                "pattern": "%d{ISO8601} : %-5p : %.1350m"
+            }
+        }
+    ],
+    "levels": {
+        "log": "INFO",
+        "elastic": "OFF"
+    }
+}

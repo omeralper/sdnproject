@@ -1,0 +1,13 @@
+{
+  "name": "rmq-consume",
+  "version": "0.0.1",
+  "private": true,
+  "description": "RMQ consume a queue",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "scripts": {},
+  "dependencies": {
+    "amqp": "^0.2.6"
+  }
+}

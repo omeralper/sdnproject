@@ -1,0 +1,81 @@
+﻿; Domain: milat.info
+; Exported (y-m-d hh:mm:ss): 2017-08-14 08:04:21
+;
+; This file is intended for use for informational and archival
+; purposes ONLY and MUST be edited before use on a production
+; DNS server.
+;
+; In particular, you must update the SOA record with the correct
+; authoritative name server and contact e-mail address information,
+; and add the correct NS records for the name servers which will
+; be authoritative for this domain.
+;
+; For further information, please consult the BIND documentation
+; located on the following website:
+;
+; http://www.isc.org/
+;
+; And RFC 1035:
+;
+; http://www.ietf.org/rfc/rfc1035.txt
+;
+; Please note that we do NOT offer technical support for any use
+; of this zone data, the BIND name server, or any other third-
+; party DNS software.
+;
+; Use at your own risk.
+
+; SOA Record
+milat.info.	600	IN	SOA	ns01.domaincontrol.com.	dns.jomax.net (
+				2017081414
+				28800
+				7200
+				604800
+				600
+				)
+
+; A Records
+@	600	IN	A	184.168.221.52
+
+; CNAME Records
+c1	3600	IN	CNAME	@
+_domainconnect	3600	IN	CNAME	_domainconnect.gd.domaincontrol.com
+c5	3600	IN	CNAME	@
+c3	3600	IN	CNAME	@
+ayb	3600	IN	CNAME	@
+c2	3600	IN	CNAME	@
+c8	3600	IN	CNAME	@
+email	3600	IN	CNAME	email.secureserver.net
+nac	3600	IN	CNAME	@
+c4	3600	IN	CNAME	@
+c7	3600	IN	CNAME	@
+c10	3600	IN	CNAME	@
+www	3600	IN	CNAME	@
+c9	3600	IN	CNAME	@
+ctrl	3600	IN	CNAME	@
+ftp	3600	IN	CNAME	@
+c6	3600	IN	CNAME	@
+
+; MX Records
+@	3600	IN	MX	10	mailstore1.secureserver.net
+@	3600	IN	MX	0	smtp.secureserver.net
+
+; TXT Records
+_acme-challenge.c2	600	IN	TXT	"R2kEzkX4_hkpqHTuRGj2R1HbZKjdLlh2wdd5FKCwvTg"
+_acme-challenge	600	IN	TXT	"SjoZvpdZ1cFbydEuKgECkjSOETX6ZmTWiEnMpqdusuQ"
+_acme-challenge.c3	600	IN	TXT	"vO5sBL2tG5jKpYWUDaOjMIPazhvtFIyTSxamUUvRy9A"
+_acme-challenge.c4	600	IN	TXT	"jnmc3ktCxzrTsQKPVXc0dE4RVj5ok_eooIyvpve2FZc"
+_acme-challenge.c5	600	IN	TXT	"KxhCjyX8Tm2H2gSXUYePKgJEpAW6nnYJceQqpgLijDU"
+_acme-challenge.c10	600	IN	TXT	"izfyKdwM1g6EJSP9iczjj3meVmyR2COHtVg1_W0ESWI"
+_acme-challenge.c1	600	IN	TXT	"hIwDQ9qRlT0lubiyjDGyh4xG5JeeC_3DTAC8OvA9PVc"
+_acme-challenge.c6	600	IN	TXT	"ipuPgCwiCQQegpRhEwWw5-M8O1H0VjZ1P9KjtS9j0RY"
+_acme-challenge.c7	600	IN	TXT	"_QQ8DO28T0DsKpRK47tkujYcAIgeW0VuGFN3EtPEqb4"
+_acme-challenge.ayb	600	IN	TXT	"9KJOSje3ZjNESHuPsJ4N5--5dJFacNtQiKw2FKWg55o"
+_acme-challenge.c9	600	IN	TXT	"z0lUTqK9IU4TNAIZVrcv8C9upkzP9s_JLFyw8LlsLzc"
+_acme-challenge.c8	600	IN	TXT	"ZLRWA2X9uJ2m2drYF-M0PWBDQOl2EGnut9aTpHq01cA"
+_acme-challenge.nac	600	IN	TXT	"5JY6tQ7mZrSSxYr0PuKWvv_j-t-SYxF5y5k3QJhyF_8"
+_acme-challenge.ctrl	600	IN	TXT	"KIO-mkIYI6H5xzfoZkAAT7Kvkm_PuU8xy3_PeRSRHTM"
+
+; NS Records
+@	3600	IN	NS	ns02.domaincontrol.com
+@	3600	IN	NS	ns01.domaincontrol.com
