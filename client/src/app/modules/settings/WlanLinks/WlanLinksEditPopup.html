@@ -1,0 +1,78 @@
+<form action="#" class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group first">
+            <label class="col-md-3 control-label">{{t('fields.wan_link_name.label')}}</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" placeholder="{{t('fields.wan_link_name.placeholder')}}"
+                       required validation [(ngModel)]="data.name"
+                       name="one">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.switch.label')}}</label>
+            <div class="col-md-9">
+                <select [ngModel]="selectedSwitch" name="switch" class="form-control"  (ngModelChange)="switchChanged($event)">
+                    <option *ngFor="let switch of switchList" [ngValue]="switch">
+                        {{switch?.id}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.port.label')}}</label>
+            <div class="col-md-9">
+                <select [(ngModel)]="selectedPort" name="port" class="form-control">
+                    <option *ngFor="let port of portList" [ngValue]="port">
+                        {{port?.number}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.dst_cluster.label')}}</label>
+            <div class="col-md-9">
+                <select [(ngModel)]="selectedCluster" name="cluster" class="form-control">
+                    <option *ngFor="let cluster of clusterList" [ngValue]="cluster">
+                        {{cluster?.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.super_port.label')}}</label>
+            <div class="col-md-9">
+                <input [(ngModel)]="data.superPortNumber" name="superPort" class="form-control" restrict
+                       [restrict_type]="'number'" [restrict_minvalue]="0" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.link_speed.label')}}</label>
+            <div class="col-md-5">
+                <input type="text" #bw [(ngModel)]="linkSpeed" name="speed" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <select #bwUnit [(ngModel)]="speedUnit" name="BwUnit" class="form-control" (change)="changeBandWith()">
+                    <option data-min="100" data-max="10000000" value="KBPS">KBPS</option>
+                    <option data-min="0.1" data-max="10000" value="MBPS">MBPS</option>
+                    <option data-min="0.0001" data-max="10" value="GBPS">GBPS</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.link_type.label')}}</label>
+            <div class="col-md-9">
+                <select [(ngModel)]="selectedLinkType" name="link_type" class="form-control">
+                    <option *ngFor="let type of linkTypes" [ngValue]="type">
+                        {{i18n.t("enums.LINKTYPE." + type)}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.description.label')}}</label>
+            <div class="col-md-9">
+                <textarea name="textarea" rows="8" cols="40" [(ngModel)]="data.explanation" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+</form>

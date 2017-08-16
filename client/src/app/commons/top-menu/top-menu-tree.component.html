@@ -1,0 +1,6 @@
+<li [class]="item.menu.length>0?'dropdown-submenu more-dropdown-submenu argela-nav-child':'dropdown'" *ngFor="let item of menu">
+    <a [routerLink]="item?.link" [attr.data-url]="item?.url" class="argela-child-link">
+        <i [class]="item.icon"></i> <span>{{item.title}}</span>
+    </a>
+    <ul *ngIf="item.menu.length>0" class="dropdown-menu" TopMenuTreeComponent [menu]="item.menu"></ul>
+</li>

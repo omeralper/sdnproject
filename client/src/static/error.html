@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html data-i18n="[lang]langCode" lang="en" class="ie8 no-js">
+<![endif]-->
+<!--[if IE 9]>
+<html data-i18n="[lang]langCode" lang="en" class="ie9 no-js">
+<![endif]-->
+<!--[if !IE]><!-->
+<html data-i18n="[lang]langCode">
+<!--<![endif]-->
+
+<head>
+    <base href="/">
+    <meta charset="utf-8"/>
+    <title data-i18n="common.project_title"></title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+
+    <link href="../assets/googlefonts.css" rel="stylesheet" type="text/css"/>
+    <link href="../node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css"/>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../node_modules/jquery.uniform/dist/css/default.css" rel="stylesheet" type="text/css"/>
+    <link href="../node_modules/pace-progress/themes/red/pace-theme-minimal.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../node_modules/icheck/skins/all.css" rel="stylesheet"/>
+    <link href="../node_modules/toastr/build/toastr.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../assets/pages/css/about.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/pages/css/error.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/global/css/languages.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="../assets/global/css/plugins.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/layouts/layout5/css/layout.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/layouts/layout5/css/custom.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../assets/style.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="shortcut icon" href="../assets/img/logo.ico"/>
+
+</head>
+
+<body class=" page-404-3">
+<div class="page-inner">
+    <img data-i18n="[src]error.background" class="img-responsive" alt=""></div>
+<div class="container error-404">
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-4 hidden-xs">
+            <br><br>
+            <h1><i data-i18n="[class]error.icon" style="font-size: 150pt;"></i></h1>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-8">
+            <h1 data-i18n="error.title;[class]error.fontColor"></h1>
+            <h2 data-i18n="error.motto"></h2>
+            <p data-i18n="error.description"></p>
+            <!--<p>-->
+            <!--<a href="index.html" class="btn red btn-outline"> Return home </a>-->
+            <!--<br></p>-->
+        </div>
+    </div>
+</div>
+<!--[if lt IE 9]>
+<script src="../node_modules/respond/main.js"></script>
+<script src="../node_modules/excanvas/excanvas.compiled.js"></script>
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+<script src="../node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
+<script src="../node_modules/is_js/is.min.js" type="text/javascript"></script>
+<script src="../libs/i18next/i18next.min.js" type="text/javascript"></script>
+<script src="../node_modules/systemjs/dist/system-polyfills.js"></script>
+<script src="../node_modules/es6-shim/es6-shim.min.js"></script>
+<!--<script src="../node_modules/zone.js/dist/zone.js"></script>-->
+<!--<script src="../node_modules/systemjs/dist/system.src.js"></script>-->
+<!--<script src="../node_modules/reflect-metadata/Reflect.js"></script>-->
+<!--<script src="../systemjs.config.js"></script>-->
+<!--<script src="../node_modules/rxjs/bundles/Rx.js"></script>-->
+<!--<script src="../node_modules/offline-js/offline.min.js"></script>-->
+<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../node_modules/js-cookie/src/js.cookie.js" type="text/javascript"></script>
+<script src="../node_modules/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../node_modules/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../node_modules/block-ui/jquery.blockUI.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="../node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="../node_modules/moment/min/moment-with-locales.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<script src="../node_modules/toastr/build/toastr.min.js" type="text/javascript"></script>
+<script src="../node_modules/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script src="../node_modules/icheck/icheck.min.js" type="text/javascript"></script>
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<script>
+
+    $(function () {
+
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            console.log('Query variable %s not found', variable);
+        }
+
+        var allowedErrors = {
+          "401":true
+        };
+        var errorCode = getQueryVariable("code");
+
+        if (!allowedErrors[errorCode]) errorCode = "500";
+
+        window.paceOptions = {
+            document: true, // disabled
+            eventLag: true,
+            restartOnPushState: true,
+            restartOnRequestAfter: true,
+            ajax: {
+                trackMethods: ['POST', 'GET']
+            }
+        };
+
+        i18n.init({
+            //lng: 'tr', //auto detect language
+            fallbackLng: 'en',
+            fallbackOnNull: true, //WARN this is requred, do not modify (yildiray)
+            fallbackOnEmpty: false,//WARN this is requred, do not modify (yildiray)
+            resGetPath: '/static/' + errorCode + '/__lng__.json'
+        }, function (err, t) {
+            // initialized and ready to go!
+            $(document).localize();
+        });
+    });
+</script>
+<script src="../node_modules/pace-progress/pace.min.js" type="text/javascript"></script>
+<!-- END THEME LAYOUT SCRIPTS -->
+</body>
+</html>

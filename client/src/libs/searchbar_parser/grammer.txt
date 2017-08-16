@@ -1,0 +1,54 @@
+/*
+ * Milat Textbox Query Parser
+ * ----------------------------------------------------------------------------------------
+ *
+ * "SearchBarParser" class is generated using peg.js (http://pegjs.org/online) a parser generator.
+ *
+ * Following grammer is used for generating the parser;
+ *
+ * Grammer By: M. Yildiray Meric <yildiray.meric@argela.com.tr>
+ * Date: 18.11.2016
+ */
+
+Start
+  = A:(Expr / SPC) { return (A==="")? null : A ;}
+
+Expr
+  = A:Factor SPC ("&&" / "&") SPC B:Expr { return { operator:"AND", leftQuery:A, rightQuery: B};}
+   / Factor
+
+Factor
+  = A:Term SPC ("||" / "|") SPC B:Expr { return { operator:"OR", leftQuery:A, rightQuery: B};}
+  / A:Term SPC B:Expr { return { operator:"OR", leftQuery:A, rightQuery: B};}
+  / Term
+
+Term
+  = SPC "!" SPC A:Term { return { operator:"NOT", leftQuery:A };}
+  / Value
+
+Value
+  = SPC "(" SPC A:Expr SPC ")" SPC { return A; }
+  / A:Query { return A;}
+
+Query
+  = A:Alfanumeric SPC (">=") SPC B:(String) SPC { return { operator:"GREATER_EQUAL", fieldName: A, fieldValue:B.fieldValue  } }
+  / A:Alfanumeric SPC (">") SPC B:(String) SPC { return { operator:"GREATER", fieldName: A, fieldValue:B.fieldValue  } }
+  / A:Alfanumeric SPC ("<=") SPC B:(String) SPC { return { operator:"SMALLER_EQUAL", fieldName: A, fieldValue:B.fieldValue  } }
+  / A:Alfanumeric SPC ("<") SPC B:(String) SPC { return { operator:"SMALLER", fieldName: A, fieldValue:B.fieldValue  } }
+  / A:Alfanumeric SPC ("!=" ) SPC B:(String) SPC { return {operator : "NOT", leftQuery : { operator:B.operator, fieldName: A, fieldValue:B.fieldValue  } } }
+  / A:Alfanumeric SPC ("=" ) SPC B:(String) SPC { return { operator:B.operator, fieldName: A, fieldValue:B.fieldValue  } }
+  / A:Alfanumeric SPC ("~") SPC B:(String) SPC { return { operator:"EXACT_VALUE", fieldName: A, fieldValue:B.fieldValue  } }
+  / A:String SPC { return { operator:A.operator, fieldName: "*", fieldValue:A.fieldValue  } }
+
+String
+ = A:($[^\t\n\r "\(\)\|\&<>~=\[\]]+) { return { operator:"VALUE", fieldValue:A  };} //BETWEEN
+  / '"' A:($[^\t\n\r"])+ '"' { return { operator:"VALUE", fieldValue:A.join('')  }; }
+  / '[' A:($[^\t\n\r\]])+ ']' { return { operator:"EXACT_VALUE", fieldValue:A.join('')  }; }
+
+Alfanumeric
+ = A:($[0-9a-zA-Z_#]i+) {  return A;}
+ //= A:($([a-zA-Z_]i[0-9a-zA-Z_]i+)) {  return A;}
+ //= A:($([#]i[0-9]i+)) {  return A;}
+
+SPC
+  = $[ \t\n\r]* { return "";}

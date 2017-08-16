@@ -1,0 +1,247 @@
+<style>
+    .node-editor-wrapper {
+        width: 18vw;
+        position: absolute;
+        right: 0;
+        margin-right: 10px;
+    }
+
+    .properties {
+
+    }
+    .pgCellInputRow40{
+        width: 40%;
+    }
+
+    /*.body-height{*/
+       /*height: 64vh;*/
+    /*}*/
+
+    .pgTable {
+        /*border: solid 1px #95B8E7;*/
+        border-spacing: 0;
+        width: 100%;
+    }
+
+    .pgGroupRow {
+        background-color: #E0ECFF;
+        font-weight: bold;
+    }
+
+    .pgGroupCell {
+        padding: 5px;
+    }
+
+    .pgRow{
+    }
+
+    .pgCell {
+        border: dotted 1px #ccc;
+        padding: 5px;
+    }
+</style>
+<div>
+    <div class="node-editor-wrapper">
+        <div class="portlet box blue-hoki">
+            <div class="portlet-title">
+                <div class="caption"><i class="fa fa-gear"></i>{{selectedElementToEdit?.type}} {{t('edit')}}</div>
+                <div class="actions">
+                    <a *ngIf="(checkIfTabTypeIsEditOrCreate()
+					&& (checkButtonStatus('SUBMITTED','vir_topo:create_approve')
+					|| checkButtonStatus('SUSPENDED','vir_topo:create_approve')
+					|| checkButtonStatus('SUSPENDED','vir_topo_req:create')
+					|| checkButtonStatus('CREATED','vir_topo_req:create')
+					|| checkButtonStatus('EDITED','vir_topo_req:create') ) )"
+                       href="javascript:;" class="btn uppercase green-meadow" (click)="createAndSendVirtualTopology()">
+                        <i class="fa fa-floppy-o"></i> {{i18n.t('dialogs.actions.save.title')}} </a>
+                    <a *ngIf="checkIfTabTypeIsEditOrCreate()" href="javascript:;" class="btn red-sunglo btn-sm" (click)="refreshSelectedTopology()">
+                        <i class="fa fa-ban"></i> {{i18n.t('dialogs.actions.cancel.title')}} </a>
+                </div>
+            </div>
+            <div class="portlet-body" style="padding: 0 !important; overflow: auto;" [style.height.px]="height-21">
+                <table class="pgTable">
+                    <tr class="pgGroupRow"><td colspan="2" class="pgGroupCell">{{t('vtn')}}</td></tr>
+                    <tbody>
+                    <tr class="pgRow">
+                        <td class="pgCell">{{t('name')}}: {{topologyData?.name}}</td>
+                        <td class="pgCell">
+                            <a id="editMvtn" href="javascript:;" class="btn btn-circle btn-icon-only blue" (click)="emitTopologyEditPopup()">
+                                <i class="fa fa-sliders" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <form action="#" class="form-horizontal" *ngIf="selectedElementToEdit">
+                    <div class="properties" [ngSwitch]="selectedElementToEdit.type">
+                        <!--SWITCH-->
+                        <div *ngSwitchCase="'Switch'">
+                            <table class="pgTable">
+                                <tr class="pgGroupRow"><td colspan="2" class="pgGroupCell">Editor</td></tr>
+                                <tbody>
+                                <tr class="pgRow">
+                                    <td class="pgCell">{{t('name')}}:</td>
+                                    <td class="pgCell">
+                                        <input type="text" [(ngModel)]="selectedElementToEdit.name" name="switchName" (ngModelChange)="onNodeNameChange($event)"/>
+                                    </td>
+                                </tr>
+                                <tr class="pgRow">
+                                    <td class="pgCell">{{t('profile')}}:</td>
+                                    <td class="pgCell">
+                                        <div [hidden]="!optionList">
+                                            <select id="switchProfileSelection" class=""
+                                                    [(ngModel)]="selectedElementToEdit.deviceProfile" name="profileId" (change)="updateSelectedValue($event.target.value, selectedElementToEdit)" ><!--(ngModelChange)="updateSelectedValue($event)"-->
+                                                <option *ngFor="let option of optionList" [disabled]="option.isUsed === true ? 'true' : null"
+                                                        [ngValue]="option">
+                                                    {{option?.profileId}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="pgRow" >
+                                    <td class="pgCell">{{t('port')}}</td>
+                                    <td class="pgCell">
+                                        <div [hidden]="!selectedPorts">
+                                            <select id="ports" #portSelector class="selectpicker" multiple data-size="5"
+                                                    title="{{t('fields.portNumber.help_line')}}"
+                                                    style="width: 100%"
+                                                    (change)="updateSelectedPorts($event.target.value)"
+                                                    name="portsOfProfile">
+                                                <option *ngFor="let port of portsOfProfile; let i = index">
+                                                    {{port?.number}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="pgRow">
+                                    <td class="pgCell">{{t('securityLevel')}}</td>
+                                    <td class="pgCell">
+                                        <select id="securityLevelForSwitchSelection" class="" [ngModel]="selectedElementToEdit?.securityLevel" (ngModelChange)="selectedElementToEdit?.securityLevel ? selectedElementToEdit.securityLevel = $event : null" name="security">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-------------------------------------------------------LINK------------------------------------------------------------------------------>
+                        <div *ngSwitchCase="'Link'">
+                            <table class="pgTable">
+                                <tr class="pgGroupRow"><td colspan="3" class="pgGroupCell">Editor</td></tr>
+                                <tbody>
+                                <tr class="pgRow">
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.add_edit_link_popup.source_bandwidth')}}</td>
+                                    <td class="pgCell">
+                                        <input class="pgCellInputRow40" id="sourceBW" #sourceBW [(ngModel)]="sourceBandwidth" (change)="updateBwOnChange()" type="text" restrict
+                                               name="srcBw"
+                                               [restrict_maxvalue]="sourceBWUnit.options[sourceBWUnit.selectedIndex]?.dataset.max"
+                                               [restrict_minvalue]="sourceBWUnit.options[sourceBWUnit.selectedIndex]?.dataset.min"
+                                               [restrict_minError]="i18n.t('common.messages.bandwidth_field_value_error_min')"
+                                               [restrict_maxError]="i18n.t('common.messages.bandwidth_field_value_error_max')"
+                                               [restrict_type]="'number'" maxlength="8"
+                                               data-i18n="[placeholder]network_vis.topology.add_edit_link_popup.source_bandwidth"
+                                               required validation>
+                                    </td>
+                                    <td class="pgCell">
+                                        <select #sourceBWUnit [(ngModel)]="sourceBandwidthUnit"
+                                                required validation (change)="changeBandWith('source')" name="srcBwUnit">
+                                            <option data-min="100" data-max="10000000" value="1000">KBPS</option>
+                                            <option data-min="0.1" data-max="10000" value="1000000">MBPS</option>
+                                            <option data-min="0.0001" data-max="10" value="1000000000">GBPS</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="pgRow">
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.add_edit_link_popup.target_bandwidth')}}</td>
+                                    <td class="pgCell">
+                                        <input class="pgCellInputRow40" id="targetBW" #targetBW [(ngModel)]="targetBandwidth" (change)="updateBwOnChange()" type="text" restrict
+                                               [restrict_type]="'number'"
+                                               [restrict_maxvalue]="targetBWUnit.options[targetBWUnit.selectedIndex]?.dataset.max"
+                                               [restrict_minvalue]="targetBWUnit.options[targetBWUnit.selectedIndex]?.dataset.min"
+                                               [restrict_minError]="i18n.t('common.messages.bandwidth_field_value_error_min')"
+                                               [restrict_maxError]="i18n.t('common.messages.bandwidth_field_value_error_max')"
+                                               name="dstBw"
+                                               maxlength="8"
+                                               data-i18n="[placeholder]network_vis.topology.add_edit_link_popup.target_bandwidth"
+                                               required validation>
+                                    </td>
+                                    <td class="pgCell">
+                                        <select #targetBWUnit [(ngModel)]="targetBandwidthUnit"
+                                                required validation (change)="changeBandWith('target')" name="dstBwUnit">
+                                            <option data-min="100" data-max="10000000" value="1000">KBPS</option>
+                                            <option data-min="0.1" data-max="10000" value="1000000">MBPS</option>
+                                            <option data-min="0.0001" data-max="10" value="1000000000">GBPS</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="pgRow">
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.add_edit_link_popup.securityLevel')}}</td>
+                                    <td class="pgCell" colspan="2">
+                                        <select id="securityLevelForLinkSelection" name="linkSecurityLevel" [ngModel]="selectedElementToEdit?.securityLevel" (ngModelChange)="linkSecurityLevelChange($event)">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="pgRow">
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.add_edit_link_popup.jitter')}}:</td>
+                                    <td class="pgCell">
+                                        <input class="pgCellInputRow40" type="text" [(ngModel)]="selectedElementToEdit.jitter" name="jitter"/>
+                                    </td>
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.create_virtual_topology_popup.qos_params.fields.jitter.unit')}}</td>
+                                </tr>
+                                <tr class="pgRow">
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.add_edit_link_popup.delay')}}:</td>
+                                    <td class="pgCell">
+                                        <input class="pgCellInputRow40" type="text" [(ngModel)]="selectedElementToEdit.delay" name="delay"/>
+                                    </td>
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.create_virtual_topology_popup.qos_params.fields.delay.unit')}}</td>
+                                </tr>
+                                <tr class="pgRow">
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.add_edit_link_popup.packet_loss_rate')}}:</td>
+                                    <td class="pgCell">
+                                        <input class="pgCellInputRow40" type="text" [(ngModel)]="selectedElementToEdit.loss" name="packetLossRate"/>
+                                    </td>
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.create_virtual_topology_popup.qos_params.fields.packet_loss_rate.unit')}}</td>
+                                </tr>
+                                <tr class="pgRow">
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.add_edit_link_popup.collision')}}:</td>
+                                    <td class="pgCell">
+                                        <input class="pgCellInputRow40" type="text" [(ngModel)]="selectedElementToEdit.collision" name="collision"/>
+                                    </td>
+                                    <td class="pgCell">{{i18n.t('network_vis.topology.create_virtual_topology_popup.qos_params.fields.collision.unit')}}</td>
+                                </tr>
+                                <!--<tr class="pgRow">-->
+                                    <!--<td class="pgCell">src-dest</td>-->
+                                    <!--<td class="pgCell">{{selectedElementToEdit?.srcPort?.id | slice:-4}}</td>-->
+                                    <!--<td class="pgCell">{{selectedElementToEdit?.destPort?.id | slice:-4}}</td>-->
+                                <!--</tr>-->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div *ngIf="selectedElementToEdit && (selectedElementToEdit.type == 'Switch' || selectedElementToEdit.type == 'Link') " style="margin-bottom:10px;text-align: right;padding:5px">
+                            <a id="delete-element" href="javascript:;" class="btn btn-circle btn-icon-only blue" (click)="deleteSelectedElement()">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

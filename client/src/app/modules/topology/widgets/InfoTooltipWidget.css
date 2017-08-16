@@ -1,0 +1,207 @@
+/*profile sales summary*/
+
+[hidden] { display: none !important;}
+
+.info-tooltip-widget{
+    box-shadow: 5px 5px #cccccc;
+    top:10vh;
+    position: absolute;
+    text-align: left;
+    min-width: 27em;
+    /*max-width: 27em;*/
+    min-height: 10em;
+    padding: 0;/*4px;*/
+    /*font: 14px sans-serif;*/
+    background: #fff;
+    /*border: 1px solid rgba(0,0,0,.2);*/
+    /*pointer-events: none;*/
+    z-index:999;
+    opacity:0;
+}
+
+div.info-tooltip-widget .tool-head {
+    text-align: center !important;
+    font-size: 1em;
+    margin-bottom: 2em;
+    font-weight: bold;
+}
+
+div.info-tooltip-widget .tool-info-head {
+    color: #404040;
+    font-weight: bold;
+}
+
+.data-summary {
+    margin-top: 25px;
+}
+
+.data-summary ul {
+    margin-top: -4px;
+}
+
+.data-summary li {
+    padding: 2px 0;
+    overflow: hidden;
+    border-top: solid 1px #eee;
+}
+
+.data-summary li:first-child {
+    border-top: none;
+}
+
+.data-summary li .data-info {
+    margin-top: 4px;
+    float: left;
+    color: #646464;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.data-summary li .data-num {
+    float: right;
+    color: #169ef4;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.data-summary li span i {
+    top: 1px;
+    width: 13px;
+    height: 14px;
+    margin-left: 3px;
+    position: relative;
+    display: inline-block;
+}
+
+/*.data-summary li i.icon-img-up {*/
+    /*background: url(../../img/icon-img-up.png) no-repeat !important;*/
+/*}*/
+
+/*.data-summary li i.icon-img-down {*/
+    /*background: url(../../img/icon-img-down.png) no-repeat !important;*/
+/*}*/
+
+.data-summary .caption h4 {
+    color: #383839;
+    font-size: 14px;
+}
+
+.data-summary .caption {
+    border-color: #c9c9c9;
+}
+
+.data-container .portlet>.portlet-title {
+    margin-bottom: 0;
+    min-height: 15px;
+    border-radius: 4px 4px 0 0;
+}
+
+.data-container .portlet>.portlet-title>.caption {
+    font-size: 14px;
+    line-height: 14px;
+    padding: 2px 0;
+}
+
+.data-container .portlet>.portlet-title>.tools {
+    float: right;
+    display: inline-block;
+    padding: 0;
+}
+
+.data-container .data-portlet-body {
+    padding-top: 0;
+}
+
+.data-container .table-scrollable {
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0 !important;
+}
+
+.data-container .table>tbody>tr>td,
+.data-container .table>tbody>tr>th,
+.data-container .table>tfoot>tr>td,
+.data-container .table>tfoot>tr>th,
+.data-container .table>thead>tr>td,
+.data-container .table>thead>tr>th {
+    padding: 3px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 11px;
+}
+
+.data-container .table>thead>tr>th {
+    vertical-align: middle;
+    text-align: center;
+    font-size: 12px;
+}
+
+.data-container .table>tbody>tr>td:first-child,
+.data-container .table>tbody>tr>td:nth-child(2) {
+    text-align: left;
+}
+
+/*.data-container .table>tbody>tr>td:nth-child(4),*/
+/*.data-container .table>tbody>tr>th:nth-child(4),*/
+/*.data-container .table>tfoot>tr>td:nth-child(4),*/
+/*.data-container .table>tfoot>tr>th:nth-child(4),*/
+.data-container .data-vert-split {
+    border-right: 1px solid #F2F5F8;
+}
+
+.info-tooltip-widget .dashboard-stat2 {
+    padding: 15px;
+}
+
+.info-tooltip-widget .dashboard-stat2, .dashboard-stat2 .display {
+    margin-bottom: 0;
+}
+
+.info-header {
+    background-color: lightyellow;
+    padding: 20px;
+    margin: -15px;
+    /* border-bottom: solid 5px green; */
+    border-bottom: solid 2px lightgrey;
+}
+
+.dashboard-stat2 .display .icon>i.info-icon-type {
+    min-width:26px;
+    min-height:26px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.dashboard-stat2 .display .icon>i.info-icon-status {
+    font-size: 14px;
+    margin-left: 18px;
+    margin-top: -4px;
+    position: absolute;
+    background-color: white;
+}
+
+.dashboard-stat2 .display .icon>i.info-icon-security {
+    font-size: 14px;
+    margin-left: -3px;
+    margin-top: -4px;
+    position: absolute;
+    background-color: white;
+}
+
+.dashboard-stat2 .display .icon>i.info-icon-mvtn {
+    font-size: 14px;
+    margin-left: 21px;
+    margin-top: -32px;
+    position: absolute;
+    background-color: white;
+}
+
+.text-icon {
+    font-size: 11px;
+    font-family: Oswald, sans-serif;
+    vertical-align: baseline;
+}
+
+.stats-title {
+
+}

@@ -1,0 +1,53 @@
+<!-- BEGIN FORM-->
+<form action="#" class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-4 control-label">{{t('fields.alarm_source.label')}}</label>
+            <div [ngSwitch]="p('phy_topo:manage')" class="col-md-8">
+                <select *ngSwitchCase="true" class="form-control sourceselector" multiple="multiple" required validation style="width: 100%">
+                    <option *ngFor="let source of alarmSource" [value]="source">
+                        {{source}}
+                    </option>
+                </select>
+                <span *ngSwitchCase="false" class="form-control-static">{{data.source}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">{{t('fields.mvtn.label')}}</label>
+            <div [ngSwitch]="p('phy_topo:manage')" class="col-md-8">
+                <select *ngSwitchCase="true" id="virtualMilat" class="form-control mvtnselector" multiple="multiple"
+                        style="width: 100%">
+                    <option *ngFor="let item of virtualNetworks"
+                            [value]="item.id">{{item.name}}
+                    </option>
+                </select>
+                <select *ngSwitchCase="false" id="virtualVirtual" class="form-control mvtnselector" multiple="multiple"
+                        required validation style="width: 100%">
+                    <option *ngFor="let item of virtualNetworks"
+                            [value]="item.id">{{item.name}}
+                    </option>
+                </select>
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label"><span style='color: red'>{{t('fields.alarm_severity.label')}} *</span></label>
+            <div class="col-md-2" *ngFor="let s of alarmSeverity">
+                <input type="checkbox" [checked]="selectedSeverity.indexOf(s) >= 0" (change)="updateCheckedSeverities(s, $event)"/>
+                <label>{{i18n.t('enums.SEVERITY.'+ s +'.title')}}</label>
+                <span class="help-block">{{t('fields.alarm_severity.help_line')}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">{{t('fields.email.label')}}</label>
+            <div class="col-md-8">
+                <textarea id="emails" class="form-control" required validation rows="10" style="resize:none"
+                          [(ngModel)]="emails" [ngModelOptions]="{standalone: true}">
+                </textarea>
+                <span class="help-block">{{t('fields.email.help_line')}}</span>
+                {{t('labels.emails_help')}}
+            </div>
+        </div>
+    </div>
+</form>
+<!-- END FORM-->

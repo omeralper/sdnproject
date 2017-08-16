@@ -1,0 +1,86 @@
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.type')}}</label>
+        <div class="col-md-8">
+            <select [disabled]="isNewItem ? null : true" class="form-control" required validation [(ngModel)]="data.type" (ngModelChange)="typeChanged()" name="type">
+                <option *ngFor="let type of (ROUTERTYPE | enumValues)" [value]="type">
+                    {{i18n.t('enums.ROUTERTYPE.' + type + '.title')}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.name')}}</label>
+        <div class="col-md-8">
+            <input class="form-control" required validation [(ngModel)]="data.name" name="name"/>
+        </div>
+    </div>
+    <div *ngIf="data.type != ROUTERTYPE.ROUTE_REFLECTOR" class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.deviceId')}}</label>
+        <div class="col-md-8">
+            <select class="form-control" required validation [(ngModel)]="selectedSwitch"
+                    (ngModelChange)="switchChanged($event)" name="deviceId">
+                <option *ngFor="let sw of switches" [ngValue]="sw">{{sw.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="data.type != ROUTERTYPE.ROUTE_REFLECTOR" class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.port')}}</label>
+        <div class="col-md-8">
+            <select class="form-control" required validation [(ngModel)]="data.port" name="port">
+                <option *ngFor="let port of selectedSwitch?.portInfo?.portDetails | minusportfilter" [value]="port.number">
+                    {{port.number}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.ip')}}</label>
+        <div class="col-md-8">
+            <input id="blockIp" restrict [restrict_mask]="'blockIp'" class="form-control" required validation [(ngModel)]="data.ip" name="ip"/>
+        </div>
+    </div>
+    <div *ngIf="data.type == ROUTERTYPE.PEER" class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.asNumber')}}</label>
+        <div class="col-md-8">
+            <input class="form-control" required validation [(ngModel)]="data.asNumber" name="asNumber"/>
+        </div>
+    </div>
+    <div *ngIf="data.type == ROUTERTYPE.SPEAKER || data.type == ROUTERTYPE.ROUTE_REFLECTOR" class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.asNumber')}}</label>
+        <div class="col-md-8">
+            <label>{{asNumber}}</label>
+        </div>
+    </div>
+    <div *ngIf="data.type == ROUTERTYPE.SPEAKER" class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.controlPlaneIp')}}</label>
+        <div class="col-md-8">
+            <input class="form-control" restrict [restrict_mask]="'blockIp'" required validation
+                   [(ngModel)]="data.controlPlaneIp" name="controlPlaneIp"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.bgpPort')}}</label>
+        <div class="col-md-8">
+            <input class="form-control" type="number" [(ngModel)]="data.bgpPort" name="bgpPort"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.bgpPassword')}}</label>
+        <div class="col-md-8">
+            <input class="form-control" type="password" [(ngModel)]="data.bgpPassword" name="bgpPassword"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.mac')}}</label>
+        <div class="col-md-8">
+            <input class="form-control" restrict [restrict_mask]="'mac'" [(ngModel)]="data.mac" name="mac"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">{{t('fields.vlanId')}}</label>
+        <div class="col-md-8">
+            <input class="form-control" [(ngModel)]="data.vlanId" name="vlanId"/>
+        </div>
+    </div>
+</form>

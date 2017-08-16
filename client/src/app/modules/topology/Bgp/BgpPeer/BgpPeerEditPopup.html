@@ -1,0 +1,104 @@
+<style>
+    tbody {
+        max-height: 270px;
+        display: block;
+        overflow-y: auto;
+    }
+
+    thead th {
+        border: none;
+    }
+
+    thead, tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .first-col {
+        width: 10%;
+        text-align: center;
+    }
+</style>
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.speaker')}}</label>
+        <div class="col-md-9">
+            <select *ngIf="isNewItem" class="form-control" required validation [(ngModel)]="data.speaker" name="speaker"
+                    (onModelChange)="speakerSelected()">
+                <option *ngFor="let speaker of speakers" [ngValue]="speaker">{{speaker.name}}</option>
+            </select>
+            <label *ngIf="!isNewItem">{{data.speaker?.name}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.connectRetry')}}</label>
+        <div class="col-md-3">
+            <input class="form-control" type="number" [(ngModel)]="data.connectRetry"
+                   name="connectRetry"/>
+        </div>
+        <label class="col-md-3">
+            {{t('second')}}
+        </label>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.holdTime')}}</label>
+        <div class="col-md-3">
+            <input class="form-control" type="number" [(ngModel)]="data.holdTime" name="holdTime"/>
+        </div>
+        <label class="col-md-3">
+            {{t('second')}}
+        </label>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.keepaliveInterval')}}</label>
+        <div class="col-md-3">
+            <input class="form-control" type="number" [(ngModel)]="data.keepaliveInterval"
+                   name="keepaliveInterval"/>
+        </div>
+        <label class="col-md-3">
+            {{t('second')}}
+        </label>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.minimumAdvertisementInterval')}}</label>
+        <div class="col-md-3">
+            <input class="form-control" type="number"
+                   [(ngModel)]="data.minimumAdvertisementInterval" name="minimumAdvertisementInterval"/>
+        </div>
+        <label class="col-md-3">
+            {{t('second')}}
+        </label>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <table class="table table-hover table-bordered table-striped table-fixed">
+                <thead>
+                <tr>
+                    <th width="10%"></th>
+                    <th>{{t('name')}}</th>
+                    <th>{{t('asNumber')}}</th>
+                    <th>{{t('ip')}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let peer of listedPeers; let i = index;">
+                    <td class="first-col" (click)="peerSelect($event,peer);">
+                        <input type="checkbox" [(ngModel)]="peer.selected"
+                               [ngModelOptions]="{standalone: true}">
+                    </td>
+                    <td>
+                        {{peer.name}}
+                    </td>
+                    <td>
+                        {{peer.asNumber}}
+                    </td>
+                    <td>
+                        {{peer.ip}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>

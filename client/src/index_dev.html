@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Milat</title>
+    <base href="/">
+    <link type="text/css" href="src/assets/googlefonts.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/jsoneditor/dist/jsoneditor.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css"
+          rel="stylesheet">
+    <link type="text/css" href="../node_modules/pace-progress/themes/red/pace-theme-minimal.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/icheck/skins/all.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/datatables.net-bs/css/dataTables.bootstrap.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/multiselect/css/multi-select.dist.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/nouislider/distribute/nouislider.min.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/toastr/build/toastr.min.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/typeahead.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/offline-js/themes/offline-theme-chrome.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/offline-js/themes/offline-language-turkish.css" id="offline_style" rel="stylesheet">
+    <link type="text/css" href="src/assets/global/plugins/jstree/themes/default/style.min.css" rel="stylesheet">
+    <!--<link type="text/css" href="../node_modules/jstree/dist/themes/default/style.min.css" rel="stylesheet">-->
+    <link type="text/css" href="../node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link type="text/css" href="../node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/pages/css/about.min.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/pages/css/error.min.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/pages/css/profile.min.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/global/css/languages.min.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/global/css/components.min.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/global/css/plugins.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/layouts/layout5/css/layout.min.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/layouts/layout5/css/custom.min.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/style.css" rel="stylesheet">
+    <link type="text/css" href="src/assets/topology-styles.css" rel="stylesheet">
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/i18next/i18next.min.js"></script>
+    <script src="../node_modules/jquery-i18next/jquery-i18next.js"></script>
+    <!--<script src="src/libs/i18next/i18next.min.js"></script>-->
+    <script src="../node_modules/d3/d3.js"></script>
+    <script src="../node_modules/offline-js/offline.min.js"></script>
+    <script src="../node_modules/is_js/is.min.js"></script>
+    <script src="src/libs/perm_parser/permParser_fast.js"></script>
+    <script src="src/libs/searchbar_parser/SearchBarParser_fast.js"></script>
+    <script src="../node_modules/jstree/dist/jstree.js"></script>
+    <script src="../node_modules/jsoneditor/dist/jsoneditor.js"></script>
+    <script src="../node_modules/excanvas/excanvas.compiled.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/file-saver/FileSaver.js"></script>
+    <script src="../node_modules/js-cookie/src/js.cookie.js"></script>
+    <script src="../node_modules/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="../node_modules/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../node_modules/block-ui/jquery.blockUI.js"></script>
+    <script src="../node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+    <script src="../node_modules/moment/min/moment-with-locales.min.js"></script>
+    <script src="../node_modules/jquery.inputmask/dist/jquery.inputmask.bundle.js"></script>
+    <script src="../node_modules/highcharts/highcharts.js"></script>
+    <script src="../node_modules/highcharts/themes/grid.js"></script>
+    <script src="../node_modules/highcharts/modules/exporting.js"></script>
+    <script src="../node_modules/highcharts/modules/offline-exporting.js"></script>
+    <script src="../node_modules/highcharts/modules/no-data-to-display.js"></script>
+    <script src="../node_modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="../node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.tr.min.js"></script>
+    <script src="../node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="../node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script src="src/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../node_modules/sortablejs/Sortable.min.js"></script>
+    <script src="src/assets/global/scripts/app.min.js"></script>
+    <script src="../node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+    <script src="../node_modules/datatables.net-buttons/js/dataTables.buttons.js"></script>
+    <script src="../node_modules/jszip/dist/jszip.min.js"></script>
+    <script src="../node_modules/datatables.net-buttons/js/buttons.print.js"></script>
+    <script src="../node_modules/datatables.net-buttons/js/buttons.html5.js"></script>
+    <script src="../node_modules/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../node_modules/pdfmake/build/vfs_fonts.js"></script>
+    <script src="../node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="../node_modules/multiselect/js/jquery.multi-select.js"></script>
+    <script src="../node_modules/nouislider/distribute/nouislider.min.js"></script>
+    <script src="../node_modules/select2/dist/js/select2.full.min.js"></script>
+    <script src="../node_modules/select2/dist/js/i18n/tr.js"></script>
+    <script src="../node_modules/toastr/build/toastr.min.js"></script>
+    <script src="../node_modules/bootbox/bootbox.min.js"></script>
+    <script src="../node_modules/icheck/icheck.min.js"></script>
+    <script src="../node_modules/typeahead.js/dist/typeahead.bundle.min.js"></script>
+    <script src="src/assets/layouts/layout5/scripts/layout.min.js"></script>
+    <script src="src/assets/layouts/global/scripts/quick-sidebar.min.js"></script>
+    <script src="src/libs/idle-timer/idle-timer.js"></script>
+    <script src="src/assets/netClustering.js"></script>
+
+    <script src="../node_modules/jquery-textrange/jquery-textrange.js"></script>
+    <script src="../node_modules/crypto-js/crypto-js.js"></script>
+    <script src="../node_modules/crypto-js/aes.js"></script>
+    <script src="../node_modules/pace-progress/pace.min.js"></script>
+
+    <script src="src/assets/config/settings.js"></script>
+    <!--<script src="node_modules/core-js/client/shim.min.js"></script>-->
+    <script src="../node_modules/zone.js/dist/zone.js"></script>
+    <script src="../node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="../node_modules/systemjs/dist/system.src.js"></script>
+    <script src="../systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function (err) {
+            console.error(err);
+        });
+    </script>
+</head>
+<body>
+<div class="body">
+    <RootComponent>Loading...</RootComponent>
+    <modal-comp></modal-comp>
+</div>
+</body>
+</html>

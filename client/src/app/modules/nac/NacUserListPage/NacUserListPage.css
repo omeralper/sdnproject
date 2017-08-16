@@ -1,0 +1,10 @@
+img.user_profile {
+  max-width: 30px;
+  max-height: 30px;
+}
+img.status_active {
+  border: 1px solid green;
+}
+img.status_passive {
+  border: 1px solid red;
+}

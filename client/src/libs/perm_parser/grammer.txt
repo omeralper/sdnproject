@@ -1,0 +1,57 @@
+﻿/*
+ * Milat Permission Parser
+ * ----------------------------------------------------------------------------------------
+ *
+ * "PermParser" class is generated using peg.js (http://pegjs.org/online) a parser generator.
+ *
+ * Following grammer is used for generating the parser;
+ *
+ * Grammer By: M. Yildiray Meric <yildiray.meric@argela.com.tr>
+ * Date: 02.05.2016
+ */
+
+start
+  = A:(Expr / SPC) { return (A==="")? { type:"OP_TRUE" } : A ;}
+
+Expr
+  = A:Factor SPC ("&&" / "&") SPC B:Expr { return { type:"OP_AND", left:A, right: B};}
+   / Factor
+
+ExprArguments
+  = A: Expr SPC "," SPC B:ExprArguments { return { type:"OP_AND", left:A, right: B};}
+   / Expr
+
+Factor
+  = A:Term SPC ("||" / "|") SPC B:Expr { return { type:"OP_OR", left:A, right: B};}
+   / Term 
+
+FactorArguments
+  = A:Expr SPC "," SPC B:FactorArguments { return { type:"OP_OR", left:A, right: B};}
+   / Expr
+
+Term
+  = SPC "!" SPC A:Term { return { type:"OP_NOT", body:A };}
+  / Value
+
+Value
+  = SPC "(" SPC A:Expr SPC ")" SPC { return A; }
+  / SPC "all("i SPC A:ExprArguments SPC ")" SPC { return A; }
+  / SPC "any("i SPC A:FactorArguments SPC ")" SPC  { return A; }
+  / SPC "true"i SPC { return { type: "OP_TRUE" } }
+  / SPC "false"i SPC { return { type: "OP_FALSE" } }
+  / A:perm { return { type:"PERM", body: A };}
+
+perm
+  = A:alfanumeric ":*" SPC { return A +"*";}
+  / A:alfanumeric ":" B:(number) SPC { return A + B;}
+  / A:alfanumeric ":" B:(perm / SPC) { return A + B;}
+  / A:alfanumeric SPC { return A;}
+
+number
+ = A:($[0-9]+) {  return A;}
+
+alfanumeric
+ = A:($([a-zA-Z_]i[0-9a-zA-Z_]i+)) {  return A+":";}
+
+SPC
+  = $[ \t\n\r]* { return "";}

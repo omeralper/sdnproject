@@ -1,0 +1,51 @@
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.name.label')}}</label>
+        <div class="col-md-3">
+            <select class="form-control device" required validation
+                    [(ngModel)]="data.nacDevice"
+                    (ngModelChange)="deviceChanged($event)" name="nacDevice">
+                <option *ngFor="let device of devices" [ngValue]="device">
+                    {{device.name}}
+                </option>
+            </select>
+            <span class="help-block"></span>
+        </div>
+        <label class="col-md-2 control-label">{{t('fields.mac.label')}}</label>
+        <div class="col-md-3">
+            <select class="form-control device"
+                    [(ngModel)]="data.nacDevice" required validation
+                    (ngModelChange)="deviceChanged($event)" name="mac">
+                <option *ngFor="let device of devices" [ngValue]="device">
+                    {{device.mac}}
+                </option>
+            </select>
+            <span class="help-block"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.has8021xSupport.label')}}</label>
+        <div class="col-md-1">
+            <input type="checkbox" [(ngModel)]="data.has8021xSupport" name="has8021xSupport">
+            <span class="help-block"></span>
+        </div>
+        <label class="col-md-1 control-label">{{t('fields.isBYOD.label')}}</label>
+        <div class="col-md-1">
+            <input type="checkbox" [(ngModel)]="data.isBYOD"
+                   title="{{t('fields.isBYOD.label')}}" name="isBYOD">
+            <span class="help-block"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.byodNacGroup.label')}}</label>
+        <div class="col-md-8">
+            <select class="form-control"  required validation
+                    [(ngModel)]="data.byodNacGroup" name="byodNacGroup">
+                <option *ngFor="let group of byodNacGroups" [ngValue]="group">
+                    {{group.name}}
+                </option>
+            </select>
+            <span class="help-block"></span>
+        </div>
+    </div>
+</form>

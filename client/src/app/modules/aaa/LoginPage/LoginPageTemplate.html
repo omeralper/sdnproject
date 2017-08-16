@@ -1,0 +1,113 @@
+<!-- BEGIN FORM-->
+<div class="user-login-5">
+    <div class="row bs-reset">
+        <div class="col-md-6 col-md-offset-3 login-container bs-reset">
+            <div style="margin-top:56px;" class="hidden-xs"></div>
+            <div class="login-content bg-grey-cararra border-grey-silver" style="padding: 20px;border:1px solid;">
+                <h1 style="text-align: center;" class="hidden-xs">
+                    <img alt="Logo" data-i18n="[src]common.logo" style="height: 3vh;"> | <span data-i18n="login.title"></span>
+                </h1>
+                <h2 style="text-align: center;" class="visible-xs" data-i18n="login.title"></h2>
+                <p style="text-align: center;" data-i18n="login.info"></p>
+                <form action="#" id="loginForm" class="form-horizontal" novalidate (submit)="login($event)" autocomplete="nope">
+                    <div class="alert alert-danger display-hide">
+                        <button class="close" data-close="alert"></button>
+                        <span></span>
+                    </div>
+                    <div class="form-body">
+                        <div class="form-group first">
+                            <label class="col-md-3 control-label hidden-xs hidden-sm" for="user" data-i18n="common.username"></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"  rel="tooltip" data-i18n="[title]common.username">
+                                        <i class="fa fa-user" style="width: 14px;"></i>
+                                    </span>
+                                    <input autocomplete="nope" required validation tabindex="1"
+                                           class="form-control form-control-solid placeholder-no-fix"
+                                           data-i18n="[placeholder]common.username" id="user" name="username"
+                                           type="text" [(ngModel)]="loginOpts.username">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label hidden-xs hidden-sm" for="password" data-i18n="common.password"></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon" rel="tooltip" data-i18n="[title]common.password">
+                                        <i class="fa fa-asterisk" style="width: 14px;"></i>
+                                    </span>
+                                    <input autocomplete="new-password" required validation tabindex="2"
+                                           class="form-control form-control-solid placeholder-no-fix"
+                                           data-i18n="[placeholder]common.password" id="password" name="password"
+                                           type="password" [(ngModel)]="loginOpts.password">
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isDevMode" class="form-group">
+                            <label class="col-md-3 control-label hidden-xs hidden-sm" for="server_combo" data-i18n="common.server_url"></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon" rel="tooltip" data-i18n="[title]common.server_url">
+                                        <i class="fa fa-server" style="width: 14px;"></i>
+                                    </span>
+                                    <input type="text" id="server_combo" name="server_combo" tabindex="3"
+                                           class="form-control form-control-solid placeholder-no-fix"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group last">
+                            <div class="col-md-3 control-label hidden-xs hidden-sm"></div>
+                            <div class="col-xs-12 col-sm-10 col-md-6">
+                                <input id="remember_me" class="rem-checkbox" type="checkbox" autocomplete="nope"
+                                       [(ngModel)]="loginOpts.isRemember" name="rememberme">
+                                <label for="remember_me" data-i18n="login.remember_me" id="remember_me_label"></label>
+                            </div>
+                            <div class="hidden-xs col-sm-2 col-md-2">
+                                <button class="btn blue login-submit pull-right" style="width:80px"
+                                        data-i18n="login.sign_in" type="submit">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions visible-xs">
+                        <div class="row">
+                            <div class="col-xs-12" style="text-align:center">
+                                <!-- div class="forgot-password">
+                                    <a class="forget-password" href="javascript:;" id="forget-password"><span
+                                            data-i18n="login.forgot_password"></span></a>
+                                </div -->
+                                <button class="btn blue login-submit" style="width:100%" data-i18n="login.sign_in"
+                                        tabindex="4"
+                                        type="submit">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2" style="align-content: center;text-align: center">
+        <div class="col-md-2" style="align-content: center;text-align: center">
+            <div class="btn-group dropup">
+                <button class="btn btn-sm default dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span class="lang-sm lang-lbl" lang="{{currentLanguage}}"></span><!-- lang-lbl-full -->
+                    <i class="fa fa-angle-up"></i>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li *ngFor="let l of LANGUAGE_DS">
+                        <a href="javascript:;" (click)="setLanguage(l.value)">
+                            <span class="lang-sm lang-lbl" lang="{{l.value}}"></span><!-- lang-lbl-full -->
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END FORM-->
+

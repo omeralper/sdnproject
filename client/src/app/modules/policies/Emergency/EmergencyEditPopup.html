@@ -1,0 +1,64 @@
+<form action="#" class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.name')}}</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="name"
+                       required validation [(ngModel)]="data.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.capacityLoss')}}</label>
+            <div class="col-md-1" style="padding-top: 7px;">%</div>
+            <div class="col-md-2" style="padding-left: 0px;">
+                <input type="number" class="form-control" name="deviceLoss"
+                       required validation min="0" max="100"
+                       [(ngModel)]="data.deviceLossRatio">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.trafficThreshold')}}</label>
+            <div class="col-md-1" style="padding-top: 7px;">%</div>
+            <div class="col-md-2" style="padding-left: 0px;">
+                <input type="number" class="form-control" name="trafficThreshold"
+                       required validation min="0"
+                       [(ngModel)]="data.trafficThreshold">
+            </div>
+        </div>
+    </div>
+    <div class="form-body">
+        <span class="caption-subject font-red-sunglo bold uppercase">{{t('fields.actions')}}</span>
+        <hr style="margin-top: 2px;">
+        <div class="form-group">
+            <div class="col-md-8">
+                <input type="checkbox" name="domain"
+                       [(ngModel)]="data.disableDomain"/>
+                <label>{{t('labels.route')}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="caption-subject font-red-sunglo bold uppercase">{{t('fields.stopVNFList')}}</span>
+                <hr style="margin-top: 2px;">
+                <br>
+            <div class="form-body" style="height: 100px; padding-top: 0px;">
+                <div class="checkbox col-md-offset-1" *ngFor="let v1 of vnfstop">
+                    <input type="checkbox" [checked]="vnfIdsStop.indexOf(v1.id) >= 0" name="stop" (change)="vnfstoplist(v1, $event)"/>
+                    <label>{{v1.vnfdName}}</label>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-6">
+                <span class="caption-subject font-red-sunglo bold uppercase">{{t('fields.startVNFList')}}</span>
+                <hr style="margin-top: 2px;">
+                <br>
+            <div class="form-body" style="height: 100px; padding-top: 0px;">
+                <div class="checkbox col-md-offset-1" *ngFor="let v2 of vnfstart">
+                    <input type="checkbox" [checked]="vnfIdsStart.indexOf(v2.id) >= 0" name="start" (change)="vnfstartlist(v2, $event)"/>
+                    <label>{{v2.vnfdName}}</label>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>

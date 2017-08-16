@@ -1,0 +1,34 @@
+<form action="#">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#jsonEditor">{{t('fields.preview')}}</a></li>
+                <li><a data-toggle="tab" href="#rawData">{{t('fields.rawView')}}</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="jsonEditor" class="tab-pane fade in active">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <span style="color:red;"> {{t('fields.networkDecriptor')}}*</span>
+                                <input jsonEditor [(ngModel)]="data.rawData" name="rawData"
+                                       style="width: 100%; height: 400px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="rawData" class="tab-pane fade">
+                    <textarea [(ngModel)]="data.rawData" name="rawData" style="width:100%;" rows="20"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" [hidden]="!isNewItem">
+        <div class="form-group">
+            <label class="col-md-4 control-label">{{t('fields.upload')}}</label>
+            <div class="col-md-8">
+                <input type="file" name="file" (change)="fileChange($event)">
+            </div>
+        </div>
+    </div>
+</form>

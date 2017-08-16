@@ -1,0 +1,54 @@
+<form action="#" class="form-horizontal">
+    <div class="form-group" >
+        <label class="col-md-3 control-label" data-i18n="network_vis.topology.add_edit_switch_popup.switch_name"></label>
+        <div class="col-md-8">
+            <input id="switchName" type="text" maxlength="50" class="form-control"
+                   data-i18n="[placeholder]network_vis.topology.add_edit_switch_popup.switch_name"
+                   required [(ngModel)]="switchName" name="switchName">
+        </div>
+    </div>
+
+    <div class="form-group" >
+        <label class="col-md-3 control-label" data-i18n="network_vis.topology.add_edit_switch_popup.profile"></label>
+        <div class="col-md-8">
+            <div *ngIf="currentProfile">
+                <select id="switchProfileSelection" class="form-control"
+                        [ngModel]="currentProfile.profileId" name="profileId" (ngModelChange)="updateSelectedValue($event)">
+                    <option *ngFor="let option of optionList" [disabled]="option.isUsed === true ? 'true' : null" [value]="option.profileId">{{option?.profileId}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" >
+        <label class="col-md-3 control-label" data-i18n="network_vis.topology.add_edit_switch_popup.host_count"
+               ></label>
+        <div class="col-md-8">
+            <div [hidden]="!currentProfile">
+                <select id="ports" #portSelector class="form-control selectpicker" multiple
+                        title="{{t('fields.portNumber.help_line')}}"
+                        style="width: 100%" >
+                    <!--<option id="accessPortWarning" disabled >{{t('labels.accessPortWarning')}}</option>-->
+                    <option *ngFor="let port of portsOfProfile; let i = index" [attr.value]="port?.number">
+                        Port {{port?.number}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" >
+        <label class="col-md-3 control-label" data-i18n="network_vis.topology.add_edit_switch_popup.securityLevel"></label>
+        <div class="col-md-8">
+            <select id="securityLevelForSwitchSelection" class="form-control select2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+            </select>
+        </div>
+    </div>
+</form>

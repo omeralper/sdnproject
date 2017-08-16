@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-md-3">
+        <div *ngFor="let d of details | slice:0:3" class="row static-info">
+            <div class="col-md-3 name">{{d.title}}</div>
+            <div class="col-md-9 value" [innerHtml]="d.value"></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div *ngFor="let d of details | slice:3:6" class="row static-info">
+            <div class="col-md-3 name">{{d.title}}</div>
+            <div class="col-md-9 value" [innerHtml]="d.value"></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div *ngFor="let d of details | slice:6:9" class="row static-info">
+            <div class="col-md-3 name">{{d.title}}</div>
+            <div class="col-md-9 value" [innerHtml]="d.value"></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div *ngFor="let d of details | slice:9:12" class="row static-info">
+            <div class="col-md-3 name">{{d.title}}</div>
+            <div class="col-md-9 value" [innerHtml]="d.value"></div>
+        </div>
+    </div>
+</div>
+<!--<span style="float:left" class="caption-subject font-red-sunglo bold uppercase"-->
+      <!--data-i18n="logs.list.title"></span>-->
+
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a href="#tab_1" data-toggle="tab" aria-expanded="false">{{t('fields.related_fields')}}</a>
+    </li>
+    <li>
+        <a href="#tab_2" data-toggle="tab" aria-expanded="true">{{t('fields.raw_edr_data')}}</a>
+    </li>
+</ul>
+
+<!--<div class="table-body">-->
+    <!--<table class="table table-striped table-bordered table-hover order-column data-table" #datatable></table>-->
+    <!--&lt;!&ndash; table-checkable &ndash;&gt;-->
+<!--</div>-->
+
+<div class="portlet-body">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+            <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-2">
+                    <select id="searchable-fields" class="selectpicker" multiple
+                            style="width: 100%; float:right; right:15px;" [ngModel]="searchableFieldsValue"
+                            (ngModelChange)="searchableFieldsValue = $event"
+                            name="searchableFieldsValue">
+                        <option *ngFor="let field of searchableFields">
+                            {{field?.displayName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn blue" (click)="queryClick()">{{t('fields.query')}}</button>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover order-column data-table" #datatable></table>
+        </div>
+        <div class="tab-pane" id="tab_2">
+            <table id="tab2Datatable" class="display table table-striped table-bordered table-hover order-column" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>{{t('fields.key')}}</th>
+                        <th>{{t('fields.value')}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let d of rawData">
+                        <td>{{d.key}}</td>
+                        <td>{{d.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<form action="#">
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#jsonEditor">{{t('fields.preview')}}</a></li>
+            <li><a data-toggle="tab" href="#rawData">{{t('fields.rawView')}}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="jsonEditor" class="tab-pane fade in active">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input jsonEditor [(ngModel)]="data.rawData" name="rawData" style="width: 100%; height: 400px;">
+                    </div>
+                </div>
+            </div>
+            <div id="rawData" class="tab-pane fade">
+                <textarea [(ngModel)]="data.rawData" name="rawData" style="width:100%;" rows="20"></textarea>
+            </div>
+        </div>
+    </div>
+</form>

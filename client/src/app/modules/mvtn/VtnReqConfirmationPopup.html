@@ -1,0 +1,24 @@
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-12" style="text-align: center">
+            <span>{{t(data.isApproved ? 'messages.approve_confirm' : 'messages.deny_confirm', {dto: data.item})}}</span>
+        </div>
+    </div>
+    <div [hidden]="!data.isApproved">
+        <div class="form-group">
+            <div class="col-md-12" style="text-align: center">
+                <span>{{t('messages.select_mvtn_type')}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.mvtnType')}}</label>
+            <div class="col-md-6">
+                <select class="form-control" [(ngModel)]="data.item.mvtnType" name="mvtnTypeOption">
+                    <option *ngFor="let option of mvtnTypes" [ngValue]="option">
+                        {{option}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+</form>

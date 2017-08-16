@@ -1,0 +1,48 @@
+<div class="portlet light bordered">
+    <div class="portlet-body">
+        <div class="tabbable-line">
+            <ul id="rangeTabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" [class.active]="isControllerMode">
+                    <a href="#controllerSettings" aria-controls="controllerSettings" role="tab"
+                       [routerLink]="['/topology/controller_management', {mode: 'ctrl'}]" >
+                        {{t('controllerSettings.title')}}</a>
+                </li>
+                <li role="presentation" [class.active]="isSwitchMode">
+                    <a href="#switchSettings" aria-controls="switchSettings" role="tab"
+                       [routerLink]="['/topology/controller_management', {mode: 'switch'}]" >
+                        {{t('switchSettings.title')}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content tab-padding">
+            <div role="tabpanel" class="tab-pane" [class.active]="isControllerMode" id="controllerSettings">
+                <div class="row">
+                    <ClusterTree class="col-md-3" ></ClusterTree>
+                    <div class="col-md-9" [ngSwitch]="currentView">
+                        <div *ngSwitchDefault>
+                            <ControllerList></ControllerList>
+                        </div>
+                        <div *ngSwitchCase="ClusterViews.Controller">
+                            <ControllerView></ControllerView>
+                        </div>
+                        <div *ngSwitchCase="ClusterViews.Parameter">
+                            <ControllerParameterList></ControllerParameterList>
+                        </div>
+                        <div *ngSwitchCase="ClusterViews.Task">
+                            <ControllerTaskList></ControllerTaskList>
+                        </div>
+                        <div *ngSwitchCase="ClusterViews.Switch">
+                            <ControllerSwitchList></ControllerSwitchList>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" [class.active]="isSwitchMode" id="switchSettings">
+                <div class="row">
+                    <SwitchList class="col-md-12">
+                    </SwitchList>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

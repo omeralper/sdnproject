@@ -1,0 +1,13 @@
+<!-- BEGIN FORM-->
+<form action="#" class="form-horizontal">
+    {{t('fields.domainList')}}
+    <div class="form-group">
+        <div class="col-md-12">
+            <textarea class="form-control" required validation  [(ngModel)]="allDomains" name="allDomains"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="alert alert-warning" role="alert">{{t('help')}}</div>
+    </div>
+</form>
+<!-- END FORM-->

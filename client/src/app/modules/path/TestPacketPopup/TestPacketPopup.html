@@ -1,0 +1,40 @@
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-3 control-label label-required">{{t('fields.path_info.label')}}</label>
+        <div class="col-md-9">
+            <span class="help-inline">{{srcId}} -&gt; {{dstId}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.pack_interval.label')}}</label>
+        <div class="col-md-9">
+            <input class="form-control input-inline input-small"
+                   id="testTime" maxlength="30" required validation restrict
+                   [restrict_type]="'number'" maxlength="30" [(ngModel)]="data.validatePathPacketInterval" [ngModelOptions]="{standalone: true}">
+            <span class="help-inline">{{t('fields.pack_interval.help_line')}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.pack_count.label')}}</label>
+        <div class="col-md-9">
+            <input class="form-control input-inline input-small"
+                   id="packetCount" maxlength="30" required validation restrict
+                   [restrict_type]="'number'" maxlength="30" [(ngModel)]="data.validatePathPacketNo" [ngModelOptions]="{standalone: true}">
+            <span class="help-inline">{{t('fields.pack_count.help_line')}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12 align-center">
+            <button name="start" id="start-test" [disabled]="startTestDisabledFlag"
+               class="btn uppercase yellow-gold" (click)="startTest()">
+                <i class="fa fa-bug"></i>
+                <span>{{t('labels.start_test')}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12 align-center">
+            <textarea disabled class="form-control" style="height: 200px;">{{testResult}}</textarea>
+        </div>
+    </div>
+</form>

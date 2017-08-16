@@ -1,0 +1,91 @@
+<style>
+    .centered-buttons {
+        text-align: center;
+        font-size: 20px;
+    }
+
+
+</style>
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-2 control-label">{{t('fields.definedSetType')}}</label>
+        <div class="col-md-8">
+            <select class="form-control" required validation [(ngModel)]="data.definedSetType" name="definedSetType">
+                <option *ngFor="let type of SDNIPDEFINEDSETTYPE | enumValues" [value]="type">
+                    {{baseServices.uiHelper.getIconTitle('SDNIPDEFINEDSETTYPE', type)}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">{{t('fields.name')}}</label>
+        <div class="col-md-8">
+            <input type="text" maxlength="50" class="form-control" required
+                   validation [(ngModel)]="data.name" name="name">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <label class="control-label">{{t('fields.list')}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div *ngIf="data.definedSetType != SDNIPDEFINEDSETTYPE.PREFIX" class="col-md-12">
+            <textarea class="form-control" required validation [(ngModel)]="list" name="list" rows="10">
+            </textarea>
+            <div class="alert alert-warning" role="alert">{{t('labels.warning')}}</div>
+        </div>
+        <div *ngIf="data.definedSetType == SDNIPDEFINEDSETTYPE.PREFIX" class="col-md-12">
+            <table class="table table-hover table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>{{t('fields.ipPrefix')}}</th>
+                    <th>{{t('fields.minMask')}}</th>
+                    <th>{{t('fields.maxMask')}}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let prefix of data.prefixList?.list">
+                    <td>
+                        {{prefix.ipPrefix}}
+                    </td>
+                    <td>
+                        {{prefix.minMaskLength}}
+                    </td>
+                    <td>
+                        {{prefix.maxMaskLength}}
+                    </td>
+                    <td class="centered-buttons">
+                        <a (click)="removePrefix(prefix)">
+                            <i class="fa fa-minus-square" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" maxlength="50" class="form-control"
+                               [attr.required]="data.prefixList?.list.length > 0 ? null : true"
+                               ip [isMasked]="true" validation [(ngModel)]="newPrefix.ipPrefix" name="prefix">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control"
+                               [attr.required]="data.prefixList?.list.length > 0 ? null : true"
+                               validation [(ngModel)]="newPrefix.minMaskLength" name="minMaskLength">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control"
+                               [attr.required]="data.prefixList?.list.length > 0 ? null : true "
+                               validation [(ngModel)]="newPrefix.maxMaskLength" name="maxMaskLength">
+                    </td>
+                    <td class="centered-buttons">
+                        <a (click)="addPrefix()">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
