@@ -426,7 +426,7 @@ var swagger_doc = jsyaml.safeLoad(spec);
 swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
     //DİKKAT swagger roputer options ayarlarında (yukarda) ignoreMissingHandlers=true olmalı
 
-
+    console.log('swagger initializing');
     common.adjustRunMode(_app);
 
     // swaggerRouter configuration
