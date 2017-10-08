@@ -2,9 +2,7 @@
 
 var express = require('express');
 var session = require('express-session');
-var serve_index = require('serve-index');
 var cors = require('cors');
-var body_parser = require('body-parser');
 var socket_io = require('socket.io');
 var util = require('util');
 var path = require('path');
@@ -16,18 +14,12 @@ var swagger_tools = require('swagger-tools');
 
 var common = require('./api/helpers/common.js');
 var proxy = require('./api/helpers/proxy.js'); //TODO refactoring gerekli
-var package_json = require('./package.json');
 var config = require('./config/config.json');
 var logger = require('./api/helpers/logger.js');
 
 var http = require('http');
 var https = require('https');
 var compression = require('compression');
-
-
-// log4js.configure('./config/log4js.json', {
-//     reloadSecs: config.log4js.config_reload
-// });
 
 
 //var _logger             = log4js.getLogger('log');
@@ -41,18 +33,6 @@ _app.use(compression({
     level: 9, //use best compression ratio
 
 }));
-
-if (config.ssl.enabled) {
-    var ssl_options = {
-        key: fs.readFileSync(config.ssl.key),
-        cert: fs.readFileSync(config.ssl.cert)
-    }
-
-    var _server_ssl = https.createServer(ssl_options, _app);
-    var _io_ssl = socket_io(_server_ssl, {
-        log: false
-    });
-}
 
 var _ps_rmq_topo = {};
 var _ps_rmq_alarm = {};

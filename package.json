@@ -9,12 +9,12 @@
   "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "node app",
+    "start": "node main.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "cd client && npm install && cd ../ && node main"
+    "postinstall": "cd client && npm install && cd ../"
   },
   "dependencies": {
     "@angular/cli": "1.2.4",
