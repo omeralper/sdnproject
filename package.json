@@ -14,7 +14,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "cd client && npm install && cd ../"
+    "preinstall": "cd client && npm install && cd ../"
   },
   "dependencies": {
     "@angular/cli": "1.2.4",
