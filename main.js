@@ -1,5 +1,5 @@
 'use strict';
-
+console.log('hello');
 var express = require('express');
 var session = require('express-session');
 var cors = require('cors');
