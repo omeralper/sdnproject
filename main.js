@@ -461,3 +461,4 @@ swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
     // Routes
     require('./api/helpers/routes')();
 });
+console.log('main is done');
