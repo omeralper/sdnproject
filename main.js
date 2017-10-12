@@ -1,61 +1,82 @@
-'use strict';
-console.log('hello');
+// 'use strict';
+// console.log('hello');
+// var express = require('express');
+// var session = require('express-session');
+// var cors = require('cors');
+// var socket_io = require('socket.io');
+// var util = require('util');
+// var path = require('path');
+// var child_process = require('child_process');
+// var jsyaml = require('js-yaml');
+// var fs = require('fs');
+// var log4js = require('log4js');
+// var swagger_tools = require('swagger-tools');
+//
+// var common = require('./api/helpers/common.js');
+// var proxy = require('./api/helpers/proxy.js'); //TODO refactoring gerekli
+// var config = require('./config/config.json');
+// var logger = require('./api/helpers/logger.js');
+//
+// var http = require('http');
+// var https = require('https');
+// var compression = require('compression');
+//
+//
+// //var _logger             = log4js.getLogger('log');
+// var _logger = logger.Logger;
+// var _app = express();
+// var _server = http.createServer(_app);
+// var _io = socket_io(_server, {
+//     log: false
+// });
+// _app.use(compression({
+//     level: 9, //use best compression ratio
+//
+// }));
+//
+// var _ps_rmq_topo = {};
+// var _ps_rmq_alarm = {};
+// var _closing = false;
+// var _timer_close = {};
+// var _timer_reinit = [];
+// var _timer_reconnect = [];
+// var _rmq_reconnecting = {};
+// var _rmq_reiniting = {};
+// var _version = '';
+// var _base_path = '';
+// var _build_date = {};
+// var _start_date = {};
+// var _terminate = false;
+//
+//
+//
+//
+// common.adjustRunMode(_app);
+//
+// _server.listen(process.env.PORT || 5000,function () {
+//     console.log('server runs!');
+// });
+
+
+
 var express = require('express');
-var session = require('express-session');
-var cors = require('cors');
-var socket_io = require('socket.io');
-var util = require('util');
-var path = require('path');
-var child_process = require('child_process');
-var jsyaml = require('js-yaml');
-var fs = require('fs');
-var log4js = require('log4js');
-var swagger_tools = require('swagger-tools');
-
-var common = require('./api/helpers/common.js');
-var proxy = require('./api/helpers/proxy.js'); //TODO refactoring gerekli
-var config = require('./config/config.json');
-var logger = require('./api/helpers/logger.js');
-
-var http = require('http');
-var https = require('https');
-var compression = require('compression');
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
 
-//var _logger             = log4js.getLogger('log');
-var _logger = logger.Logger;
-var _app = express();
-var _server = http.createServer(_app);
-var _io = socket_io(_server, {
-    log: false
+var port = process.env.PORT || 5000;
+
+app.use(express.static(__dirname + '/dist'));
+
+app.get('/', function(request, response) {
+    response.sendFile('dist/index.html');
 });
-_app.use(compression({
-    level: 9, //use best compression ratio
 
-}));
-
-var _ps_rmq_topo = {};
-var _ps_rmq_alarm = {};
-var _closing = false;
-var _timer_close = {};
-var _timer_reinit = [];
-var _timer_reconnect = [];
-var _rmq_reconnecting = {};
-var _rmq_reiniting = {};
-var _version = '';
-var _base_path = '';
-var _build_date = {};
-var _start_date = {};
-var _terminate = false;
-
-
-
-
-common.adjustRunMode(_app);
-
-_server.listen(process.env.PORT || 5000,function () {
-    console.log('server runs!');
+app.listen(port, function() {
+    console.log('Node app is running on port', port);
 });
+
 
 //
 // // process
