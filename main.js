@@ -430,8 +430,12 @@ module.exports = {
     get_start_date: get_start_date
 };
 
+function server_error_handler(error) {
+    _logger.fatal('APP | SERVER ERROR - %s', error.message);
+    force_terminate(1);
+};
 
-var server_callback = function(port) {
+function server_callback(port) {
     var real_port = port;
     return function() {
         _logger.info('APP | listening port: %d', real_port);
@@ -466,6 +470,7 @@ var spec                = fs.readFileSync('./api/swagger/swagger.yaml', 'utf8');
 // YAML to JSON
 var swagger_doc         = jsyaml.safeLoad(spec);
 console.log('initializing swagger doc');
+
 swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
     //DİKKAT swagger roputer options ayarlarında (yukarda) ignoreMissingHandlers=true olmalı
     console.log("inside initialize middleware");
@@ -559,10 +564,7 @@ swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
 
 
 
-    var server_error_handler = function (error) {
-        _logger.fatal('APP | SERVER ERROR - %s', error.message);
-        force_terminate(1);
-    };
+
     if (config.ssl.enabled) {
         var ssl_port    = process.env.SSL_PORT || config.ssl.port || 443;
 
