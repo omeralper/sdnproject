@@ -248,7 +248,7 @@ exports.get_debug_port = function (argv, isRemove) {
 
 
 exports.get_path_and_file = function () {
-    var distPath = path.join(__dirname, '/../../client/dist');
+    var distPath = path.join(__dirname, '/../../dist');
     var devPath = path.join(__dirname, '/../../client');
     var distMode = fs.existsSync(distPath);
     return {
