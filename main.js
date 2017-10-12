@@ -1,6 +1,4 @@
 
-'use strict';
-
 var express             = require('express');
 var session             = require('express-session');
 var serve_index         = require('serve-index');
@@ -25,13 +23,6 @@ var http                = require('http');
 var https               = require('https');
 var compression         = require('compression');
 
-
-// log4js.configure('./config/log4js.json', {
-//     reloadSecs: config.log4js.config_reload
-// });
-
-
-//var _logger             = log4js.getLogger('log');
 var _logger             = logger.Logger;
 var _app                = express();
 var _server             = http.createServer(_app);
@@ -39,7 +30,7 @@ var _io                 = socket_io(_server, {
     log: false
 });
 _app.use(compression({
-    level : 9, //use best compression ratio
+    level : 9 //use best compression ratio
 
 }));
 
@@ -447,8 +438,6 @@ var swagger_doc         = jsyaml.safeLoad(spec);
 swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
     //DİKKAT swagger roputer options ayarlarında (yukarda) ignoreMissingHandlers=true olmalı
 
-
-
     var corsSetup = cors(config.cors);
 
     _app.use(corsSetup);
@@ -580,27 +569,4 @@ swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
     // Routes
     require('./api/helpers/routes')();
 
-    /*setInterval(function(){
-
-     _io.sockets.emit('alarms',{
-     "id": (new Date()).getTime().toString(),
-     "version": 1,
-     "revision": 1,
-     "timestamp": new Date().toISOString() ,
-     "time": new Date().getTime() / 1000,
-     "severity": 'FATAL',
-     "source": 'SERVER',
-     "sourceHost": '192.168.1.1',
-     "sourceInstance": 1,
-     "resource": 'CPU',
-     "description": 'desc',
-     "detail": "Details",
-     "correctionAction": "",
-     "name": 'Alarm' + (Math.random()*1000).toString(),
-     "alarmStatus": 'ON',
-     "type": 'ALARM'
-     });
-
-     },5000+(Math.random()*15000));
-     */
 });
