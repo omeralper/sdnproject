@@ -428,7 +428,38 @@ module.exports = {
     get_proj_name:  get_proj_name,
     get_build_date: get_build_date,
     get_start_date: get_start_date
+};
+
+
+var server_callback = function(port) {
+    var real_port = port;
+    return function() {
+        _logger.info('APP | listening port: %d', real_port);
+        _logger.info('APP | config:\n%s', JSON.stringify(config, null, '\t'));
+        _logger.info('APP | log config:\n%s', logger.getConfig());
+        _logger.info('APP | log options:\n%s', logger.getOptions());
+
+        if (config.services.topology_rmq.enabled) {
+            setTimeout(function () {
+                _ps_rmq_topo = init_rmq(config.services.topology_rmq.process.pass_name, JSON.stringify(config.services.topology_rmq));
+            }, config.services.topology_rmq.delay.init);
+        }
+
+        if (config.services.alarm_rmq.enabled) {
+            setTimeout(function () {
+                _ps_rmq_alarm = init_rmq(config.services.alarm_rmq.process.pass_name, JSON.stringify(config.services.alarm_rmq));
+            }, config.services.alarm_rmq.delay.init);
+        }
+    }
+};
+
+var port        = process.env.PORT || config.port;// MLAT-3595 kapsamında default değer kaldırılmıştır
+console.log('Server listen');
+if (port) {
+    //MLAT-3595 : eğer port tanımı var ise bu porttan server açalım.
+    _server.listen(port, server_callback(port));
 }
+_server.on('error', server_error_handler);
 
 // the Swagger document (require it, build it programmatically, fetch it from a URL, ...)
 var spec                = fs.readFileSync('./api/swagger/swagger.yaml', 'utf8');
@@ -437,7 +468,7 @@ var swagger_doc         = jsyaml.safeLoad(spec);
 console.log('initializing swagger doc');
 swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
     //DİKKAT swagger roputer options ayarlarında (yukarda) ignoreMissingHandlers=true olmalı
-
+    console.log("inside initialize middleware");
     var corsSetup = cors(config.cors);
 
     _app.use(corsSetup);
@@ -515,7 +546,7 @@ swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
         //}
     });
 
-    var port        = process.env.PORT || config.port;// MLAT-3595 kapsamında default değer kaldırılmıştır
+
     var version     = process.env.MILAT_BUILD_VERSION || ('v' + package_json.version);
     var base_path   = swagger_doc['basePath'];
 
@@ -526,40 +557,12 @@ swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
 
     _logger.info('APP | started - PID: [%d]\nPROCESS TITLE: %s - VERSION: %s - BASE PATH: %s', process.pid, process.title, version, base_path);
 
-    var server_callback = function(port) {
-        var real_port = port;
-        return function() {
-            _logger.info('APP | listening port: %d', real_port);
-            _logger.info('APP | config:\n%s', JSON.stringify(config, null, '\t'));
-            _logger.info('APP | log config:\n%s', logger.getConfig());
-            _logger.info('APP | log options:\n%s', logger.getOptions());
 
-            if (config.services.topology_rmq.enabled) {
-                setTimeout(function () {
-                    _ps_rmq_topo = init_rmq(config.services.topology_rmq.process.pass_name, JSON.stringify(config.services.topology_rmq));
-                }, config.services.topology_rmq.delay.init);
-            }
-
-            if (config.services.alarm_rmq.enabled) {
-                setTimeout(function () {
-                    _ps_rmq_alarm = init_rmq(config.services.alarm_rmq.process.pass_name, JSON.stringify(config.services.alarm_rmq));
-                }, config.services.alarm_rmq.delay.init);
-            }
-        }
-    };
 
     var server_error_handler = function (error) {
         _logger.fatal('APP | SERVER ERROR - %s', error.message);
         force_terminate(1);
     };
-
-    console.log('Server listen');
-    if (port) {
-        //MLAT-3595 : eğer port tanımı var ise bu porttan server açalım.
-        _server.listen(port, server_callback(port));
-    }
-    _server.on('error', server_error_handler);
-
     if (config.ssl.enabled) {
         var ssl_port    = process.env.SSL_PORT || config.ssl.port || 443;
 
