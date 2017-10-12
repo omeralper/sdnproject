@@ -434,7 +434,7 @@ module.exports = {
 var spec                = fs.readFileSync('./api/swagger/swagger.yaml', 'utf8');
 // YAML to JSON
 var swagger_doc         = jsyaml.safeLoad(spec);
-
+console.log('initializing swagger doc');
 swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
     //DİKKAT swagger roputer options ayarlarında (yukarda) ignoreMissingHandlers=true olmalı
 
@@ -449,7 +449,6 @@ swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
     // parse application/x-www-form-urlencoded
     _app.use(body_parser.urlencoded({extended: true}));
 
-    var oneDay = 86400000/2;
     // static dir: /client or /client/dist
     common.adjustRunMode(_app);
 
@@ -482,6 +481,7 @@ swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
         useStubs: false // process.env.NODE_ENV === 'development' ? true : false // Conditionally turn on stubs (mock mode)
     };
 
+    console.log('swagger Meta Data');
     // interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
     _app.use(middleware.swaggerMetadata());
 
@@ -553,6 +553,7 @@ swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
         force_terminate(1);
     };
 
+    console.log('Server listen');
     if (port) {
         //MLAT-3595 : eğer port tanımı var ise bu porttan server açalım.
         _server.listen(port, server_callback(port));
