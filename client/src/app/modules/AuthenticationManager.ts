@@ -97,10 +97,10 @@ export class AuthenticationManager implements ISessionInvalidator {
 
         let savedData = this.localStorageManager.getItem(authorizationKey);
         let loginOpts: SavedLoginOptions = {
-            username: '',
-            password: '',
-            isRemember: false,
-            isSaved: false
+            username: 'prognet',
+            password: 'prognet',
+            isRemember: true,
+            isSaved: true
         };
 
         if (savedData) {
