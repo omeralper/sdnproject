@@ -1,0 +1,159 @@
+<form action="#" class="form-horizontal">
+    <div class="form-group first" *ngIf="mode != DEVICEEDITPOPUPMODE.DEVICEREGISTRY">
+        <label class="col-md-3 control-label">{{t('fields.id')}}</label>
+        <div class="col-md-8">
+            <span class="form-control-static">{{data?.id}}</span>
+        </div>
+    </div>
+    <!--<div class="form-group">-->
+    <!--<label class="col-md-3 control-label">{{t('fields.cluster')}}</label>-->
+    <!--<div class="col-md-8">-->
+    <!--<select class="form-control" required validation [ngModel]="selectedCluster"-->
+    <!--(select)="clusterSelected($event)" name="cluster">-->
+    <!--<option *ngFor="let cluster of clusters;" [value]="cluster.id">{{cluster.name}}</option>-->
+    <!--</select>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="form-group" *ngIf="mode != DEVICEEDITPOPUPMODE.TOPOLOGY">
+        <label class="col-md-3 control-label">{{t('fields.masterController')}}</label>
+        <div class="col-md-8">
+            <select class="form-control" [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null"  validation [(ngModel)]="data.controllerId" name="controllerId">
+                <option *ngFor="let controller of controllers;" [value]="controller.id">{{controller.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group" *ngIf="mode != DEVICEEDITPOPUPMODE.TOPOLOGY">
+        <label class="col-md-3 control-label">{{t('fields.slaveControllers')}}</label>
+        <div class="col-md-8">
+            <select class="form-control slaves" multiple name="slaveControllerIds"
+                    style="width: 100%;">
+                <option *ngFor="let controller of controllers;" [value]="controller.id">{{controller.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group" *ngIf="mode != DEVICEEDITPOPUPMODE.TOPOLOGY">
+        <label class="col-md-3 control-label">{{t('fields.mac')}}</label>
+        <div *ngIf="isNewItem" class="col-md-8">
+            <input *ngIf="!isNewItem && data.deviceType == 'NETCONF'" [disabled]="true" class="form-control" restrict [restrict_mask]="'mac'"
+                   [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null"  validation [ngModel]="data.address?.mac" (ngModelChange)="setMac($event)"
+                   name="mac"/>
+            <input *ngIf="isNewItem || (data.id && data.deviceType != 'NETCONF')" [disabled]="false" class="form-control" restrict [restrict_mask]="'mac'"
+                   [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null" validation [ngModel]="data.address?.mac" (ngModelChange)="setMac($event)"
+                   name="mac"/>
+        </div>
+        <div *ngIf="!isNewItem" class="col-md-8">
+            <span class="form-control-static form-disabled">{{data.address.mac?data.address.mac:"-"}}</span>
+        </div>
+    </div>
+    <div class="form-group" *ngIf="mode != DEVICEEDITPOPUPMODE.TOPOLOGY">
+        <label class="col-md-3 control-label">{{t('fields.ip')}}</label>
+        <div class="col-md-8">
+            <input class="form-control" ip
+                   [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null" validation [ngModel]="data.address?.ipv4" (ngModelChange)="setIp($event) "
+                   name="ip"/>
+        </div>
+    </div>
+    <div *ngIf="(isNewItem && data.deviceType != 'NETCONF' && mode != DEVICEEDITPOPUPMODE.TOPOLOGY)"  class="form-group" >
+        <label class="col-md-3 control-label">{{t('fields.datapathId')}}</label>
+        <div class="col-md-8">
+            <input *ngIf="!isNewItem && (data.deviceType == 'OVSDB' || data.deviceType == 'NETCONF')" disabled class="form-control" restrict [restrict_mask]="'dataPath'"
+                   [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null" validation [(ngModel)]="data.datapathId" name="datapathId"/>
+            <input *ngIf="isNewItem || (!isNewItem && data.deviceType == 'CLI')" class="form-control" restrict [restrict_mask]="'dataPath'"
+                   [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null" validation [(ngModel)]="data.datapathId" name="datapathId"/>
+        </div>
+    </div>
+
+
+    <div class="form-group" *ngIf="data.deviceInfo && data.deviceInfo.type != DEVICETYPE.LEGACY_SWITCH">
+        <label class="col-md-3 control-label">{{t('fields.switchmetermode')}}</label>
+        <div class="col-md-2">
+            <input class="form-control switch-meter-mode" type="checkbox"/>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+
+
+
+
+    <div class="form-group" *ngIf="mode != DEVICEEDITPOPUPMODE.TOPOLOGY">
+        <label class="col-md-3 control-label">{{t('fields.ssl')}}</label>
+        <div class="col-md-2">
+            <input type="checkbox" name="ssl"/>
+        </div>
+    </div>
+    <div class="form-group" *ngIf="mode != DEVICEEDITPOPUPMODE.TOPOLOGY">
+        <label class="col-md-3 control-label">{{t('fields.protocol')}}</label>
+        <div class="col-md-3">
+            <select [disabled]="!isNewItem" class="form-control" [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null"  validation [(ngModel)]="data.deviceType" name="protocol">
+                <option>OVSDB</option>
+                <option>NETCONF</option>
+                <option>CLI</option>
+            </select>
+        </div>
+        <label class="col-md-2 control-label" id="port_label" >{{t('fields.port')}}</label>
+        <div class="col-md-3">
+            <input [required]="isNewItem && mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY" validation validation_label="label#port_label"
+                   class="form-control" maxlength="6" restrict [restrict_type]="'number'"
+                   [(ngModel)]="data.managementPort" name="port"/>
+        </div>
+    </div>
+    <div *ngIf="data.deviceType == 'OVSDB' && mode != DEVICEEDITPOPUPMODE.TOPOLOGY">
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.connectionType')}}</label>
+            <div class="col-md-8">
+                <select class="form-control" [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null"  validation [(ngModel)]="data.connectionMode"
+                        name="connectionMode">
+                    <option *ngFor="let mode of (CONNECTIONMODE | enumValues);" [value]="mode">
+                        {{i18n.t('enums.CONNECTIONMODE.' + mode)}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="mode != DEVICEEDITPOPUPMODE.TOPOLOGY">
+            <label class="col-md-3 control-label">{{t('fields.offlineType')}}</label>
+            <div class="col-md-8">
+                <select class="form-control" [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null"  validation [(ngModel)]="data.offlineMode" name="offlineMode">
+                    <option *ngFor="let mode of (OFFLINEMODE | enumValues);" [value]="mode">{{i18n.t('enums.OFFLINEMODE.' +  mode)}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="data.deviceType == 'NETCONF' && mode != DEVICEEDITPOPUPMODE.TOPOLOGY">
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.ncName')}}</label>
+            <div class="col-md-8">
+                <input class="form-control" maxlength="50"
+                       [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null"  validation [(ngModel)]="data.netconfName" name="ncName"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.ncPassword')}}</label>
+            <div class="col-md-8">
+                <input class="form-control" maxlength="150" type="password"
+                       [required]="mode == DEVICEEDITPOPUPMODE.DEVICEREGISTRY ? true : null"  validation [(ngModel)]="data.netconfPassword" name="ncPassword"/>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!(data.deviceInfo && data.deviceInfo.type == DEVICETYPE.LEGACY_SWITCH) && !(data.deviceType == 'CLI' || mode == DEVICEEDITPOPUPMODE.TOPOLOGY)">
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.dpdk')}}</label>
+            <div class="col-md-2">
+                <input type="checkbox" name="dpdk"/>
+            </div>
+        </div>
+    </div>
+    <!--<div class="form-group">-->
+    <!--<label class="col-md-3 control-label">{{t('fields.location')}}</label>-->
+    <!--<div class="col-md-2">-->
+    <!--<input class="form-control"-->
+    <!--required validation [ngModel]="data.location?.x" (ngModelChange)="data.location.x=$event"-->
+    <!--name="locationx"/>-->
+    <!--</div>-->
+    <!--<div class="col-md-2">-->
+    <!--<input class="form-control"-->
+    <!--required validation [ngModel]="data.location?.y" (ngModelChange)="data.location.y=$event"-->
+    <!--name="locationy"/>-->
+    <!--</div>-->
+    <!--</div>-->
+</form>

@@ -1,0 +1,36 @@
+<form action="#" class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.app_name.label')}}</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="name"
+                       required validation [(ngModel)]="data.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.priority.label')}}</label>
+            <div class="col-md-3">
+                <select class="form-control" name="priority"
+                       required validation [(ngModel)]="data.priority">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.ports.label')}}</label>
+            <div class="col-md-8">
+                <textarea class="form-control" name="ports" (blur)="validateIpAndPort($event)"
+                rows="5" required validation [(ngModel)]="ipPorts">
+                </textarea>
+                <span class="help-block">{{t('fields.ports.help_block')}}</span>
+            </div>
+        </div>
+    </div>
+</form>

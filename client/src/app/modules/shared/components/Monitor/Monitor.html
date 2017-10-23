@@ -1,0 +1,56 @@
+<div class="portlet light bordered" style="padding: 5px;">
+    <div class="portlet-title" style="min-height: 28px; margin:0;">
+        <div class="caption">
+            <span class="caption-subject bold uppercase" style="font-size:14px; color: #8e9daa;">{{i18n.t('statistic_metrics.' + monitorInfo?.name)}}</span>
+            <div class="caption-desc" style="line-height: 13px;color: #9eacb4;font-size: 13px;font-weight: 400;">
+                {{tags}}
+            </div>
+        </div>
+        <div class="tools" style="padding-bottom: 5px;">
+            <a href="" class="collapse"> </a>
+            <a class="config" (click)="editMonitor()"> </a>
+            <a href="" class="reload" (click)="fetchMonitorValue()"> </a>
+            <a href="javascript:;" class="remove"  (click)="removeMonitor($event)"> </a>
+            <!--<a (click)="editMonitor()" rel="tooltip" class="btn btn-circle btn-icon-only btn-default floatL">-->
+            <!--<i class="fa fa-wrench" aria-hidden="true"></i>-->
+            <!--</a>-->
+        </div>
+
+    </div>
+    <div class="portlet-body" style="padding-top: 0;">
+        <div [ngSwitch]="status">
+            <div *ngSwitchCase="MONITORSTATUS.NoId" class="tiles" (click)="editMonitor()" style="text-align: center; padding: 10px;">
+                <a class="btn default btn-sm">
+                    <i class="fa fa-plus-square-o"></i>
+                    {{getText()}}
+                </a>
+            </div>
+            <div *ngSwitchCase="MONITORSTATUS.OnlyId">
+                <span>
+                    <i class='fa fa-spinner fa-spin'></i>
+                </span>
+            </div>
+            <div *ngSwitchCase="MONITORSTATUS.InfoNotFound" style="text-align: center;">
+                <span>
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                </span>
+            </div>
+            <div *ngSwitchCase="MONITORSTATUS.Info">
+                <!--<div *ngIf="!((monitorInfo | json) != '{}' && (monitorValue | json) != '{}')">-->
+                <!--<span (click)="editMonitor()">-->
+                <!--<i class='fa fa-spinner fa-spin'></i>-->
+                <!--</span>-->
+                <!--</div>-->
+                <div [ngSwitch]="monitorInfo.monitorType">
+                    <Gauge *ngSwitchCase="MONITORTYPE.GAUGE" [options]="monitorInfo"
+                           [gaugeValue]="monitorValue.gaugeFields">
+
+                    </Gauge>
+                    <CounterUp *ngSwitchCase="MONITORTYPE.COUNTER" [options]="monitorInfo"
+                               [counterValue]="monitorValue.counterFields">
+                    </CounterUp>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

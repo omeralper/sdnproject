@@ -1,0 +1,54 @@
+<!-- BEGIN FORM-->
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.nodeType.label')}}</label>
+        <div class="col-md-4"><span class="form-control-static">{{i18n.t('enums.NODETYPE.' + data.configDefinition.nodeType)}}</span></div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.componentName.label')}}</label>
+        <div class="col-md-4"><span class="form-control-static">{{data.configDefinition.componentName}}</span></div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.configKey.label')}}</label>
+        <div class="col-md-4"><span class="form-control-static">{{data.configDefinition.configKey}}</span></div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.nodeVersion.label')}}</label>
+        <div class="col-md-4">
+            <select class="form-control" required validation [(ngModel)]="selectedVersion" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let itm of versionList" [ngValue]="itm">{{tt(itm.nodeVersion)}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.nodeId.label')}}</label>
+        <div class="col-md-4">
+            <select class="form-control" required validation [(ngModel)]="selectedNode" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let itm of nodeList" [ngValue]="itm">{{tt(itm)}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.configValue.label')}}</label>
+        <div class="col-md-9" *ngIf="isValueTypeText()">
+            <input class="form-control" type="text"
+                   maxlength="60"
+                   validation [(ngModel)]="data.configValue" [ngModelOptions]="{standalone: true}"
+                   [placeholder]="t('fields.configValue.help_line')"
+            />
+        </div>
+        <div class="col-md-4" *ngIf="isValueTypeNumber()">
+            <input class="form-control" type="number"
+                   maxlength="10" step="any"
+                   validation [(ngModel)]="data.configValue" [ngModelOptions]="{standalone: true}"
+                   [placeholder]="t('fields.configValue.help_line')"
+            />
+        </div>
+        <div class="col-md-4" *ngIf="isValueTypeBoolean()">
+            <select class="form-control" validation [(ngModel)]="data.configValue" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let boolType of BOOLEANS" [value]="boolType">{{boolType}}</option>
+            </select>
+        </div>
+    </div>
+</form>
+<!-- END FORM-->

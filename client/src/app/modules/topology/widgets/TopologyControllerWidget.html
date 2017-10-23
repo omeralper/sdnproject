@@ -1,0 +1,20 @@
+<div style="width:100%;height:34px;z-index:1000;margin-top:5px;">
+    <div style="margin:0 auto;display: table;">
+        <div *ngFor="let controller of controllerList; let i = index; let isLast = last;" (click)="tabClicked(controller, $event)" (mouseenter)="controllerTabHover(controller, $event)"
+             (mouseleave)="controllerTabLeave(controller, $event)"
+             class="floatL"
+             [class.controller-tab-active]="controller.isActive ?  true : false"
+             [class.controller-tab-down]="controller.controllerState === 'INACTIVE'"
+             style="margin-right:7px;"
+        >
+            <button type="button" class="btn btn-circle btn-default">
+                <i *ngIf="controller.securityMode == 'TLS' && controller.controllerState !='INACTIVE'" class="fa fa-lock" aria-hidden="true"></i>
+                <i *ngIf="controller.securityMode == 'OFF' && controller.controllerState !='INACTIVE'" class="fa fa-unlock-alt" aria-hidden="true"></i>
+                <i *ngIf="controller.controllerState =='INACTIVE'" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <span id="controller{{i}}"
+                      [style.font-weight]="controller.controllerState !== 'INACTIVE' ? 'bold' : 'normal'"
+                >{{controller.name || controller.id}}</span>
+            </button>
+        </div>
+    </div>
+</div>

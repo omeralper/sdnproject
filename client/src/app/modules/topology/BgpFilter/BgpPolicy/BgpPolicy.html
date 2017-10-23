@@ -1,0 +1,118 @@
+<div class="portlet">
+    <div class="portlet-body">
+        <form action="#" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">{{t('fields.statementName')}}</label>
+                <div class="col-md-10">
+                    <input class="form-control" maxlength="50" [(ngModel)]="statement.name"
+                           name="name"/>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">{{t('condition')}}</div>
+                <table class="table table-hover table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{t('conditionType')}}</th>
+                        <th>{{t('definedSets')}}</th>
+                        <th>{{t('peerMode')}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">{{t('fields.asPathMatchSet')}}</th>
+                        <td>
+                            <select class="form-control" [ngModel]="statement.condition?.asPathMatchSet?.definedSet"
+                                    (ngModelChange)="statement.condition.asPathMatchSet.definedSet = $event"
+                                    name="asPathMatchSet">
+                                <option value="">
+                                    {{t('select')}}
+                                </option>
+                                <option *ngFor="let pol of osPolicy" [ngValue]="pol">
+                                    {{pol.name}}
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control" [ngModel]="statement.condition?.asPathMatchSet?.matchType"
+                                    (ngModelChange)="statement.condition.asPathMatchSet.matchType = $event"
+                                    name="asPathMatchSetType">
+                                <option *ngFor="let matchType of SDNIPMATCHTYPE | enumValues" [value]="matchType">
+                                    {{i18n.t('enums.SDNIPMATCHTYPE.' + matchType)}}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{t('fields.neighborMatchSet')}}</th>
+                        <td>
+                            <select class="form-control" id="test"
+                                    [ngModel]="statement.condition?.neighborMatchSet?.definedSet"
+                                    (ngModelChange)="statement.condition.neighborMatchSet.definedSet  = $event"
+                                    name="neighborMatchSet">
+                                <option value="">
+                                    {{t('select')}}
+                                </option>
+                                <option *ngFor="let pol of neighbor" [ngValue]="pol">
+                                    {{pol.name}}
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control" [ngModel]="statement.condition?.neighborMatchSet?.matchType"
+                                    (ngModelChange)="statement.condition.neighborMatchSet.matchType = $event"
+                                    name="neighborMatchSetType">
+                                <option *ngFor="let matchType of SDNIPMATCHTYPE | enumValues" [value]="matchType">
+                                    {{i18n.t('enums.SDNIPMATCHTYPE.' + matchType)}}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{t('fields.prefixMatchSet')}}</th>
+                        <td>
+                            <select class="form-control" [ngModel]="statement.condition?.prefixMatchSet?.definedSet"
+                                    (ngModelChange)="statement.condition.prefixMatchSet.definedSet = $event"
+                                    name="prefixMatchSet">
+                                <option value="">
+                                    {{t('select')}}
+                                </option>
+                                <option *ngFor="let pol of prefix" [ngValue]="pol">
+                                    {{pol.name}}
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control" [ngModel]="statement.condition?.prefixMatchSet?.matchType"
+                                    (ngModelChange)="statement.condition.prefixMatchSet.matchType = $event"
+                                    name="prefixMatchSetType">
+                                <option *ngFor="let matchType of SDNIPMATCHTYPE | enumValues" [value]="matchType">
+                                    {{i18n.t('enums.SDNIPMATCHTYPE.' + matchType)}}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">{{t('action')}}</div>
+                <table class="table table-hover table-bordered table-striped">
+                    <tbody>
+                    <tr>
+                        <th width="40%" scope="row">{{t('fields.routeAction')}}</th>
+                        <td width="60%">
+                            <select class="form-control" [ngModel]="statement.action?.routeAction"
+                                    (ngModelChange)="statement.action.routeAction = $event;" name="routeAction">
+                                <option *ngFor="let action of SDNIPROUTEACTION | enumValues" [value]="action">
+                                    {{i18n.t('enums.SDNIPROUTEACTION.' + action)}}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

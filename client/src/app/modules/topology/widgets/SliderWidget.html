@@ -1,0 +1,8 @@
+<div style="height:100px;width:450px;position:absolute;right:10px;bottom:10px;padding:50px">
+    <div id="colorpicker">
+        <div class="sliders" id="slider"></div>
+    </div>
+    <div id="topo-grad-sch">
+        <span *ngFor="let coef of colorArray; let i = index;" [ngStyle]="{'padding-left.%': 18*(i+1)}">%{{coef}}</span>
+    </div>
+</div>

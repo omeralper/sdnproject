@@ -1,0 +1,10 @@
+<form action="#">
+    <div class="form-body">
+        <div class="form-group">
+            <label>{{t('fields.resolveNote')+':'}}</label>
+            <textarea id="note" class="form-control" rows="10" style="resize:none" required validation
+                      [(ngModel)]="data.resolveNote" [ngModelOptions]="{standalone: true}">
+                </textarea>
+        </div>
+    </div>
+</form>

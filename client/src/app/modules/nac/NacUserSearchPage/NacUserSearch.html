@@ -1,0 +1,133 @@
+<div class="portlet light form-fit bordered">
+    <div class="portlet-title">
+        <div class="caption font-dark">
+            <i class="{{icon}} font-dark"></i>
+            <span class="caption-subject bold uppercase">{{title}}</span>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="portlet light form-fit bordered " style="height:500px">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <span class="caption-subject bold uppercase">{{t('searchPart.title')}}</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <form id="userSearchForm" action="#" class="form-horizontal">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{t('searchPart.fields.ip.label')}}</label>
+                                            <div class="col-md-4">
+                                                <input ip type="text" maxlength="15" class="form-control"
+                                                       required validation [(ngModel)]="ip" name="ip"
+                                                       placeholder="{{t('searchPart.fields.ip.placeholder')}}">
+                                                <span class="help-block">{{t('searchPart.fields.ip.help_line')}}</span>
+                                            </div>
+                                            <button rel="tooltip" class="btn uppercase blue-madison col-md-3" (click)="searchUser()"
+                                                    title="{{t('searchPart.searchButton')}}">
+                                                <i class="fa fa-search"></i>
+                                                <span>{{t('searchPart.searchButton')}}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-offset-1 col-md-11">
+                                                <span>{{t('searchPart.notificationMessage')}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div  class="col-md-8" *ngIf="result && (result | json) != '{}'">
+                <div class="portlet light form-fit bordered " style="height:500px">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <span class="caption-subject bold uppercase">{{t('resultPart.title')}}</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="container">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-body">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">{{t('resultPart.fields.userName')}}</label>
+                                        <label class="col-md-4 form-control-static">: {{result?.nacUserDTO?.username}}</label>
+                                        <div class="col-md-6">
+                                            <a rel="tooltip" class="btn btn-circle green-jungle" (click)="gotoEditUser()"
+                                               title="{{t('resultPart.buttons.editUser')}}">
+                                                <i class="fa fa-users fa-sub fa-sub-pencil"></i>
+                                                <span>{{t('resultPart.buttons.editUser')}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">{{t('resultPart.fields.nacGroup')}}</label>
+                                        <label class="col-md-4 form-control-static">: {{result?.nacGroupDTO?.name}}</label>
+                                        <div class="col-md-6">
+                                            <a rel="tooltip" class="btn btn-circle green-jungle" (click)="gotoEditNacGroup()"
+                                               title="{{t('resultPart.buttons.editNacGroup')}}">
+                                                <i class="fa fa-tags fa-sub fa-sub-pencil"></i>
+                                                <span>{{t('resultPart.buttons.editNacGroup')}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">{{t('resultPart.fields.device')}}</label>
+                                        <label class="col-md-4 form-control-static">:
+                                            <a href="javascript:;"  class="btn btn-circle  btn-icon-only btn-disabled {{deviceColor}}">
+                                                <i class="{{deviceIcon}}"></i>
+                                            </a>
+                                            <span>{{result?.nacDeviceDTO?.name}}</span>
+                                        </label>
+                                        <div class="col-md-6">
+                                            <a rel="tooltip" class="btn btn-circle green-jungle" (click)="gotoEditDevice()"
+                                               title="{{t('resultPart.buttons.editDevice')}}">
+                                                <i class="fa fa-desktop fa-sub fa-sub-pencil"></i>
+                                                <span>{{t('resultPart.buttons.editDevice')}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">{{t('resultPart.fields.switch')}}</label>
+                                        <label class="col-md-4 form-control-static">: {{result?.deviceId}} : {{result?.portNumber}}</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">{{t('resultPart.fields.status')}}</label>
+                                        <label class="col-md-4 form-control-static">: {{state}}</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">{{t('resultPart.fields.name')}}</label>
+                                        <label class="col-md-4 form-control-static">: {{result?.nacUserDTO?.name}}</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">{{t('resultPart.fields.surname')}}</label>
+                                        <label class="col-md-4 form-control-static">: {{result?.nacUserDTO?.surname}}</label>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

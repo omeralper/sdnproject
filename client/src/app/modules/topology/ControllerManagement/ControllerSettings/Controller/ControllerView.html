@@ -1,0 +1,115 @@
+<!-- BEGIN FORM-->
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption font-dark">
+            <i class="{{t('icon')}} font-dark"></i>
+            <span class="caption-subject bold uppercase"> {{t('title')}}</span>
+        </div>
+        <div class="actions">
+            <a href="javascript:;" class="btn btn-circle green-meadow" (click)="edit()">
+                <i class="fa fa-pencil"></i> {{t('fields.edit')}} </a>
+
+            <div class="btn-group">
+                <a class="btn btn-circle btn-default " href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-cogs"></i> {{t('fields.settings')}}
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li  *ngIf="controller.status != CONTROLLERSTATUS.PASSIVE">
+                        <a href="javascript:;" class="yellow-casablanca" (click)="selectView(ClusterViews.Parameter)">
+                            <i class="fa fa-sliders"></i> {{t('fields.parameters')}} </a>
+                    </li>
+                    <li *ngIf="controller.featureVisible">
+                        <a href="javascript:;" class="blue-hoki" (click)="selectView(ClusterViews.Task)">
+                            <i class="fa fa-tasks"></i> {{t('fields.tasks')}} </a>
+                    </li>
+                    <li *ngIf="controller.featureVisible">
+                        <a href="javascript:;" class="red-sunglo" (click)="selectView(ClusterViews.Switch)">
+                            <i class="fa fa-exchange"></i> {{t('fields.switches')}} </a>
+                    </li>
+                    <!--<li class="divider"> </li>-->
+                    <!--<li>-->
+                        <!--<a href="javascript:;"> Make admin </a>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-6">
+                <form action="#" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">{{t('fields.id')}}</label>
+                        <div class="col-md-9 form-control-static">
+                            {{controller.id}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">{{t('fields.name')}}</label>
+                        <div class="col-md-9 form-control-static">
+                            {{controller.name}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">{{t('fields.clusterId')}}</label>
+                        <div class="col-md-9 form-control-static">
+                            {{controller.clusterId}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">{{t('fields.ip')}}</label>
+                        <div class="col-md-4 form-control-static">
+                            {{controller.managementAddress}} : {{controller.managementPort}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">{{t('fields.ofVersion')}}</label>
+                        <div class="col-md-9 form-control-static">
+                            {{controller.openflowVersions}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">{{t('fields.location')}}</label>
+                        <div class="col-md-9 form-control-static">
+                            {{controller.location}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!--<div class="col-md-3">-->
+            <!--<ul class="list-group">-->
+            <!--<li class="list-group-item">-->
+            <!--<a class="btn btn-outline btn-sm uppercase green-meadow" (click)="edit()">-->
+            <!--<i class="fa fa-pencil"></i>-->
+            <!--<span>{{t('fields.edit')}}</span>-->
+            <!--</a>-->
+            <!--</li>-->
+            <!--<li class="list-group-item">-->
+            <!--<a class="btn btn-outline btn-sm uppercase yellow-casablanca"-->
+            <!--(click)="selectView(ClusterViews.Parameter)">-->
+            <!--<i class="fa fa-sliders"></i>-->
+            <!--<span>{{t('fields.parameters')}}</span>-->
+            <!--</a>-->
+            <!--</li>-->
+            <!--<li class="list-group-item">-->
+            <!--<a class="btn btn-outline btn-sm uppercase blue-hoki" (click)="selectView(ClusterViews.Task)">-->
+            <!--<i class="fa fa-tasks"></i>-->
+            <!--<span>{{t('fields.tasks')}}</span>-->
+            <!--</a>-->
+            <!--</li>-->
+            <!--<li class="list-group-item">-->
+            <!--<a class="btn btn-outline btn-sm uppercase red-sunglo"-->
+            <!--(click)="selectView(ClusterViews.Switch)">-->
+            <!--<i class="fa fa-exchange"></i>-->
+            <!--<span>{{t('fields.switches')}}</span>-->
+            <!--</a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+
+<!-- END FORM-->

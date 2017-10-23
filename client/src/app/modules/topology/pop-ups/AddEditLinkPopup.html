@@ -1,0 +1,64 @@
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-3 control-label"
+               data-i18n="network_vis.topology.add_edit_link_popup.source_bandwidth"></label>
+        <div class="col-md-6">
+            <input id="sourceBW" #sourceBW [(ngModel)]="sourceBandwidth" type="text" restrict
+                   [ngModelOptions]="{standalone: true}"
+                   [restrict_maxvalue]="sourceBWUnit.options[sourceBWUnit.selectedIndex]?.dataset.max"
+                   [restrict_minvalue]="sourceBWUnit.options[sourceBWUnit.selectedIndex]?.dataset.min"
+                   [restrict_minError]="i18n.t('common.messages.bandwidth_field_value_error_min')"
+                   [restrict_maxError]="i18n.t('common.messages.bandwidth_field_value_error_max')"
+                   [restrict_type]="'number'" class="form-control" maxlength="8"
+                   data-i18n="[placeholder]network_vis.topology.add_edit_link_popup.source_bandwidth"
+                   required validation>
+        </div>
+        <div class="col-md-3">
+            <select #sourceBWUnit class="form-control" [(ngModel)]="sourceBandwidthUnit"
+                    required validation (change)="changeBandWith('source')" [ngModelOptions]="{standalone: true}">
+                <option data-min="100" data-max="10000000" value="1000">KBPS</option>
+                <option data-min="0.1" data-max="10000" value="1000000">MBPS</option>
+                <option data-min="0.0001" data-max="10" value="1000000000">GBPS</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label"
+               data-i18n="network_vis.topology.add_edit_link_popup.target_bandwidth"></label>
+        <div class="col-md-6">
+            <input id="targetBW" #targetBW [(ngModel)]="targetBandwidth" type="text" restrict
+                   [restrict_type]="'number'"
+                   [restrict_maxvalue]="targetBWUnit.options[targetBWUnit.selectedIndex]?.dataset.max"
+                   [restrict_minvalue]="targetBWUnit.options[targetBWUnit.selectedIndex]?.dataset.min"
+                   [restrict_minError]="i18n.t('common.messages.bandwidth_field_value_error_min')"
+                   [restrict_maxError]="i18n.t('common.messages.bandwidth_field_value_error_max')"
+                   [ngModelOptions]="{standalone: true}"
+                   class="form-control" maxlength="8"
+                   data-i18n="[placeholder]network_vis.topology.add_edit_link_popup.target_bandwidth"
+                   required validation>
+        </div>
+        <div class="col-md-3">
+            <select #targetBWUnit class="form-control" [(ngModel)]="targetBandwidthUnit"
+                    required validation (change)="changeBandWith('target')" [ngModelOptions]="{standalone: true}">
+                <option data-min="100" data-max="10000000" value="1000">KBPS</option>
+                <option data-min="0.1" data-max="10000" value="1000000">MBPS</option>
+                <option data-min="0.0001" data-max="10" value="1000000000">GBPS</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label"
+               data-i18n="network_vis.topology.add_edit_link_popup.securityLevel"></label>
+        <div class="col-md-9">
+            <select id="securityLevelForLinkSelection" class="form-control select2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+            </select>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,63 @@
+<!-- BEGIN FORM-->
+<form id="networkDeviceDetails" action="#" class="form-horizontal">
+    <div class="form-body">
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.type.label')}}</label>
+            <div class="col-md-6">
+                <select class="form-control"  id="type"
+                        required
+                        [(ngModel)]="selectedDevice.type" name="type">
+                    <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group first" >
+            <label class="col-md-3 control-label">{{t('fields.mac.label')}}</label>
+            <div class="col-md-6">
+                <input restrict class="form-control" required validation [restrict_mask]="'mac'"
+                       placeholder="{{t('fields.mac.placeholder')}}"
+                       [(ngModel)]="selectedDevice.mac" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.IP.label')}}</label>
+            <div class="col-md-6">
+                <input class="form-control" required validation ip
+                       placeholder="{{t('fields.IP.placeholder')}}"
+                       [(ngModel)]="selectedDevice.ip" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+
+        <div class="form-group" *ngIf="selectedDevice.type && selectedDevice.type != NETWORKDEVICETYPE.FIREWALL">
+            <label class="col-md-3 control-label">{{t('fields.vlan_id.label')}}</label>
+            <div class="col-md-6">
+                <input restrict [restrict_type]="'number'" class="form-control"
+                       placeholder="{{t('fields.vlan_id.placeholder')}}"
+                       [(ngModel)]="selectedDevice.vlanid" [ngModelOptions]="{standalone: true}">
+                <!--<span class="help-block">{{t('fields.collision.help_line')}}</span>-->
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.switch_list.label')}}</label>
+            <div class="col-md-6">
+                <select class="form-control" id="details-switch-list" required validation [(ngModel)]="selectedDevice.port.id" name="portid">
+                    <option *ngFor="let switch of switches" [value]="switch">{{switch}}</option>
+                </select>
+                <!--<span class="help-block">{{t('fields.collision.help_line')}}</span>-->
+            </div>
+        </div>
+        <div class="form-group last">
+            <label class="col-md-3 control-label">{{t('fields.port_no.label')}}</label>
+            <div class="col-md-6">
+                <input restrict [restrict_type]="'number'" class="form-control" required validation
+                       placeholder="{{t('fields.port_no.placeholder')}}"
+                       [(ngModel)]="selectedDevice.port.number" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+    </div>
+
+</form>
+<!-- END FORM-->

@@ -1,0 +1,36 @@
+<form action="#">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tabbable-custom tabs-below">
+                <div class="tab-content">
+                    <div id="jsonEditor" class="tab-pane fade in active">
+                        <input jsonEditor editorMode="tree" [(ngModel)]="data.rawData" name="rawData" style="width: 100%; height: 400px;">
+                    </div>
+                    <div id="rawData" class="tab-pane fade">
+                        <codemirror [(ngModel)]="codeMirror.data"
+                                    name="rawData"
+                                    [config]="codeMirror.config"
+                                    (focus)="codeMirror.onCodeMirrorFocus()"
+                                    (blur)="codeMirror.onCodeMirrorBlur()"
+                                    style="width: 100%; height: 400px;"
+                                    #editor
+                        >
+                        </codemirror>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#jsonEditor"><i class="fa fa-eye"></i> {{t('fields.preview')}}</a></li>
+                    <li data-tabname="rawDataTab"><a data-toggle="tab" href="#rawData"><i class="fa fa-file-code-o"></i> {{t('fields.rawView')}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label class="col-md-4 control-label">{{t('fields.upload')}}</label>
+            <div class="col-md-8">
+                <input class="form-control" type="file" name="file" (change)="fileChange($event)">
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,16 @@
+<!-- BEGIN FORM-->
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.ip')}}</label>
+        <div class="col-md-9">
+            <input class="form-control" restrict [restrict_mask]="'ip24'" required validation [(ngModel)]="data.ipAddress" name="ipAddress"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.subnetMask')}}</label>
+        <div class="col-md-9">
+            <label>{{data.subnetMask}}</label>
+        </div>
+    </div>
+</form>
+<!-- END FORM-->

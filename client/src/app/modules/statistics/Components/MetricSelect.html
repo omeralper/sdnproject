@@ -1,0 +1,18 @@
+<div class="btn-group">
+    <a class="btn btn-sm btn-circle btn-default" href="javascript:;" data-toggle="dropdown"
+       aria-expanded="false">
+        {{name}}
+        <span class="badge">{{selectedMetrics.length}}</span>
+        <i class="fa fa-angle-down "></i>
+    </a>
+    <div class="dropdown-menu">
+        <div *ngFor="let metric of metrics;" style="width: 300px; padding:5px 5px 0 5px;">
+            <label for="check_{{metric.metricName + metricName}}">
+                <input id="check_{{metric.metricName + metricName}}" type="checkbox"
+                       [attr.checked]="selectedMetrics.indexOf(metric) != -1 ? true : null"
+                       (click)="onMetricSelect(metric,$event)" name="metric.metricName">
+                {{t('metrics.' + metric.metricName)}}
+            </label>
+        </div>
+    </div>
+</div>

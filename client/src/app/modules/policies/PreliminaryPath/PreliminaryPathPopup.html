@@ -1,0 +1,98 @@
+<!-- BEGIN FORM-->
+<form action="#" class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group first">
+            <label class="col-md-3 control-label">{{t('fields.name.label')}}</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" required validation
+                       [(ngModel)]="data.name" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="form-group first">
+            <label class="col-md-3 control-label">{{t('fields.topology.label')}}</label>
+            <div class="col-md-9">
+                <select class="form-control" id="mvtnId" (ngModelChange)="onChange($event)"
+                        required
+                        [(ngModel)]="selectedTopology" name="sqp" [ngModelOptions]="{standalone: true}"
+                        [disabled]="shouldTopologyBeDisabled"
+                >
+                    <option *ngFor="let topology of topologies" [ngValue]="topology">{{topology?.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" [hidden]="!selectedTopology">
+            <label class="col-md-3 control-label">{{t('fields.source_host.label')}}</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" required validation id="fromId"
+                       [(ngModel)]="data.fromId" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="form-group" [hidden]="!selectedTopology">
+            <label class="col-md-3 control-label">{{t('fields.target_host.label')}}</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" required validation id="toId"
+                       [(ngModel)]="data.toId" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="form-group" [hidden]="!selectedTopology">
+            <label class="col-md-3 control-label" rel="tooltip" title="{{t('fields.priority.help_line')}}">{{t('fields.priority.label')}}</label>
+            <div class="col-md-3">
+                <input restrict required validation [restrict_type]="'number'" class="form-control"
+                       [(ngModel)]="data.priority" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+
+        <div class="form-group" [hidden]="!selectedTopology">
+            <label class="col-md-3 control-label">{{t('fields.service_quality_policy.label')}}</label>
+            <div class="col-md-6">
+                <select class="form-control" id="sqp"
+                        required validation
+                        [(ngModel)]="selectedServiceQualityPolicy" name="sqp">
+                    <option *ngFor="let sqp of serviceActionDTOList" [ngValue]="sqp">{{sqp?.policyName}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-11 ml15">
+                    <label class="col-md-3">
+                        {{t('fields.start_date.label')}} </label>
+                    <div class="col-md-8">
+                        <div class="input-group date form_datetime" id="startTime">
+                            <input type="text" size="16" class="form-control">
+                            <span class="input-group-btn">
+                                    <button class="btn default date-reset" type="button">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <button class="btn default date-set" type="button">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-11 ml15">
+                    <label class="col-md-3">
+                        {{t('fields.end_date.label')}} </label>
+                    <div class="col-md-8">
+                        <div class="input-group date form_datetime" data-date="" id="endTime">
+                            <input type="text" size="16" class="form-control">
+                            <span class="input-group-btn">
+                                    <button class="btn default date-reset" type="button">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <button class="btn default date-set" type="button">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<!-- END FORM-->

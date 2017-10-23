@@ -1,0 +1,95 @@
+<!-- BEGIN FORM-->
+<form action="#" class="form-horizontal">
+    <div class="form-body">
+        <!--<div *ngIf="!isNewItem" class="form-group first">-->
+        <!--<label class="col-md-3 control-label">{{t('fields.traffic_cat_name.label')}}</label>-->
+        <!--<div class="col-md-9">-->
+        <!--<span class="form-control-static">{{data.serviceClassName}}</span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="form-group first">
+            <label class="col-md-3 control-label">{{t('fields.traffic_cat_name.label')}}</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" placeholder="{{t('fields.traffic_cat_name.placeholder')}}"
+                       required validation [(ngModel)]="data.serviceClassName"
+                       name="one">
+                <!--<span class="help-block">{{t('fields.traffic_cat_name.help_line')}}</span>-->
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.class_level')}}</label>
+            <div class="col-md-3">
+                <select class="form-control" id="class-level-selection" [(ngModel)]="data.classLevel"
+                        name="classLevel">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.bandwidth.label')}}</label>
+            <div class="col-md-6">
+                <input #bandWidth restrict [restrict_type]="'number'" validation class="form-control" maxlength="8"
+                       placeholder="{{t('fields.bandwidth.placeholder')}}" required
+                       [restrict_maxvalue]="bandWidthUnit.options[bandWidthUnit.selectedIndex]?.dataset.max"
+                       [restrict_minvalue]="bandWidthUnit.options[bandWidthUnit.selectedIndex]?.dataset.min"
+                       [restrict_minError]="i18n.t('common.messages.bandwidth_field_value_error_min')"
+                       [restrict_maxError]="i18n.t('common.messages.bandwidth_field_value_error_max')"
+                       [(ngModel)]="data.bandwidth" name="two">
+            </div>
+            <div class="col-md-3">
+                <select #bandWidthUnit (change)="changeBandWith()" class="form-control" id="bw-unit-selectbox">
+                    <option data-min="100" data-max="10000000" value="KBPS">KBPS</option>
+                    <option data-min="0.1" data-max="10000" value="MBPS">MBPS</option>
+                    <option data-min="0.0001" data-max="10" value="GBPS">GBPS</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.jitter.label')}}</label>
+            <div class="col-md-6">
+                <input restrict [restrict_type]="'number'" class="form-control" validation required
+                       placeholder="{{t('fields.jitter.placeholder')}}"
+                       [(ngModel)]="data.jitter" name="three">
+            </div>
+            <div class="col-md-1">ms</div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.delay.label')}}</label>
+            <div class="col-md-6">
+                <input restrict [restrict_type]="'number'" class="form-control" validation required
+                       placeholder="{{t('fields.delay.placeholder')}}"
+                       [(ngModel)]="data.delay" name="four">
+            </div>
+            <div class="col-md-1">ms</div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.collision.label')}}</label>
+            <div class="col-md-6">
+                <input restrict [restrict_type]="'number'" class="form-control" validation required
+                       placeholder="{{t('fields.collision.placeholder')}}"
+                       [(ngModel)]="data.collision" name="five">
+                <!--<span class="help-block">{{t('fields.collision.help_line')}}</span>-->
+            </div>
+            <div class="col-md-1">{{t('fields.collision.unit')}}</div>
+        </div>
+
+        <div class="form-group last">
+            <label class="col-md-3 control-label">{{t('fields.loss.label')}}</label>
+            <div class="col-md-6">
+                <input restrict [restrict_type]="'number'" class="form-control" validation  type="number" step="any"
+                       placeholder="{{t('fields.loss.placeholder')}}"
+                       [(ngModel)]="data.loss" name="six">              
+            </div>
+            <div class="col-md-1">{{t('fields.loss.unit')}}</div>
+        </div>
+    </div>
+
+</form>
+<!-- END FORM-->

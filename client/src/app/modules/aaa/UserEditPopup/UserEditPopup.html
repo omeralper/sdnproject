@@ -1,0 +1,136 @@
+<form action="#" class="form-horizontal" autocomplete="nope">
+    <div class="form-body">
+        <div *ngIf="!isNewItem" class="form-group first">
+            <label class="col-md-3 control-label">{{t('fields.username.label')}}</label>
+            <div class="col-md-8">
+                <span class="form-control-static">{{data.username}}</span>
+            </div>
+        </div>
+        <div *ngIf="isNewItem">
+            <div class="form-group first">
+                <label class="col-md-3 control-label">{{t('fields.username.label')}}</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="{{t('fields.username.placeholder')}}"
+                           minlength="5"
+                           maxlength="50"
+                           required validation
+                           InputLengthValidator [ilv_minlength]="5"
+                           name="username"
+                           [(ngModel)]="data.username">
+                    <span class="help-block">{{t('fields.username.help_line')}}</span>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="!isLdapEnabled">
+                <label class="col-md-3 control-label">{{t('fields.password.label')}}</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input #pass1 type="password" class="form-control" autocomplete="nope" minlength="6"
+                               maxlength="50" validation PasswordChecker
+                               placeholder="{{t('fields.password.placeholder')}}"
+                               name="pass1" (keyup)="pass2.value = ''" [(ngModel)]="password1">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    </div>
+                    <span class="help-block">{{t('fields.password.help_line')}}</span>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="!isLdapEnabled">
+                <label class="col-md-3 control-label">{{t('fields.passwordRetype.label')}}</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input #pass2 type="password" class="form-control" [required]="isNewItem ? 'true' : null"
+                               autocomplete="nope"
+                               minlength="6"
+                               maxlength="50"
+                               validation
+                               PasswordMatcher [pm_target]="pass1"
+                               placeholder="{{t('fields.passwordRetype.placeholder')}}"
+                               name="pass2"
+                               [(ngModel)]="password2" [ngModelOptions]="{standalone: true}">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    </div>
+                    <span class="help-block">{{t('fields.passwordRetype.help_line')}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.name.label')}}</label>
+            <div class="col-md-8">
+                <input type="text"
+                       name="name"
+                       maxlength="50" class="form-control" placeholder="{{t('fields.name.placeholder')}}" required
+                       validation
+                       [(ngModel)]="data.name">
+                <span class="help-block">{{t('fields.name.help_line')}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.surname.label')}}</label>
+            <div class="col-md-8">
+                <input type="text"
+                       name="surname"
+                       maxlength="50" class="form-control" placeholder="{{t('fields.surname.placeholder')}}" required
+                       validation
+                       [(ngModel)]="data.surname">
+                <span class="help-block">{{t('fields.surname.help_line')}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.email.label')}}</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="email" maxlength="50"
+                           name="email"
+                           class="form-control" placeholder="{{t('fields.email.placeholder')}}" required validation
+                           [(ngModel)]="data.email">
+                    <span class="input-group-addon">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.notes.label')}}</label>
+            <div class="col-md-8">
+                <textarea class="form-control"
+                          name="notes"
+                          rows="3" maxlength="255" placeholder="{{t('fields.notes.placeholder')}}"
+                          [(ngModel)]="data.notes" [ngModelOptions]="{standalone: true}"></textarea>
+                <span class="help-block">{{t('fields.notes.help_line')}}</span>
+            </div>
+        </div>
+        <div class="form-group last">
+            <label class="col-md-3 control-label">{{t('fields.thirdparty.label')}}</label>
+            <div class="col-md-8">
+                <select *ngIf="isMilatMainUser" class="form-control" name="thirdparty"
+                        required validation [(ngModel)]="data.appId" (ngModelChange)="appChanged($event)">
+                    <option *ngFor="let app of apps" [value]="app.id">{{app.name}}</option>
+                </select>
+                <span *ngIf="!isMilatMainUser" class="form-control-static">{{selectedApp?.name}}</span>
+            </div>
+        </div>
+        <div class="form-group" data-permitted="roles:list" data-noperm="remove">
+            <label class="col-md-3 control-label">{{t('fields.roleList.label')}}</label>
+            <div class="col-md-8">
+                <select multiple="multiple"
+                        name="roleList"
+                        class="multi-select" required validation id="js_role_list">
+                    <option *ngFor="let role of roleList; let i = index" [value]="role.id" [attr.data-index]="i">
+                        {{role.name}}
+                    </option>
+                </select>
+                <span class="help-block">{{t('fields.roleList.help_line')}}</span>
+            </div>
+        </div>
+        <div class="form-group last">
+            <label class="col-md-3 control-label">{{t('fields.status.label')}}</label>
+            <div class="col-md-8">
+                <select class="form-control" name="status" required validation [(ngModel)]="data.status">
+                    <option *ngFor="let s of AAASTATUS | enumValues" [value]="s">
+                        {{getIconTitle('AAASTATUS', s)}}
+                    </option>
+                </select>
+                <span class="help-block">{{t('fields.status.help_line')}}</span>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,79 @@
+<!--<div #graph></div>-->
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-bar-chart font-green-haze"></i>
+            <span class="caption-subject bold uppercase font-green-haze">{{title}}</span>
+        </div>
+        <div class="actions">
+            <div *ngFor="let tagNameListPair of tagLists" class="btn-group">
+                <a class="btn btn-sm btn-circle btn-default" href="javascript:;" data-toggle="dropdown"
+                   aria-expanded="false">
+                    {{t('filter.' + tagNameListPair.name)}}
+                    <span class="badge"></span>
+                    <i class="fa fa-angle-down "></i>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li *ngFor="let tag of tagNameListPair.list | mapvalue">
+                        <label for="tag_{{tag.key}}">{{tag.key}}</label>
+                        <input id="tag_{{tag.key}}" type="checkbox" (click)="tagSelected(tagNameListPair,tag)">
+                    </li>
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <a class="btn btn-sm btn-circle btn-default" href="javascript:;" data-toggle="dropdown"
+                   aria-expanded="false">
+                    {{t('filter.metrics')}}
+                    <span class="badge">{{selectedMetrics.length}}</span>
+                    <i class="fa fa-angle-down "></i>
+                </a>
+                <div class="dropdown-menu">
+                    <select class="metricSelect" multiple="multiple" style="width: 100%">
+                        <option *ngFor="let metric of metrics; let i = index" [value]="metric.metricName">
+                            {{t('metrics.' + metric.metricName)}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-sm btn-circle btn-default" href="javascript:;" data-toggle="dropdown"
+                   aria-expanded="false">
+                    <i class="fa fa-clock-o"></i>
+                    {{selectedDuration.val}} {{t('duration.display.' + selectedDuration.unit)}}
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li *ngFor="let duration of durations;" (click)="durationChanged(duration)"
+                        [class.active]="duration == selectedDuration">
+                        <a href="javascript:;">{{duration.val }} {{t('duration.display.' + duration.unit)}}</a>
+                    </li>
+                </ul>
+            </div>
+            <a (click)="fullScreen()" class="fullscreen btn btn-circle btn-icon-only btn-default"
+               data-original-title=""
+               title=""> </a>
+            <a (click)="refresh()" class="btn btn-circle  btn-icon-only btn-default"
+               style="color:#a0a0a1"
+               data-original-title="" title="">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+            </a>
+            <a (click)="live()" class="btn btn-circle  btn-icon-only btn-default"
+               [style.color]="liveModeOn ? '#ff8a8a' : '#a0a0a1'"
+               data-original-title="" title="">
+                <i class="fa fa-heartbeat" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="graphContainer" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

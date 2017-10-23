@@ -1,0 +1,25 @@
+<!-- BEGIN FORM-->
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('labels.type')}}</label>
+        <div class="col-md-9">
+            <select #type class="form-control" required validation name="monitorType">
+                <option *ngFor="let type of MONITORTYPE | enumValues" [value]="type">
+                    {{baseServices.uiHelper.getIconTitle('MONITORTYPE', type)}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('labels.name')}}</label>
+        <div class="col-md-9">
+            <select class="form-control" required validation [(ngModel)]="selectedMonitorInfo"
+                    name="selectedMonitorInfo">
+                <option *ngFor="let info of monitorInfos | monitorFilter:type.value" [ngValue]="info">
+                    {{getMonitorListName(info)}}
+                </option>
+            </select>
+        </div>
+    </div>
+</form>
+<!-- END FORM-->

@@ -1,0 +1,235 @@
+<div id="accessRule" class="portlet light form-fit bordered">
+    <div class="portlet-body form">
+        <div class="form-horizontal">
+            <div class="form-body" style="padding-left:20px; padding-right:20px;">
+                <div class="form-group">
+                    <p *ngIf="rule.conflictedRuleNames && rule.conflictedRuleNames.length > 0" class="bg-danger">
+                        {{t('messages.conflictedRules')}} {{rule.conflictedRuleNames}}
+                    </p>
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.name')}}
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input [(ngModel)]="rule.policyName"
+                               maxlength="16"
+                               placeholder="{{t('fields.actions.rule.name')}}"
+                               type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.mode')}}</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input id="access" type="radio" name="accessPolicyAction"
+                               (click)="rule.accessPolicyAction = ACCESSACTIONTYPE.ACCESS"
+                               [checked]="rule.accessPolicyAction == ACCESSACTIONTYPE.ACCESS">
+                        <label for="access">{{t('fields.actions.rule.access_all')}} </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input id="deny" type="radio" name="accessPolicyAction"
+                               (click)="rule.accessPolicyAction = ACCESSACTIONTYPE.DENIED "
+                               [checked]="rule.accessPolicyAction == ACCESSACTIONTYPE.DENIED">
+                        <label for="deny">{{t('fields.actions.rule.block_all')}}</label>
+                    </div>
+                </div>
+                <div [hidden]="rule.accessPolicyAction == ACCESSACTIONTYPE.DENIED" class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.service_quality_rule')}}
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control" [(ngModel)]="rule.quality">
+                            <option *ngFor="let quality of serviceActions;"
+                                    [ngValue]="quality">
+                                {{quality.policyName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="text-align: center;">
+                        <label class="control-label"> {{t('fields.actions.rule.source')}}</label>
+                    </div>
+                    <div class="col-md-4" style="text-align: center;">
+                        <label class="control-label">{{t('fields.actions.rule.target')}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.mac_params')}}
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input [(ngModel)]="rule.macSourceAddresses"
+                               (blur)="regexValidation($event,'mac')"
+                               placeholder="{{t('fields.actions.rule.source')}}"
+                               type="text" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <input [(ngModel)]="rule.macDestAddresses"
+                               (blur)="regexValidation($event,'mac')"
+                               placeholder="{{t('fields.actions.rule.target')}}"
+                               class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.ip_params')}}
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input [(ngModel)]="rule.ipSourceAddressess"
+                               (blur)="regexValidation($event,'ip')"
+                               placeholder="{{t('fields.actions.rule.source')}}"
+                               type="text" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <input [(ngModel)]="rule.ipDestAddressess"
+                               (blur)="regexValidation($event,'ip')"
+                               placeholder="{{t('fields.actions.rule.target')}}"
+                               class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.port_params')}}
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input [(ngModel)]="rule.portSourceRanges"
+                               (blur)="regexValidation($event,'port')"
+                               placeholder="{{t('fields.actions.rule.source')}}"
+                               class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <input [(ngModel)]="rule.portDestRanges"
+                               (blur)="regexValidation($event,'port')"
+                               placeholder="{{t('fields.actions.rule.target')}}"
+                               class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.user_params')}}
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="sourceselector form-control" multiple="multiple" style="width: 100%">
+                            <option *ngFor="let nacUser of nacUsers" [value]="nacUser.id">
+                                {{nacUser?.username}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="destselector form-control" multiple="multiple" style="width: 100%">
+                            <option *ngFor="let nacUser of nacUsers" [value]="nacUser.id">
+                                {{nacUser?.username}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.ip_loc')}}
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="iplocsourceselector form-control" multiple="multiple" style="width: 100%">
+                            <option *ngFor="let ipLoc of ipLocs" [value]="ipLoc.id">
+                                {{ipLoc?.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="iplocdestselector form-control" multiple="multiple" style="width: 100%">
+                            <option *ngFor="let ipLoc of ipLocs" [value]="ipLoc.id">
+                                {{ipLoc?.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.protocol')}}
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input id="protocol"
+                               [(value)]="rule.protocols" data-field="protocols"
+                               type="text" class="form-control" data-role="tagsinput">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.user_apps')}}
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="appselector form-control" multiple="multiple" style="width: 100%">
+                            <option *ngFor="let userApp of userApps" [value]="userApp.id">
+                                {{userApp?.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.vlan_tags')}}
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input id="vlan_tags"
+                               [(value)]="rule.vlan_tags" data-field="vlan_tags"
+                               type="text" class="form-control" data-role="tagsinput">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.mpls_tags')}}
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input id="mpls_tags"
+                               [(value)]="rule.mpls_tags" data-field="mpls_tags"
+                               type="text" class="form-control" data-role="tagsinput">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.inport_tags')}}
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="switches" class="form-control" [(ngModel)]="rule.inportSwitch"
+                                [ngModelOptions]="{standalone: true}">
+                            <option [ngValue]="null">{{t('fields.actions.rule.selection')}}</option>
+                            <option *ngFor="let switch of switchList"
+                                    [ngValue]="switch">{{switch?.id}}
+                            </option>
+                        </select>
+                    </div>
+                    <div [hidden]="!rule.inportSwitch" class="col-md-4">
+                        <select id="inportSwitchPorts" class="form-control inport-switch-ports" multiple="multiple" style="width: 100%">
+                            <option *ngFor="let port of rule?.inportSwitch?.portInfo?.portDetails" [value]="port.number">
+                                {{port?.number}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">{{t('fields.actions.rule.time')}}
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="datetime"  value=""
+                               class="form-control timeInterval" style="text-align: left; width: 100%"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

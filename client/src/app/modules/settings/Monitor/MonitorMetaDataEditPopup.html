@@ -1,0 +1,35 @@
+<!-- BEGIN FORM-->
+<form action="#" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.name.label')}}</label>
+        <div class="col-md-9" style="max-height: 100px;overflow: auto;">
+            <label class="form-control-static">{{names}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.label.label')}}</label>
+        <div class="col-md-9" style="max-height: 100px;overflow: auto;">
+            <label class="form-control-static">{{monitorTags}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.lowAlarmThreshold.label')}}</label>
+        <div class="col-md-9">
+            <input class="form-control" [(ngModel)]="lowThreshold" type="number" name="loLimit"/>
+            <span class="help-block">{{t('fields.lowAlarmThreshold.help_line')}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{t('fields.highAlarmThreshold.label')}}</label>
+        <div class="col-md-9">
+            <input class="form-control" [(ngModel)]="highThreshold" type="number" name="hiLimit"/>
+            <span class="help-block">{{t('fields.highAlarmThreshold.help_line')}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="alert alert-warning" role="alert">{{t('warning')}}</div>
+        </div>
+    </div>
+</form>
+<!-- END FORM-->

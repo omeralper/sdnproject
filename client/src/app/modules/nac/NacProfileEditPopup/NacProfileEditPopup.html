@@ -1,0 +1,104 @@
+<!-- BEGIN FORM-->
+<form action="#" class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group first">
+            <label class="col-md-3 control-label">{{t('fields.groupType.label')}}</label>
+            <div class="col-md-3">
+                <select id="groupType" class="form-control" required [(ngModel)]="data.groupType" name="groupType">
+                    <option selected *ngFor="let item of groupTypes" [value]="item">
+                        {{baseServices.uiHelper.getIconTitle('NACENTITYTYPE', item)}}
+                    </option>
+                </select>
+                <span class="help-block">{{t('fields.groupType.help_line')}}</span>
+            </div>
+            <label class="col-md-3 control-label">{{t('fields.status.label')}}</label>
+            <div class="col-md-3">
+                <select id="groupStatus" class="form-control" required [(ngModel)]="data.status" name="status">
+                    <option *ngFor="let item of statuses" [value]="item">
+                        {{getIconTitle('NACSTATUS', item)}}
+                    </option>
+                </select>
+                <span class="help-block">{{t('fields.status.help_line')}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.name.label')}}</label>
+            <div class="col-md-9">
+                <input id="groupName" type="text" maxlength="50"
+                       class="form-control" placeholder="{{t('fields.name.placeholder')}}" required validation
+                       [(ngModel)]="data.name" name="name">
+                <span class="help-block"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.accessPolicy.label')}}</label>
+            <div class="col-md-9">
+                <select id="accessPolicy" class="form-control" required validation [(ngModel)]="data.accessPolicy"
+                        name="accessPolicy">
+                    <option *ngFor="let item of accessPolicies"
+                            [ngValue]="item">{{item.profileName}}
+                    </option>
+                </select>
+                <span class="help-block"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.virtualNetwork.label')}}</label>
+            <div class="col-md-9">
+                <select class="form-control" [attr.required]="p('phy_topo:manage') ? null : true"
+                        validation [(ngModel)]="data.mvtnId" name="virtualNetwork">
+                    <option value="">{{t('labels.no_mvtn')}}</option>
+                    <option *ngFor="let item of virtualNetworks" [value]="item.id">{{item?.name}}</option>
+                </select>
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.priority.label')}}</label>
+            <div class="col-md-3">
+                <select class="form-control"
+                        validation [(ngModel)]="data.priority" name="priority">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </select>
+                <span class="help-block"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.isVerified.label')}}</label>
+            <div class="col-md-9">
+                <input id="isVerified" type="checkbox" [(ngModel)]="isVerified" name="isVerified"/>
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group" [hidden]="!isVerified">
+            <label class="col-md-3 control-label">{{t('fields.aaaServer.label')}}</label>
+            <div class="col-md-9">
+                <select id="aaaServer" class="form-control" [attr.required]="isVerified ? true : null"
+                        validation [(ngModel)]="data.aaaServer" name="aaaServer">
+                    <option value="">{{t('fields.aaaServer.placeholder')}}</option>
+                    <option *ngFor="let item of aaaServers" [ngValue]="item">{{item.name}}</option>
+                </select>
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{t('fields.allowAutoBYOD.label')}}</label>
+            <div class="col-md-3">
+                <input type="checkbox" name="byodCheck"/>
+            </div>
+            <span class="col-md-6" [hidden]="!data.allowAutoBYOD" style="color: #6AA84F;">{{t('fields.allowAutoBYOD.allow')}}</span>
+            <span class="col-md-6" [hidden]="data.allowAutoBYOD" style="color: #c71b16;">{{t('fields.allowAutoBYOD.notAllow')}}</span>
+        </div>
+    </div>
+</form>
+<!-- END FORM-->

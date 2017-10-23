@@ -1,0 +1,32 @@
+<TopologyStatistics [hidden]="graphsVisible  === 'true' || ( topologyData && (topologyData.tabType == CREATESHOWENUM.CREATE || topologyData.tabType == CREATESHOWENUM.EDIT))"></TopologyStatistics>
+
+<div *ngIf="controllersTabFlag === 'true'">
+    <div *ngIf="controllerTabData">
+        <controllers-widget [controllerTabData]="controllerTabData" #controllerTabElement></controllers-widget>
+    </div>
+</div>
+<div *ngIf="detailInfoFlag === 'true' && !(topologyData && (topologyData.tabType == CREATESHOWENUM.CREATE || topologyData.tabType == CREATESHOWENUM.EDIT))">
+    <info-tooltip-widget [infoTooltipData]="infoTooltipData" [topologyData]="topologyData" #infoTooltipElement></info-tooltip-widget>
+</div>
+<div *ngIf="footerFlag === 'true'">
+    <footer-tooltip-widget [footerTooltipData]="footerTooltipData" #footerTooltipElement></footer-tooltip-widget>
+</div>
+<div *ngIf="topologyData && topologyData.type != TOPOLOGYTYPE.PHYSICAL && !topologyData.isMappedVersionShown && (topologyData.tabType == CREATESHOWENUM.CREATE || topologyData.tabType == CREATESHOWENUM.EDIT)">
+    <node-editor #nodeEditorComponent
+                 [height]="height"
+                 [topologyData]="topologyData"
+                 [selectedElementToEdit]="selectedElementToEdit"
+                 [topologyCreateModeFlag]="topologyCreateModeFlag"
+                 (onRenderTrigger)="onRenderTrigger($event)"
+                 (resetState)="resetSelectedElementState($event)"
+                 (deleteElement)="deleteElement($event)"
+                 (refreshTopology)="refreshSelectedTopology($event)"
+                 (createAndSaveSelectedTopology)="createAndSendVirtualTopology($event)"
+                 (topologyEditPopup)="emitTopologyEditPopup()"
+    ></node-editor>
+</div>
+
+<alarm-status-popover-window [alarmStatus]="alarmStatus" [aspcDisplay]="aspcDisplay" [aspcLeft]="aspcLeft"
+                             [aspcTop]="aspcTop"></alarm-status-popover-window>
+<svg id="show-topo-svg">
+</svg>

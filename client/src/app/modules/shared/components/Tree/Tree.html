@@ -1,0 +1,41 @@
+<style>
+    .list-group-item {
+        border: none;
+        cursor: pointer;
+    }
+
+    .list-group-item:hover{
+        background-color: #F2EEF5;
+    }
+
+    .branch .list-group-item {
+        position: relative;
+        padding-left: 30px;
+    }
+
+    .branch .branch .list-group-item {
+        position: relative;
+        padding-left: 60px;
+    }
+
+    .active {
+        background-color: #36C6D3 !important;
+        color: white;
+    }
+
+    .treeView {
+        display: inline;
+    }
+</style>
+<div class="treeView" *ngFor="let branch of treeData">
+    <div class="list-group-item {{' ' + branch.className}}" (click)="branchClick(branch);" [attr.tree-id]="branch.id">
+        <a href="javascript:" data-toggle="collapse" [attr.data-target]="'#branch_' + branch.id">
+            <i [attr.class]="branch.iconClass || ( targetTree.classList.contains('in') ? 'fa fa-folder-open' : 'fa fa-folder')"
+               aria-hidden="true"></i>
+        </a>
+        {{branch.name}}
+    </div>
+    <div #targetTree id="branch_{{branch.id}}" class="branch collapse in">
+        <Tree [treeData]="branch.children" (treeClicked)="branchClick($event)"></Tree>
+    </div>
+</div>

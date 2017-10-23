@@ -1,0 +1,15 @@
+<div class="btn-group custom-dropdown">
+    <a class="btn btn-sm btn-circle btn-default" href="javascript:;" data-toggle="dropdown"
+       aria-expanded="false">
+        {{name}}
+        <span class="badge">{{count}}</span>
+        <i class="fa fa-angle-down "></i>
+    </a>
+    <div class="dropdown-menu">
+        <select class="custom-select" multiple="multiple" style="width: 100%">
+            <option *ngFor="let item of items" [value]="item">
+                {{item}}
+            </option>
+        </select>
+    </div>
+</div>

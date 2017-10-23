@@ -1,0 +1,183 @@
+<div class="portlet light bordered">
+    <div class="portlet-title tabbable-line">
+        <div class="caption">
+            <!--<i class="icon-share font-dark"></i>-->
+            <span class="caption-subject font-dark bold uppercase"></span>
+        </div>
+        <ul class="nav nav-tabs" style="width: 100%;">
+            <li class="active col-md-2">
+                <a href="#controller" data-toggle="tab" aria-expanded="false" (click)="tabChanged(STATISTICVIEWS.Controller)">
+                    <span class="dashboard-stat dashboard-stat-v2 red">
+                        <div class="visual">
+                            <i class="{{t('list.titles.controller.icon')}}"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                <span>{{summaryStatistics.controllerNumber}}</span>
+                            </div>
+                            <div class="desc"> {{t('list.titles.controller.title')}}</div>
+                        </div>
+                    </span>
+                </a>
+            </li>
+            <li class="col-md-2">
+                <a href="#switch" data-toggle="tab" aria-expanded="false" (click)="tabChanged(STATISTICVIEWS.Switch)">
+                    <span class="dashboard-stat dashboard-stat-v2 blue">
+                        <div class="visual">
+                            <i class="{{t('list.titles.switch.icon')}}"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                <span>{{summaryStatistics.switchNumber}}</span>
+                            </div>
+                            <div class="desc"> {{t('list.titles.switch.title')}}</div>
+                        </div>
+                    </span>
+                </a>
+            </li>
+            <li class="col-md-2">
+                <a href="#link" data-toggle="tab" aria-expanded="false" (click)="tabChanged(STATISTICVIEWS.Link)">
+                    <span class="dashboard-stat dashboard-stat-v2 green-jungle">
+                        <div class="visual">
+                            <i class="{{t('list.titles.link.icon')}}"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                <span>{{summaryStatistics.linkNumber}}</span>
+                            </div>
+                            <div class="desc"> {{t('list.titles.link.title')}}</div>
+                        </div>
+                    </span>
+                </a>
+            </li>
+            <li class="col-md-2">
+                <a href="#application" data-toggle="tab" aria-expanded="false" (click)="tabChanged(STATISTICVIEWS.Application)">
+                    <span class="dashboard-stat dashboard-stat-v2 yellow-lemon">
+                        <div class="visual">
+                            <i class="{{t('list.titles.application.icon')}}"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                <span>{{appCount}}</span>
+                            </div>
+                            <div class="desc"> {{t('list.titles.application.title')}}</div>
+                        </div>
+                    </span>
+                </a>
+            </li>
+            <li class="col-md-2">
+                <a href="#virtual" data-toggle="tab" aria-expanded="false" (click)="tabChanged(STATISTICVIEWS.Virtual)">
+                    <span class="dashboard-stat dashboard-stat-v2 purple-studio">
+                        <div class="visual">
+                            <i class="{{t('list.titles.virtual.icon')}}"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                <span>{{summaryStatistics.mvtnNumber}}</span>
+                            </div>
+                            <div class="desc"> {{t('list.titles.virtual.title')}}</div>
+                        </div>
+                    </span>
+                </a>
+            </li>
+            <li class="col-md-2">
+                <a href="#hoststat" data-toggle="tab" aria-expanded="false" (click)="tabChanged(STATISTICVIEWS.Hoststat)">
+                    <span class="dashboard-stat dashboard-stat-v2 yellow-gold">
+                        <div class="visual">
+                            <i class="{{t('list.titles.hoststat.icon')}}"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                <span>{{summaryStatistics.hostNumber}}</span>
+                            </div>
+                            <div class="desc"> {{t('list.titles.hoststat.title')}}</div>
+                        </div>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="portlet-body">
+        <div class="tab-content">
+            <div class="tab-pane active" id="controller">
+                <!--<div class="row">-->
+                <!--<div class="col-md-6">-->
+                <!--<genericgraph></genericgraph>-->
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
+                <!--</div>-->
+                <!--</div>-->
+                <div *ngIf="currentView == STATISTICVIEWS.Controller">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <cpugraph></cpugraph>
+                        </div>
+                        <div class="col-md-6">
+                            <ramgraph></ramgraph>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <diskgraph></diskgraph>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="switch">
+                <div *ngIf="currentView == STATISTICVIEWS.Switch">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <switchgraph [switchList]="switchList"></switchgraph>
+                        </div>
+                        <div class="col-md-6">
+                            <tablestatgraph [switchList]="switchList"></tablestatgraph>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <groupgraph></groupgraph>
+                        </div>
+                        <div class="col-md-6">
+                            <miscgraph></miscgraph>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <queuegraph></queuegraph>
+                        </div>
+                        <div class="col-md-6">
+                            <metergraph></metergraph>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="link">
+                <div *ngIf="currentView == STATISTICVIEWS.Link">
+                    <linkgraph></linkgraph>
+                </div>
+            </div>
+            <div class="tab-pane" id="application">
+                <div *ngIf="currentView == STATISTICVIEWS.Application">
+                    <restcallgraph></restcallgraph>
+                </div>
+            </div>
+            <div class="tab-pane" id="virtual">
+                <div *ngIf="currentView == STATISTICVIEWS.Virtual">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <portgraph></portgraph>
+                        </div>
+                        <div class="col-md-6">
+                            <virtualnetworkgraph></virtualnetworkgraph>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="hoststat">
+                <div *ngIf="currentView == STATISTICVIEWS.Hoststat">
+                    <usergraph></usergraph>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

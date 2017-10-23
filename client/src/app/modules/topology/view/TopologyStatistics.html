@@ -1,0 +1,39 @@
+<style>
+    :host >>> Monitor .portlet-title {
+        cursor: move;
+    }
+</style>
+<div style="margin-top: 34px; position: absolute; z-index: 5; width:95%;">
+    <div  class="row">
+        <div id="container1" class="col-md-2 droppable" (drop)="onDrop($event)">
+            <div id="mon1" draggable="true" (dragover)="$event.preventDefault()" (dragstart)="drag($event)">
+                <Monitor [monitorId]="'1'" (remove)="remove(1)"></Monitor>
+            </div>
+        </div>
+        <div id="container2" class="col-md-2 droppable" (drop)="onDrop($event)">
+            <div id="mon2" draggable="true" (dragover)="$event.preventDefault()" (dragstart)="drag($event)">
+                <Monitor [monitorId]="'2'" (remove)="remove(2)"></Monitor>
+            </div>
+        </div>
+        <div id="container3" class="col-md-2 droppable" (drop)="onDrop($event)">
+            <div id="mon3" draggable="true" (dragover)="$event.preventDefault()" (dragstart)="drag($event)">
+                <Monitor [monitorId]="'3'" (remove)="remove(3)"></Monitor>
+            </div>
+        </div>
+        <div id="container4" class="col-md-2 droppable" (drop)="onDrop($event)">
+            <div id="mon4" draggable="true" (dragover)="$event.preventDefault()" (dragstart)="drag($event)">
+                <Monitor [monitorId]="'4'" (remove)="remove(4)"></Monitor>
+            </div>
+        </div>
+        <div id="container5" class="col-md-2 droppable" (drop)="onDrop($event)">
+            <div id="mon5" draggable="true" (dragover)="$event.preventDefault()" (dragstart)="drag($event)">
+                <Monitor [monitorId]="'5'" (remove)="remove(5)"></Monitor>
+            </div>
+        </div>
+        <div id="container6" class="col-md-2 droppable" (drop)="onDrop($event)">
+            <div id="mon6" draggable="true" (dragover)="$event.preventDefault()" (dragstart)="drag($event)">
+                <Monitor [monitorId]="'6'" (remove)="remove(6)"></Monitor>
+            </div>
+        </div>
+    </div>
+</div>

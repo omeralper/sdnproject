@@ -1,0 +1,257 @@
+<style>
+    .centered-buttons {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .tab-padding {
+        padding-top: 20px;
+    }
+
+    .passive-tab {
+        cursor: not-allowed;
+    }
+
+    .passive-tab a {
+        pointer-events: none;
+    }
+</style>
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption font-red-sunglo">
+            <i class="fa fa-file font-red-sunglo"></i>
+            <span class="caption-subject sbold uppercase">{{t('propertyList.scopeIpRange')}} [{{range?.ipStart}}-{{range?.ipEnd}}/{{maskBitLength}}]</span>
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        <div class="tabbable-line">
+            <ul id="rangeTabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#scopeIpRange" aria-controls="scopeIpRange" role="tab" data-toggle="tab">
+                        {{t('range.scopeIpRange')}}</a>
+                </li>
+                <li [class.passive-tab]="!range.id" role="presentation">
+                    <a href="#excludedAddresses"
+                       aria-controls="excludedAddresses" role="tab" data-toggle="tab">
+                        {{t('range.excludedAddresses')}}</a>
+                </li>
+                <li [class.passive-tab]="!range.id" role="presentation">
+                    <a href="#reservedAddresses"
+                       aria-controls="reservedAddresses" role="tab" data-toggle="tab">
+                        {{t('range.reservedAddresses')}}</a>
+                </li>
+                <li [class.passive-tab]="!range.id" role="presentation">
+                    <a href="#reservedUserAddresses"
+                       aria-controls="reservedUserAddresses" role="tab" data-toggle="tab">
+                        {{t('range.reservedUserAddresses')}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content tab-padding">
+            <div role="tabpanel" class="tab-pane active" id="scopeIpRange">
+                <form id="rangeForm" action="#">
+                    <div [hidden]="!poolsStr" class="form-group first">
+                        <label class="col-md-4 control-label">{{t('range.addressPool')}}</label>
+                        <div class="col-md-8" >
+                            {{poolsStr}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" [class.label-disabled]="isEditMode">{{t('range.ipStart')}}</label>
+                        <div class="col-md-8" >
+                            <input type="text" class="form-control" required validation [disabled] = "isEditMode"
+                                   ip
+                                   (blur)="startIpBlur($event)"
+                                   [(ngModel)]="range.ipStart" name="ipStart">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" [class.label-disabled]="isEditMode">{{t('range.ipEnd')}}</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" required validation [disabled] = "isEditMode"
+                                   ip
+                                   (blur)="endIpBlur($event)"
+                                   [(ngModel)]="range.ipEnd" name="ipEnd">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" [class.label-disabled]="isEditMode">{{t('range.subnetMask')}}</label>
+                        <div class="col-md-8">
+                            <input #networkMask type="text" class="form-control" required validation [disabled] = "isEditMode"
+                                   ip
+                                   [(ngModel)]="range.networkMask"
+                                   (ngModelChange)="networkMaskChange($event,networkMask)"
+                                   name="networkMask">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" [class.label-disabled]="isEditMode">{{t('range.subnetMask')}}</label>
+                        <div class="col-md-8">
+                            <input type="number" [(ngModel)]="maskBitLength" [disabled] = "isEditMode"
+                                   (ngModelChange)="networkBitChange($event,networkMask)"
+                                   name="maskBitLength" class="form-control" min="8" max="32">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="col-md-12 align-center">
+                            <button *ngIf="!isEditMode" (click)="saveRange();" name="save"
+                                    class="btn uppercase green-meadow">
+                                <i class="fa fa-floppy-o"></i>
+                                <span>{{t('range.save')}}</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="excludedAddresses">
+                <form id="excludedAdressForm" action="#">
+                    <table class="table table-hover table-bordered table-striped">
+                        <tr>
+                            <th>{{t('range.startAddress')}}</th>
+                            <th>{{t('range.endAddress')}}</th>
+                            <th>{{t('range.description')}}</th>
+                            <th>{{t('range.actions')}}</th>
+                        </tr>
+                        <tr *ngFor="let address of range.ipsExcludedDtos">
+                            <td>
+                                {{address.ipStart}}
+                            </td>
+                            <td>
+                                {{address.ipEnd}}
+                            </td>
+                            <td>
+                                {{address.description}}
+                            </td>
+                            <td class="centered-buttons">
+                                <a (click)="removeExcludedAddress(address)">
+                                    <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" required validation
+                                       ip
+                                       name="startAddress" [(ngModel)]="newExcludedAddress.ipStart">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" required validation
+                                       ip
+                                       name="endAddress" [(ngModel)]="newExcludedAddress.ipEnd">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control"
+                                       name="description" [(ngModel)]="newExcludedAddress.description">
+                            </td>
+                            <td class="centered-buttons">
+                                <a (click)="addExcludedAddress()">
+                                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="reservedAddresses">
+                <form id="reservedAddressForm" action="#">
+                    <table class="table table-hover table-bordered table-striped">
+                        <tr>
+                            <th>{{t('range.macAddress')}}</th>
+                            <th>{{t('range.ipAddress')}}</th>
+                            <th>{{t('range.description')}}</th>
+                            <th>{{t('range.actions')}}</th>
+                        </tr>
+                        <tr *ngFor="let address of range.ipsReservedDtos">
+                            <td>
+                                {{address.mac}}
+                            </td>
+                            <td>
+                                {{address.ip}}
+                            </td>
+                            <td>
+                                {{address.description}}
+                            </td>
+                            <td class="centered-buttons">
+                                <a (click)="removeReservedAddress(address)">
+                                    <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" required validation
+                                       restrict [restrict_mask]="'mac'"
+                                       name="startAddress" [(ngModel)]="newReservedAddress.mac">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" required validation
+                                       ip
+                                       name="endAddress" [(ngModel)]="newReservedAddress.ip">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control"
+                                       name="description" [(ngModel)]="newReservedAddress.description">
+                            </td>
+                            <td class="centered-buttons">
+                                <a (click)="addReservedAddress()">
+                                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="reservedUserAddresses">
+                <form id="reservedUserAddressForm" action="#">
+                    <table class="table table-hover table-bordered table-striped">
+                        <tr>
+                            <th>{{t('range.username')}}</th>
+                            <th>{{t('range.ipAddress')}}</th>
+                            <th>{{t('range.description')}}</th>
+                            <th>{{t('range.actions')}}</th>
+                        </tr>
+                        <tr *ngFor="let address of range.ipsReservedUserDtos">
+                            <td>
+                                {{address.username}}
+                            </td>
+                            <td>
+                                {{address.ip}}
+                            </td>
+                            <td>
+                                {{address.description}}
+                            </td>
+                            <td class="centered-buttons">
+                                <a (click)="removeReservedUserAddress(address)">
+                                    <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" required validation id="newReservedUsername"
+                                       restrict
+                                       name="username" [(ngModel)]="newReservedUserAddress.username">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" required validation
+                                       ip
+                                       name="endAddress" [(ngModel)]="newReservedUserAddress.ip">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control"
+                                       name="description" [(ngModel)]="newReservedUserAddress.description">
+                            </td>
+                            <td class="centered-buttons">
+                                <a (click)="addReservedUserAddress()">
+                                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
