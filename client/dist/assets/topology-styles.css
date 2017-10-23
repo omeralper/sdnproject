@@ -1,0 +1,301 @@
+html svg .node[nodetype=dhcpservernode] .text3 {
+    stroke-width: 0pt;
+    stroke: white;
+    fill: white;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=ntopnode] .text3 {
+    stroke-width: 0pt;
+    stroke: white;
+    fill: white;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=networkdevicenode] .text3 {
+    stroke-width: 0pt;
+    stroke: white;
+    fill: white;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=gatewaynode] .text3 {
+    stroke-width: 0pt;
+    stroke: white;
+    fill: white;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=virtualgatewaynode] .text3 {
+    stroke-width: 0pt;
+    stroke: white;
+    fill: white;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=clusternode] .text3 {
+    stroke-width: 0pt;
+    stroke: white;
+    fill: white;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=switchnode] .stacked-text {
+    stroke-width: 0pt;
+    stroke: white;
+    fill: black;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=hostnode] .stacked-text {
+    stroke-width: 0pt;
+    stroke: white;
+    fill: white;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=virtualgatewaynode] .text4 {
+    stroke-width: 0pt !important;
+    font-size: 15px;
+    stroke: #ff8533;
+    fill: #ff8533;
+    text-anchor: middle;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=switchnode] .text4 {
+    stroke-width: 0pt !important;
+    font-size: 20px;
+    stroke: green;
+    fill: green;
+    text-anchor: middle;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=firewallnode] .text3 {
+    stroke-width: 0pt;
+    stroke: white;
+    fill: white;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=accesspointnode] .text3 {
+    stroke-width: 0pt;
+    stroke: white;
+    fill: white;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=hostnode] .text3 {
+    stroke: none;/* DO NOT USE STROKE FOR ICONS, their details are lost when store is use. (Yildiray)*/
+    fill: white;
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=bgprouternode] .text3 {
+ stroke: none;/* DO NOT USE STROKE FOR ICONS, their details are lost when store is use. (Yildiray)*/
+ fill: white;
+ font-family: FontAwesome;
+}
+
+html svg .node[nodetype=switchnode] .text3 {
+    stroke: none;/* DO NOT USE STROKE FOR ICONS, their details are lost when store is use. (Yildiray)*/
+    fill: white;
+    /*stroke-width: 0pt;*/
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=domainnode] .text3 {
+    stroke: none;/* DO NOT USE STROKE FOR ICONS, their details are lost when store is use. (Yildiray)*/
+    fill: white;
+    /*stroke-width: 0pt;*/
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=domainnode] .alarm-status-text {
+    stroke: none;/* DO NOT USE STROKE FOR ICONS, their details are lost when store is use. (Yildiray)*/
+    font-family: FontAwesome;
+}
+
+html svg .node[nodetype=clusternode] .cluster-node-count {
+    stroke: white;
+    fill: white;
+    font-family: FontAwesome;
+}
+
+.text4 {
+    stroke-width: 0 !important;
+    stroke: #ff8533;
+    fill: #ff8533;
+    font-family: FontAwesome;
+    dominant-baseline: central;
+    text-anchor: middle;
+    font-size: 10px;
+}
+
+html svg .node text {
+    stroke: black;
+    stroke-width: 0.5pt;
+}
+
+html svg .switchnode text {
+    stroke: black;
+    stroke-width: 0.5pt;
+}
+
+html svg .hostnode text {
+    stroke: black;
+    stroke-width: 0.5pt;
+}
+
+html a {
+    cursor: pointer;
+}
+
+div.topotooltip {
+    bottom: 8vh;
+    left:2vw;
+    position: absolute;
+    text-align: left;
+    min-width: 10%;
+    height: 2em;
+    padding: 4px;
+    font: 14px sans-serif;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.2);
+    pointer-events: none;
+    box-shadow: 5px 5px  #cccccc;
+}
+
+div.topotooltip .tool-head {
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 2em;
+    font-weight: bold;
+}
+
+div.topotooltip .tool-info-head {
+    color: steelblue;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.selected-path-link {
+    stroke:black !important;
+    stroke-dasharray: 5 !important; /*78, 2*/
+    animation: flow 6s linear infinite !important;
+    -webkit-animation: flow 6s linear infinite !important;
+}
+
+.PathDrawStroke{
+    stroke: magenta !important;
+}
+
+.PathDrawFill{
+    fill: magenta !important;
+}
+
+.node {
+    cursor: pointer;
+    /*stroke: #3182bd;*/
+}
+
+.switchnode{
+    cursor: pointer;
+}
+
+.hostnode{
+    cursor: pointer;
+}
+
+.insideswitch text{
+    font-size: 1px;
+}
+
+.link {
+    /*fill: none;*/
+    /*stroke: blue;*/
+}
+
+@keyframes flow {
+    from {stroke-dashoffset: 80;}
+    to {stroke-dashoffset: 0;}
+}
+
+@-webkit-keyframes flow {
+    from {stroke-dashoffset: 80;}
+    to {stroke-dashoffset: 0;}
+}
+
+.A{
+    stroke:red !important;
+    /*image: images/switchTestAqua48x32.svg;*/
+}
+
+.B {
+    stroke:#7BB7EF !important;
+}
+.C{
+    stroke:green !important;
+}
+.D{
+    stroke:gold !important;
+}
+.E{
+    stroke:purple !important;
+    stroke-width: 6px !important;
+    /* radius */
+    width: 8px !important;
+
+}
+
+#contextmenu-node {
+    position: absolute;
+    background-color: white;
+    border: solid #CCCCCC 1px;
+}
+
+/*#contextmenu-node .contextmenu-item {*/
+/*margin: 0.5em;*/
+/*padding-left: 0.5em;*/
+/*list-style: none;*/
+/*margin-left: -35px;*/
+/*font-size: 130%;*/
+/*}*/
+
+/*#contextmenu-node .contextmenu-item:hover {*/
+/*background-color: #CCCCCC;*/
+/*cursor: pointer;*/
+/*}*/
+.blurred.link {
+    opacity: 0.25;
+}
+
+.flowline {
+
+}
+.textpath{
+    stroke:black;
+}
+
+.turkey-svg{
+    width: 3072px;
+    height: 1500px;
+    background-repeat: no-repeat;
+    display: block;
+    margin:2% auto;
+    opacity: 0.7;
+}
+.turkey-svg-g{
+
+}
+
+#topo-grad-sch {
+    height: 14px;
+    line-height: 12px;
+    border: grey 1px solid;
+    background: -webkit-linear-gradient(left, rgb(153, 255, 204), rgb(0, 230, 0), rgb(0, 153, 0), rgb(255, 255, 102), rgb(255, 204, 102), rgb(255, 153, 51), rgb(255, 102, 0), rgb(255, 0, 0)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(left, rgb(153, 255, 204), rgb(0, 230, 0), rgb(0, 153, 0), rgb(255, 255, 102), rgb(255, 204, 102), rgb(255, 153, 51), rgb(255, 102, 0), rgb(255, 0, 0)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(left, rgb(153, 255, 204), rgb(0, 230, 0), rgb(0, 153, 0), rgb(255, 255, 102), rgb(255, 204, 102), rgb(255, 153, 51), rgb(255, 102, 0), rgb(255, 0, 0)); /* For Fx 3.6 to 15 */
+    background: linear-gradient(to right, rgb(153, 255, 204), rgb(0, 230, 0), rgb(0, 153, 0), rgb(255, 255, 102), rgb(255, 204, 102), rgb(255, 153, 51), rgb(255, 102, 0), rgb(255, 0, 0)); /* Standard syntax (must be last) */
+}

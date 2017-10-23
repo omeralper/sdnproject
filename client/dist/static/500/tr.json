@@ -1,0 +1,14 @@
+{
+  "langCode": "tr",
+  "common": {
+    "project_title": "MILAT | Sistem Hatası"
+  },
+  "error": {
+    "title": "Ops...",
+    "motto": "Sistemde bir hata oluştu",
+    "description": "Sistemde beklenmedik bir hata oluştu, bir süre sonra tekrar deneyin.",
+    "background": "/assets/pages/media/pages/error.jpg",
+    "icon":"fa fa-exclamation-triangle font-yellow-gold",
+    "fontColor":"font-yellow-gold"
+  }
+}
