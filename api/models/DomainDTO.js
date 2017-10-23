@@ -22,6 +22,7 @@ exports.DomainDTO =  {
         revision : { name: 'revision', type: 'Integer', isRequired: true }, 
         timestamp : { name: 'timestamp', type: 'Date', isRequired: true }, 
         name : { name: 'name', type: 'String' }, 
+        ip : { name: 'ip', type: 'String' }, 
         port : { name: 'port', type: 'PortDetail' }, 
         status : { name: 'status', type: 'DOMAIN_STATUS' }, 
         type : { name: 'type', type: 'SUPER_TOPOLOGY_TYPE' }, 

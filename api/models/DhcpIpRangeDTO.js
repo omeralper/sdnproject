@@ -5,6 +5,7 @@
 //var BaseDTO = require('./BaseDTO');
 //var DhcpIpExcludedDTO = require('./DhcpIpExcludedDTO');
 //var DhcpIpReservedDTO = require('./DhcpIpReservedDTO');
+//var DhcpIpReservedUserDTO = require('./DhcpIpReservedUserDTO');
 
 'use strict';
 /**
@@ -23,7 +24,8 @@ exports.DhcpIpRangeDTO =  {
         ipEnd : { name: 'ipEnd', type: 'String', isRequired: true }, 
         networkMask : { name: 'networkMask', type: 'String', isRequired: true }, 
         ipsExcludedDtos : { name: 'ipsExcludedDtos', type: 'Array', subType: 'DhcpIpExcludedDTO' }, 
-        ipsReservedDtos : { name: 'ipsReservedDtos', type: 'Array', subType: 'DhcpIpReservedDTO' }
+        ipsReservedDtos : { name: 'ipsReservedDtos', type: 'Array', subType: 'DhcpIpReservedDTO' }, 
+        ipsReservedUserDtos : { name: 'ipsReservedUserDtos', type: 'Array', subType: 'DhcpIpReservedUserDTO' }
     }
 }
 

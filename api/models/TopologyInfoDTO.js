@@ -46,7 +46,8 @@ exports.TopologyInfoDTO =  {
         collision : { name: 'collision', type: 'Float' }, 
         maximumNumberOfUser : { name: 'maximumNumberOfUser', type: 'Integer' }, 
         vlanTag : { name: 'vlanTag', type: 'Integer' }, 
-        dnsServer : { name: 'dnsServer', type: 'String' }
+        dnsServer : { name: 'dnsServer', type: 'String' }, 
+        energyConsumption : { name: 'energyConsumption', type: 'Integer' }
     }
 }
 

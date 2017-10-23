@@ -9,6 +9,6 @@
 exports.SEVERITY = {
     type:'enum',
     name:'SEVERITY',
-    values: ['MINOR', 'MAJOR', 'CRITICAL', 'FATAL']
+    values: ['MINOR', 'MAJOR', 'CRITICAL', 'FATAL', 'NONE']
 }
 

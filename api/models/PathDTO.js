@@ -45,6 +45,7 @@ exports.PathDTO =  {
         validatePathPacketInterval : { name: 'validatePathPacketInterval', type: 'Long' }, 
         validatePathPacketNo : { name: 'validatePathPacketNo', type: 'Long' }, 
         validatePathAvgDelay : { name: 'validatePathAvgDelay', type: 'Long' }, 
+        sendMeasurePacket : { name: 'sendMeasurePacket', type: 'Boolean' }, 
         routeHopFrequency : { name: 'routeHopFrequency', type: 'Long' }
     }
 }

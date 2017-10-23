@@ -38,6 +38,10 @@ module.exports.nsrSavePOST = function nsrSavePOST (req, res, next) {
   NFV.nsrSavePOST(req.swagger.params, res, next);
 };
 
+module.exports.nsrUpdatePOST = function nsrUpdatePOST (req, res, next) {
+  NFV.nsrUpdatePOST(req.swagger.params, res, next);
+};
+
 module.exports.vimComputeHostGetByIpPOST = function vimComputeHostGetByIpPOST (req, res, next) {
   NFV.vimComputeHostGetByIpPOST(req.swagger.params, res, next);
 };
@@ -64,6 +68,10 @@ module.exports.vimVmRestartPOST = function vimVmRestartPOST (req, res, next) {
 
 module.exports.vimVmStartPOST = function vimVmStartPOST (req, res, next) {
   NFV.vimVmStartPOST(req.swagger.params, res, next);
+};
+
+module.exports.vimVmStatusInfoPOST = function vimVmStatusInfoPOST (req, res, next) {
+  NFV.vimVmStatusInfoPOST(req.swagger.params, res, next);
 };
 
 module.exports.vimVmStopPOST = function vimVmStopPOST (req, res, next) {

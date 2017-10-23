@@ -4,6 +4,7 @@
 
 //var BaseDTO = require('./BaseDTO');
 //var VnfInstancePlacementMap = require('./VnfInstancePlacementMap');
+//var VnfMetadataMap = require('./VnfMetadataMap');
 
 'use strict';
 /**
@@ -17,8 +18,8 @@ exports.NetServiceRecordLaunchByPlacementDTO =  {
         version : { name: 'version', type: 'Integer', isRequired: true }, 
         revision : { name: 'revision', type: 'Integer', isRequired: true }, 
         timestamp : { name: 'timestamp', type: 'Date', isRequired: true }, 
-        nsdId : { name: 'nsdId', type: 'String', isRequired: true }, 
-        vnfInstancePlacementMap : { name: 'vnfInstancePlacementMap', type: 'VnfInstancePlacementMap' }
+        vnfInstancePlacementMap : { name: 'vnfInstancePlacementMap', type: 'VnfInstancePlacementMap', isRequired: true }, 
+        vnfMetadataMap : { name: 'vnfMetadataMap', type: 'VnfMetadataMap', isRequired: true }
     }
 }
 

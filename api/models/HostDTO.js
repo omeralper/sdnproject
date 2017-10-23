@@ -5,6 +5,7 @@
 //var BaseDTO = require('./BaseDTO');
 //var HOST_STATUS = require('./HOST_STATUS');
 //var HOST_TYPE = require('./HOST_TYPE');
+//var HostNetworkDTO = require('./HostNetworkDTO');
 //var PortDetail = require('./PortDetail');
 //var UserInfo = require('./UserInfo');
 
@@ -32,13 +33,16 @@ exports.HostDTO =  {
         blocked : { name: 'blocked', type: 'Boolean' }, 
         required : { name: 'required', type: 'Boolean' }, 
         colorCode : { name: 'colorCode', type: 'String' }, 
-        networks : { name: 'networks', type: 'Array', subType: 'string' }, 
+        networks : { name: 'networks', type: 'Array', subType: 'HostNetworkDTO' }, 
         vnfdId : { name: 'vnfdId', type: 'String' }, 
         vnfdType : { name: 'vnfdType', type: 'String' }, 
         vnfdName : { name: 'vnfdName', type: 'String' }, 
         vnfrId : { name: 'vnfrId', type: 'String' }, 
         vnfrType : { name: 'vnfrType', type: 'String' }, 
-        vnfrName : { name: 'vnfrName', type: 'String' }
+        vnfrName : { name: 'vnfrName', type: 'String' }, 
+        quarantined : { name: 'quarantined', type: 'Boolean' }, 
+        hostName : { name: 'hostName', type: 'String' }, 
+        isExempt : { name: 'isExempt', type: 'Boolean' }
     }
 }
 

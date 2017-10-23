@@ -75,6 +75,27 @@ exports.deviceListPOST = function(args, res, next) {
 
 /**
 * parameters expected in the args:
+* request (DeviceQuarantineRequest)
+**/
+exports.deviceQuarantinePOST = function(args, res, next) {
+    var val = proxy.getVal(args);
+    var funcName = "deviceQuarantinePOST";
+
+    logger.debug(funcName + ' | request:\n%s', JSON.stringify(val, null, '\t'));
+
+    if (!proxy.run('services.NacDevice.deviceQuarantinePOST', args, res)) {
+        var mockup = require('../models/DeviceQuarantineDTO');
+        var response = mockup.quarantine(val);
+
+        logger.debug(funcName + ' | response:\n%s', JSON.stringify(response, null, '\t'));
+        res.setHeader('Content-Type', 'application/json');
+        res.send(response);
+    }
+
+}
+
+/**
+* parameters expected in the args:
 * request (NacDeviceRequest)
 **/
 exports.deviceSavePOST = function(args, res, next) {

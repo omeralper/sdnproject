@@ -46,6 +46,18 @@ module.exports.dhcpWebIpReservedSearchPOST = function dhcpWebIpReservedSearchPOS
   Dhcp.dhcpWebIpReservedSearchPOST(req.swagger.params, res, next);
 };
 
+module.exports.dhcpWebIpReservedUserDeletePOST = function dhcpWebIpReservedUserDeletePOST (req, res, next) {
+  Dhcp.dhcpWebIpReservedUserDeletePOST(req.swagger.params, res, next);
+};
+
+module.exports.dhcpWebIpReservedUserSavePOST = function dhcpWebIpReservedUserSavePOST (req, res, next) {
+  Dhcp.dhcpWebIpReservedUserSavePOST(req.swagger.params, res, next);
+};
+
+module.exports.dhcpWebIpReservedUserSearchPOST = function dhcpWebIpReservedUserSearchPOST (req, res, next) {
+  Dhcp.dhcpWebIpReservedUserSearchPOST(req.swagger.params, res, next);
+};
+
 module.exports.dhcpWebIpownerSearchPOST = function dhcpWebIpownerSearchPOST (req, res, next) {
   Dhcp.dhcpWebIpownerSearchPOST(req.swagger.params, res, next);
 };

@@ -137,3 +137,24 @@ exports.emergencyPolicyStartStopVnfPOST = function(args, res, next) {
 
 }
 
+/**
+* parameters expected in the args:
+* request (GenericIdRequest)
+**/
+exports.emergencyPolicyStopProcessPOST = function(args, res, next) {
+    var val = proxy.getVal(args);
+    var funcName = "emergencyPolicyStopProcessPOST";
+
+    logger.debug(funcName + ' | request:\n%s', JSON.stringify(val, null, '\t'));
+
+    if (!proxy.run('services.EmergencyPolicy.emergencyPolicyStopProcessPOST', args, res)) {
+        var mockup = require('../models/EmercencyPolicyDTO');
+        var response = mockup.stopProcess(val);
+
+        logger.debug(funcName + ' | response:\n%s', JSON.stringify(response, null, '\t'));
+        res.setHeader('Content-Type', 'application/json');
+        res.send(response);
+    }
+
+}
+

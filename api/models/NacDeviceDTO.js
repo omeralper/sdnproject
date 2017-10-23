@@ -4,7 +4,7 @@
 
 //var BaseDTO = require('./BaseDTO');
 //var HOST_TYPE = require('./HOST_TYPE');
-//var NAC_STATUS = require('./NAC_STATUS');
+//var NAC_DEVICE_STATUS = require('./NAC_DEVICE_STATUS');
 //var NacAccessPortDTO = require('./NacAccessPortDTO');
 //var NacGroupDTO = require('./NacGroupDTO');
 
@@ -24,7 +24,7 @@ exports.NacDeviceDTO =  {
         notes : { name: 'notes', type: 'String' }, 
         ipv4 : { name: 'ipv4', type: 'String', isRequired: true }, 
         mac : { name: 'mac', type: 'String', isRequired: true }, 
-        status : { name: 'status', type: 'NAC_STATUS', isRequired: true }, 
+        status : { name: 'status', type: 'NAC_DEVICE_STATUS', isRequired: true }, 
         type : { name: 'type', type: 'HOST_TYPE', isRequired: true }, 
         securityLevel : { name: 'securityLevel', type: 'Integer', isRequired: true }, 
         isExempt : { name: 'isExempt', type: 'Boolean', isRequired: true }, 

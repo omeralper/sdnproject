@@ -18,6 +18,10 @@ module.exports.deviceListPOST = function deviceListPOST (req, res, next) {
   NacDevice.deviceListPOST(req.swagger.params, res, next);
 };
 
+module.exports.deviceQuarantinePOST = function deviceQuarantinePOST (req, res, next) {
+  NacDevice.deviceQuarantinePOST(req.swagger.params, res, next);
+};
+
 module.exports.deviceSavePOST = function deviceSavePOST (req, res, next) {
   NacDevice.deviceSavePOST(req.swagger.params, res, next);
 };

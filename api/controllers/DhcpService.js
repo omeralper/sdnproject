@@ -232,6 +232,74 @@ exports.dhcpWebIpReservedSearchPOST = function(args, res, next) {
 
 /**
 * parameters expected in the args:
+* request (GenericDeleteRequest)
+**/
+exports.dhcpWebIpReservedUserDeletePOST = function(args, res, next) {
+    var val = proxy.getVal(args);
+    var funcName = "dhcpWebIpReservedUserDeletePOST";
+
+    logger.debug(funcName + ' | request:\n%s', JSON.stringify(val, null, '\t'));
+
+    if (!proxy.run('services.Dhcp.dhcpWebIpReservedUserDeletePOST', args, res)) {
+        var mockup = require('../models/DhcpIpReservedUserDTO');
+        var data = mockup.deleteData(val.options.id);
+        if (!val.options.isReturnModel) {
+            data = null;
+        }
+        var response = mockupHelper.genResponse(data);
+
+        logger.debug(funcName + ' | response:\n%s', JSON.stringify(response, null, '\t'));
+        res.setHeader('Content-Type', 'application/json');
+        res.send(response);
+    }
+
+}
+
+/**
+* parameters expected in the args:
+* request (DhcpIpReservedUserRequest)
+**/
+exports.dhcpWebIpReservedUserSavePOST = function(args, res, next) {
+    var val = proxy.getVal(args);
+    var funcName = "dhcpWebIpReservedUserSavePOST";
+
+    logger.debug(funcName + ' | request:\n%s', JSON.stringify(val, null, '\t'));
+
+    if (!proxy.run('services.Dhcp.dhcpWebIpReservedUserSavePOST', args, res)) {
+        var mockup = require('../models/DhcpIpReservedUserDTO');
+        var data = mockup.saveData(val.data);
+        var response = mockupHelper.genResponse(data);
+
+        logger.debug(funcName + ' | response:\n%s', JSON.stringify(response, null, '\t'));
+        res.setHeader('Content-Type', 'application/json');
+        res.send(response);
+    }
+
+}
+
+/**
+* parameters expected in the args:
+* request (GenericSearchRequest)
+**/
+exports.dhcpWebIpReservedUserSearchPOST = function(args, res, next) {
+    var val = proxy.getVal(args);
+    var funcName = "dhcpWebIpReservedUserSearchPOST";
+
+    logger.debug(funcName + ' | request:\n%s', JSON.stringify(val, null, '\t'));
+
+    if (!proxy.run('services.Dhcp.dhcpWebIpReservedUserSearchPOST', args, res)) {
+        var mockup = require('../models/DhcpIpReservedUserDTO');
+        var response = mockup.getListData(val.options);
+
+        logger.debug(funcName + ' | response:\n%s', JSON.stringify(response, null, '\t'));
+        res.setHeader('Content-Type', 'application/json');
+        res.send(response);
+    }
+
+}
+
+/**
+* parameters expected in the args:
 * request (GenericSearchRequest)
 **/
 exports.dhcpWebIpownerSearchPOST = function(args, res, next) {

@@ -2251,6 +2251,43 @@ paths:
       x-swagger-router-controller: "Controller"
       x-dto: "ControllerNodeDTO"
       x-operation-any: "ControllerNodeGet"
+  /ctrl/controller/halt:
+    post:
+      tags:
+      - "Controller"
+      summary: "Kontrolcüyü kapatır."
+      operationId: "controllerHaltPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "request"
+        description: "Kontrolcü numarasını içeren istek nesnesi."
+        required: true
+        schema:
+          $ref: "#/definitions/GenericIdRequest"
+      responses:
+        200:
+          description: "Başarılı (SUCCESS)"
+          schema:
+            $ref: "#/definitions/ControllerNodeResponse"
+        300:
+          description: "Uygulama Hata/Uyarıları (ERROR , NOT_MODIFIED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        400:
+          description: "Erişim Hataları (ACCESS_DENIED , ACCESS_LIMITED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        500:
+          description: "Yazılım Hatası (SERVER_ERROR , NOT_IMPLEMENTED , DEPRECATED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+      x-swagger-router-controller: "Controller"
+      x-dto: "ControllerNodeDTO"
+      x-operation-any: "halt"
   /ctrl/controller/save:
     post:
       tags:
@@ -2780,6 +2817,44 @@ paths:
       x-swagger-router-controller: "EmergencyPolicy"
       x-dto: "EmercencyPolicyDTO"
       x-operation-any: "startStopVnf"
+  /ctrl/emergencyPolicy/stopProcess:
+    post:
+      tags:
+      - "EmergencyPolicy"
+      summary: "Idsi bilenen acil durum politikasını çalıştırmamak için"
+      description: "Idsi bilenen acil durum politikasını çalıştırmamak için"
+      operationId: "emergencyPolicyStopProcessPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "request"
+        description: "İstek yapılmasını sağlayan veri modeli."
+        required: true
+        schema:
+          $ref: "#/definitions/GenericIdRequest"
+      responses:
+        200:
+          description: "Başarılı işlemler (SUCCESS)"
+          schema:
+            $ref: "#/definitions/EmergencyPolicyResponse"
+        300:
+          description: "Uygulama Hata/Uyarıları (ERROR , NOT_MODIFIED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        400:
+          description: "Erişim Hataları (ACCESS_DENIED , ACCESS_LIMITED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        500:
+          description: "Yazılım Hatası (SERVER_ERROR , NOT_IMPLEMENTED , DEPRECATED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+      x-swagger-router-controller: "EmergencyPolicy"
+      x-dto: "EmercencyPolicyDTO"
+      x-operation-any: "stopProcess"
   /ctrl/endUserApp/delete:
     post:
       tags:
@@ -6484,6 +6559,7 @@ paths:
           schema:
             $ref: "#/definitions/GenericResponse"
       x-swagger-router-controller: "TSDB"
+      x-dto: "TsdbDataSet"
       x-operation-any: "query"
   /ctrl/virtual/changeStatus:
     post:
@@ -7975,6 +8051,119 @@ paths:
       x-swagger-router-controller: "Dhcp"
       x-operation-search: "true"
       x-dto: "DhcpIpReservedDTO"
+  /dhcp/dhcpWeb/ipReservedUser/delete:
+    post:
+      tags:
+      - "Dhcp"
+      summary: "Kimlik (id) numarası belirtilen ayrılmış ip'i (ipReserved'i) siler."
+      operationId: "dhcpWebIpReservedUserDeletePOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "request"
+        description: "Genel silme isteğinin belirtildiği veri yapısıdır."
+        required: true
+        schema:
+          $ref: "#/definitions/GenericDeleteRequest"
+      responses:
+        200:
+          description: "Başarılı (SUCCESS)"
+          schema:
+            $ref: "#/definitions/DhcpIpReservedUserResponse"
+        300:
+          description: "Uygulama Hata/Uyarıları (ERROR , NOT_MODIFIED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        400:
+          description: "Erişim Hataları (ACCESS_DENIED , ACCESS_LIMITED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        500:
+          description: "Yazılım Hatası (SERVER_ERROR , NOT_IMPLEMENTED , DEPRECATED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+      x-swagger-router-controller: "Dhcp"
+      x-operation-delete: "true"
+      x-dto: "DhcpIpReservedUserDTO"
+  /dhcp/dhcpWeb/ipReservedUser/save:
+    post:
+      tags:
+      - "Dhcp"
+      summary: "Ayrılmış ip (ipReserved) verilerinin saklanmasını ve güncellenmesini\
+        \ sağlar."
+      operationId: "dhcpWebIpReservedUserSavePOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "request"
+        description: "Ayrılmış ip (ipReserved) veri transfer modelini taşıyan istek\
+          \ nesnesidir."
+        required: true
+        schema:
+          $ref: "#/definitions/DhcpIpReservedUserRequest"
+      responses:
+        200:
+          description: "Başarılı (SUCCESS)"
+          schema:
+            $ref: "#/definitions/DhcpIpReservedUserResponse"
+        300:
+          description: "Uygulama Hata/Uyarıları (ERROR , NOT_MODIFIED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        400:
+          description: "Erişim Hataları (ACCESS_DENIED , ACCESS_LIMITED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        500:
+          description: "Yazılım Hatası (SERVER_ERROR , NOT_IMPLEMENTED , DEPRECATED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+      x-swagger-router-controller: "Dhcp"
+      x-dto: "DhcpIpReservedUserDTO"
+      x-operation-save: "true"
+  /dhcp/dhcpWeb/ipReservedUser/search:
+    post:
+      tags:
+      - "Dhcp"
+      summary: "Ayrılmış ip (ipReserved) verileri arasında arama yapmaya yarar."
+      operationId: "dhcpWebIpReservedUserSearchPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "request"
+        description: "Arama parametrelerinin belirtildiği veri yapısıdır."
+        required: true
+        schema:
+          $ref: "#/definitions/GenericSearchRequest"
+      responses:
+        200:
+          description: "Başarılı işlemler (SUCCESS)"
+          schema:
+            $ref: "#/definitions/DhcpIpReservedUserListResponse"
+        300:
+          description: "Uygulama Hata/Uyarıları (ERROR , NOT_MODIFIED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        400:
+          description: "Erişim Hataları (ACCESS_DENIED , ACCESS_LIMITED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        500:
+          description: "Yazılım Hatası (SERVER_ERROR , NOT_IMPLEMENTED , DEPRECATED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+      x-swagger-router-controller: "Dhcp"
+      x-operation-search: "true"
+      x-dto: "DhcpIpReservedUserDTO"
   /dhcp/dhcpWeb/option/delete:
     post:
       tags:
@@ -8800,6 +8989,43 @@ paths:
       x-swagger-router-controller: "NacDevice"
       x-dto: "NacDeviceDTO"
       x-operation-list: "true"
+  /nas/device/quarantine:
+    post:
+      tags:
+      - "NacDevice"
+      summary: "Cihazın karantinaya alınmasını sağlayan fonksiyon."
+      operationId: "deviceQuarantinePOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "request"
+        description: "Genel karantina isteğinin belirtildiği veri yapısı."
+        required: true
+        schema:
+          $ref: "#/definitions/DeviceQuarantineRequest"
+      responses:
+        200:
+          description: "Başarılı işlemler (SUCCESS)"
+          schema:
+            $ref: "#/definitions/DeviceQuarantineResponse"
+        300:
+          description: "Uygulama Hata/Uyarıları (ERROR , NOT_MODIFIED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        400:
+          description: "Erişim Hataları (ACCESS_DENIED , ACCESS_LIMITED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        500:
+          description: "Yazılım Hatası (SERVER_ERROR , NOT_IMPLEMENTED , DEPRECATED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+      x-swagger-router-controller: "NacDevice"
+      x-dto: "DeviceQuarantineDTO"
+      x-operation-any: "quarantine"
   /nas/device/save:
     post:
       tags:
@@ -9306,7 +9532,7 @@ paths:
       parameters:
       - in: "body"
         name: "request"
-        description: "Genel silme isteğinin belirtildiği veri yapısı."
+        description: "Genel silme isteğinin belirtildiği veri   yapısı."
         required: true
         schema:
           $ref: "#/definitions/GenericDeleteRequest"
@@ -10045,6 +10271,43 @@ paths:
       x-swagger-router-controller: "NFV"
       x-dto: "NetServiceRecordDTO"
       x-operation-save: "true"
+  /nfva/nsr/update:
+    post:
+      tags:
+      - "NFV"
+      summary: "ID değeri kullanılarak ağ servis kayıdını çalıştıran fonksiyon."
+      operationId: "nsrUpdatePOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "request"
+        description: "Genel ID değeri istek yapılmasını sağlayan veri modeli."
+        required: true
+        schema:
+          $ref: "#/definitions/NetServiceRecordRequest"
+      responses:
+        200:
+          description: "Başarılı işlemler (SUCCESS)"
+          schema:
+            $ref: "#/definitions/NetServiceRecordResponse"
+        300:
+          description: "Uygulama Hata/Uyarıları (ERROR , NOT_MODIFIED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        400:
+          description: "Erişim Hataları (ACCESS_DENIED , ACCESS_LIMITED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        500:
+          description: "Yazılım Hatası (SERVER_ERROR , NOT_IMPLEMENTED , DEPRECATED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+      x-swagger-router-controller: "NFV"
+      x-dto: "NetServiceRecordDTO"
+      x-operation-any: "update"
   /nfva/vim/computeHost/getByIp:
     post:
       tags:
@@ -10304,6 +10567,43 @@ paths:
       x-swagger-router-controller: "NFV"
       x-dto: null
       x-operation-any: "start"
+  /nfva/vim/vm/statusInfo:
+    post:
+      tags:
+      - "NFV"
+      summary: "OpenStack'te olan sanal makinaların anlık durumunu gösterir"
+      operationId: "vimVmStatusInfoPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "request"
+        description: "Genel istek yapılmasını sağlayan veri modeli."
+        required: true
+        schema:
+          $ref: "#/definitions/VimVmStatusInfoRequest"
+      responses:
+        200:
+          description: "Başarılı işlemler (SUCCESS)"
+          schema:
+            $ref: "#/definitions/VimVmStatusInfoResponse"
+        300:
+          description: "Uygulama Hata/Uyarıları (ERROR , NOT_MODIFIED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        400:
+          description: "Erişim Hataları (ACCESS_DENIED , ACCESS_LIMITED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+        500:
+          description: "Yazılım Hatası (SERVER_ERROR , NOT_IMPLEMENTED , DEPRECATED)"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+      x-swagger-router-controller: "NFV"
+      x-dto: "VimVmStatusInfoDTO"
+      x-operation-any: "statusInfo"
   /nfva/vim/vm/stop:
     post:
       tags:
@@ -12904,13 +13204,11 @@ definitions:
     title: "SWITCH_MODE"
     description: "Anahtarlayıcı modunu belirten ENUM değeridir.\nDeğerler şunlardı\
       r;\n\n| Adı         | Açıklama         |\n|:------------|:-----------------|\n\
-      | ACTIVE      | Aktif durumda.   |\n| PASSIVE     | Pasif durumda.   |\n| SLAVE\
-      \       | Yamak durumunda. |\n| BACKUP      | Yedek durumunda. |\n| MAINTANENCE\
-      \ | Bakımda.         |\n"
+      | ACTIVE      | Aktif durumda.   |\n| PASSIVE     | Pasif durumda.   |\n| BACKUP\
+      \      | Yedek durumunda. |\n| MAINTANENCE | Bakımda.         |\n"
     enum:
     - "ACTIVE"
     - "PASSIVE"
-    - "SLAVE"
     - "BACKUP"
     - "MAINTANENCE"
     default: "PASSIVE"
@@ -13074,34 +13372,36 @@ definitions:
     type: "string"
     title: "TOPOLOGY_EVENT_TYPE"
     description: "Topoloji event tipini belirten ENUM değeridir.\nDeğerler şunlardı\
-      r;\n\n| Adı                       | Açıklama                          |\n|:--------------------------|:----------------------------------|\n\
-      | TOPOLOGY_UPDATED          | Topolojide değişiklik oldu.       |\n| SWITCH_ADDED\
-      \              | Anahtarlayıcı eklendi.            |\n| SWITCH_REMOVED     \
-      \       | Anahtarlayıcı kaldırıldı.         |\n| SWITCH_UPDATED            |\
-      \ Anahtarlayıcı güncellendi.        |\n| HOST_ADDED                | Uç birim\
-      \ cihazı eklendi.          |\n| HOST_REMOVED              | Uç birim cihazı\
-      \ kaldırıldı.       |\n| HOST_UPDATED              | Uç birim cihazı güncellendi.\
-      \      |\n| LINK_ADDED                | Bağlantı eklendi.                 |\n\
-      | LINK_REMOVED              | Bağlantı kaldırıldı.              |\n| LINK_UPDATED\
-      \              | Bağlantı güncellendi.             |\n| STATS_UPDATED      \
-      \       | İstatistikler güncellendi.        |\n| PORTS_UPDATED             |\
-      \ Port bilgileri güncellendi.       |\n| CONTROLLER_DEACTIVATED    | Kontrolcü\
-      \ düştü.                  |\n| CONTROLLER_ACTIVATED      | Kontrolcü ayaklandı\
-      .              |\n| CONTROLLER_UPDATED        | Kontrolcü güncellendi.     \
-      \       |\n| MASTER_CHANGED            | Usta kontrolcu degisti            |\n\
-      | RULE_ADDED                | Yeni bir akış kuralı eklendi      |\n| RULE_REMOVED\
-      \              | Bir akış kuralı silindi           |\n| NETWORK_DEVICE_ADDED\
-      \      | Network cihazı eklendi            |\n| NETWORK_DEVICE_UPDATED    |\
-      \ Network cihazı güncellendi        |\n| NETWORK_DEVICE_REMOVED    | Network\
-      \ cihazı silindi            |\n| DOMAIN_ADDED              | Geniş alan ağı\
-      \ eklendi            |\n| DOMAIN_REMOVED            | Geniş alan ağı silindi\
-      \            |\n| DOMAIN_UPDATED            | Geniş alan ağı güncellendi   \
-      \     |\n| WAN_PORT_ADDED            | Uç birimi eklendi                 |\n\
-      | WAN_PORT_REMOVED          | Uç birimi silindi                 |\n| WAN_PORT_UPDATED\
-      \          | Uç birimi güncellendi             |\n| ROUTER_ADDED           \
-      \   | Internete çıkış birimi eklendi    |\n| ROUTER_REMOVED            | Internete\
-      \ çıkış birimi silindi    |\n| ROUTER_UPDATED            | Internete çıkış birimi\
-      \ güncellendi|\n"
+      r;\n\n| Adı                       | Açıklama                            |\n\
+      |:--------------------------|:------------------------------------|\n| TOPOLOGY_UPDATED\
+      \          | Topolojide değişiklik oldu.         |\n| SWITCH_ADDED         \
+      \     | Anahtarlayıcı eklendi.              |\n| SWITCH_REMOVED            |\
+      \ Anahtarlayıcı kaldırıldı.           |\n| SWITCH_UPDATED            | Anahtarlayı\
+      cı güncellendi.          |\n| HOST_ADDED                | Uç birim cihazı eklendi.\
+      \            |\n| HOST_REMOVED              | Uç birim cihazı kaldırıldı.  \
+      \       |\n| HOST_UPDATED              | Uç birim cihazı güncellendi.      \
+      \  |\n| LINK_ADDED                | Bağlantı eklendi.                   |\n\
+      | LINK_REMOVED              | Bağlantı kaldırıldı.                |\n| LINK_UPDATED\
+      \              | Bağlantı güncellendi.               |\n| STATS_UPDATED    \
+      \         | İstatistikler güncellendi.          |\n| PORTS_UPDATED         \
+      \    | Port bilgileri güncellendi.         |\n| CONTROLLER_DEACTIVATED    |\
+      \ Kontrolcü düştü.                    |\n| CONTROLLER_ACTIVATED      | Kontrolcü\
+      \ ayaklandı.                |\n| CONTROLLER_UPDATED        | Kontrolcü güncellendi.\
+      \              |\n| MASTER_CHANGED            | Usta kontrolcu degisti     \
+      \         |\n| RULE_ADDED                | Yeni bir akış kuralı eklendi    \
+      \    |\n| RULE_REMOVED              | Bir akış kuralı silindi             |\n\
+      | NETWORK_DEVICE_ADDED      | Network cihazı eklendi              |\n| NETWORK_DEVICE_UPDATED\
+      \    | Network cihazı güncellendi          |\n| NETWORK_DEVICE_REMOVED    |\
+      \ Network cihazı silindi              |\n| DOMAIN_ADDED              | Geniş\
+      \ alan ağı eklendi              |\n| DOMAIN_REMOVED            | Geniş alan\
+      \ ağı silindi              |\n| DOMAIN_UPDATED            | Geniş alan ağı gü\
+      ncellendi          |\n| WAN_PORT_ADDED            | Uç birimi eklendi      \
+      \             |\n| WAN_PORT_REMOVED          | Uç birimi silindi           \
+      \        |\n| WAN_PORT_UPDATED          | Uç birimi güncellendi            \
+      \   |\n| ROUTER_ADDED              | Internete çıkış birimi eklendi      |\n\
+      | ROUTER_REMOVED            | Internete çıkış birimi silindi      |\n| ROUTER_UPDATED\
+      \            | Internete çıkış birimi güncellendi  |\n| DOMAIN_INFO_UPDATED\
+      \       | Domain bilgilerinde değişiklik oldu.|\n"
     enum:
     - "TOPOLOGY_UPDATED"
     - "SWITCH_ADDED"
@@ -13133,6 +13433,7 @@ definitions:
     - "ROUTER_ADDED"
     - "ROUTER_REMOVED"
     - "ROUTER_UPDATED"
+    - "DOMAIN_INFO_UPDATED"
     default: "TOPOLOGY_UPDATED"
   SECURITY_MODE:
     type: "string"
@@ -13641,6 +13942,11 @@ definitions:
         dnsServer:
           type: "string"
           description: "DNS Sunucusu."
+        energyConsumption:
+          type: "integer"
+          format: "int32"
+          description: "Sanal ağ kurulurken seçilecek anahtarlayıcıların maximum enerji\
+            \ kullanımını belirtir"
     description: "Topoloji detaylarının bulunduğu veri yapısı."
   TopologyInfoListDTO:
     allOf:
@@ -13808,17 +14114,6 @@ definitions:
     allOf:
     - $ref: "#/definitions/BaseDTO"
     - type: "object"
-      required:
-      - "address"
-      - "datapathId"
-      - "deviceInfo"
-      - "deviceType"
-      - "portInfo"
-      - "securityLevel"
-      - "slaveControllerIds"
-      - "status"
-      - "supports"
-      - "topologyId"
       properties:
         name:
           type: "string"
@@ -13848,6 +14143,9 @@ definitions:
           type: "string"
           description: "Anahtarlayıcı veri katmanı için tanımlanacak değer (00:00:00:00:00:00:00:03\
             \ gibi)"
+        enrichedDeviceId:
+          type: "string"
+          description: "Anahtarlayıcının zenginleştirilmiş ID'si"
         status:
           description: "Anahtarlayıcının sağlık durumu."
           $ref: "#/definitions/SWITCH_STATUS"
@@ -13986,6 +14284,11 @@ definitions:
         isControllerDevice:
           type: "boolean"
           description: "Anahtarlayıcının Kontrol katmanında olup olmadığını söyler."
+          default: false
+        usingControlChannel:
+          type: "boolean"
+          description: "Anahtarlayıcının Kontrol kanalını kullanıp kullanamadığını\
+            \ söyler."
           default: false
         openStackNodeName:
           type: "string"
@@ -14152,10 +14455,10 @@ definitions:
           description: "??"
         networks:
           type: "array"
-          description: "Cihazın ait olduğu ağ topolojilerinin ID değerleri."
+          description: "Cihazın ait olduğu ağ topolojilerinin değerleri."
           items:
-            type: "string"
-            description: "Topoloji ID değeri"
+            description: "Cihazın ait olduğu ağ topoloji değeri"
+            $ref: "#/definitions/HostNetworkDTO"
         vnfdId:
           type: "string"
           description: "??"
@@ -14174,7 +14477,28 @@ definitions:
         vnfrName:
           type: "string"
           description: "??"
+        quarantined:
+          type: "boolean"
+          description: "Cihaz karantinada ise true; değil ise false"
+          default: false
+        hostName:
+          type: "string"
+          description: "??"
+        isExempt:
+          type: "boolean"
+          description: "??"
     description: "Uç birim veri transfer veri modeli."
+  HostNetworkDTO:
+    allOf:
+    - $ref: "#/definitions/BaseDTO"
+    - type: "object"
+      required:
+      - "name"
+      properties:
+        name:
+          type: "string"
+          description: "Network ismi."
+    description: "Hostun bağlı olduğu network'ün id ve name değerleri"
   DomainDTO:
     allOf:
     - $ref: "#/definitions/BaseDTO"
@@ -14183,6 +14507,9 @@ definitions:
         name:
           type: "string"
           description: "Cihaz adı."
+        ip:
+          type: "string"
+          description: "Cihaz ipsi."
         port:
           description: "Cihazın bağlı bulunduğu port bilgisi."
           $ref: "#/definitions/PortDetail"
@@ -14393,12 +14720,14 @@ definitions:
             | WAN_PORT_REMOVED      | WanPortInfoDTO    | Silinen uç birime ait veri\
             \ transfer modeli                         |\n| WAN_PORT_UPDATED      |\
             \ WanPortInfoDTO    | Güncellenen uç birime ait veri transfer modeli \
-            \                    |\n| ROUTER_ADDED          | SdnipRouterDTO     |\
-            \ Eklenen internete çıkış birime ait veri transfer modeli           |\n\
-            | ROUTER_REMOVED        | SdnipRouterDTO     | Silinen internete çıkış\
-            \ birime ait veri transfer modeli           |\n| ROUTER_UPDATED      \
-            \  | SdnipRouterDTO     | Güncellenen internete çıkış birime ait veri\
-            \ transfer modeli       |\n"
+            \                    |\n| ROUTER_ADDED          | SdnipRouterDTO    |\
+            \ Eklenen internete çıkış birime ait veri transfer modeli            |\n\
+            | ROUTER_REMOVED        | SdnipRouterDTO    | Silinen internete çıkış\
+            \ birime ait veri transfer modeli            |\n| ROUTER_UPDATED     \
+            \   | SdnipRouterDTO    | Güncellenen internete çıkış birime ait veri\
+            \ transfer modeli        |\n| DOMAIN_INFO_UPDATED   | BaseDTO        \
+            \   | Değişiklik olan domainlere ait istek veri modeli               \
+            \    |\n"
           properties: {}
         topologyId:
           type: "string"
@@ -15068,8 +15397,12 @@ definitions:
     - $ref: "#/definitions/BaseDTO"
     - type: "object"
       required:
+      - "appId"
+      - "name"
+      - "roleList"
       - "securityLevel"
       - "status"
+      - "surname"
       - "username"
       properties:
         username:
@@ -15432,6 +15765,10 @@ definitions:
         id:
           type: "string"
           description: "Akışların listeleneceği anahtarlayıcıya ait ID değeri."
+        mvtnNetworkId:
+          type: "string"
+          description: "Akışların listeleneceği sanal ağ anahtarlayıcısına ait ID\
+            \ değeri."
     description: "Akışların listelenmesinde kullanılacak parametrelerin tanımlanması\
       nı sağlayan veri modelidir."
   FlowSearchOptions:
@@ -15951,6 +16288,10 @@ definitions:
           type: "integer"
           format: "int64"
           description: "Monitor paket ortalama gecikmesi."
+        sendMeasurePacket:
+          type: "boolean"
+          description: "Gecikme ölçüm paketinin gönderileceğini gösterir."
+          default: false
         routeHopFrequency:
           type: "integer"
           format: "int64"
@@ -16333,11 +16674,23 @@ definitions:
     type: "string"
     title: "NAC_STATUS"
     description: "Son kullanıcı nesnelerinin genel durumunu belirten ENUM değeri.\n\
-      Değerler şunlardır;\n\n| Adı      | Açıklama    |\n|:---------|:------------|\n\
-      | ACTIVE   | Aktif nesne |\n| PASSIVE  | Pasif nesne |\n"
+      Değerler şunlardır;\n\n| Adı          | Açıklama                  |\n|:---------\
+      \    |:--------------------------|\n| ACTIVE       | Aktif nesne           \
+      \    |\n| PASSIVE      | Pasif nesne               |\n"
     enum:
     - "ACTIVE"
     - "PASSIVE"
+    default: "ACTIVE"
+  NAC_DEVICE_STATUS:
+    type: "string"
+    title: "NAC_DEVICE_STATUS"
+    description: "Cihaz nesnelerinin genel durumunu belirten ENUM değeri.\nDeğerler\
+      \ şunlardır;\n\n| Adı          | Açıklama                  |\n|:---------  \
+      \  |:--------------------------|\n| ACTIVE       | Aktif cihaz             \
+      \  |\n| QUARANTINED  | Karantinaya alınmış cihaz |\n"
+    enum:
+    - "ACTIVE"
+    - "QUARANTINED"
     default: "ACTIVE"
   NAC_ENTITY_TYPE:
     type: "string"
@@ -16706,7 +17059,7 @@ definitions:
           description: "Cihaz mac adresi."
         status:
           description: "Cihaz sağlık durumu."
-          $ref: "#/definitions/NAC_STATUS"
+          $ref: "#/definitions/NAC_DEVICE_STATUS"
         type:
           description: "Cihaz tipi."
           $ref: "#/definitions/HOST_TYPE"
@@ -17186,6 +17539,44 @@ definitions:
         data:
           $ref: "#/definitions/AAAServerListDTO"
     description: "AAA sunucu listeleme işleminin cevap veri yapısı."
+  DeviceQuarantineRequest:
+    allOf:
+    - $ref: "#/definitions/GenericRequest"
+    - type: "object"
+      required:
+      - "data"
+      properties:
+        data:
+          $ref: "#/definitions/DeviceQuarantineDTO"
+    description: "Cihaz karantina isteklerinin sunucuya iletilmesi için kullanılan\
+      \ veri yapısı."
+  DeviceQuarantineResponse:
+    allOf:
+    - $ref: "#/definitions/GenericResponse"
+    description: "Cihaz karantinaya alma işleminin cevap veri yapısı."
+  DeviceQuarantineDTO:
+    allOf:
+    - $ref: "#/definitions/BaseDTO"
+    - type: "object"
+      required:
+      - "macAddress"
+      properties:
+        macAddress:
+          type: "string"
+          description: "Cihazın MAC Adresi"
+        portNumber:
+          type: "integer"
+          format: "int32"
+          description: "Cihazın bağlı olduğu anahtarlayıcı portu"
+        deviceId:
+          type: "string"
+          description: "Cihazın bağlı olduğu anahtarlayıcının kontrolcü tarafından\
+            \ bilinen benzersiz kimlik bilgisi"
+        type:
+          description: "Cihaz tipi."
+          $ref: "#/definitions/HOST_TYPE"
+    description: "Karantinaya alınacak/alınmış cihazların başlıca bilgilerini taşı\
+      yan veri yapısı"
   AlarmDTO:
     allOf:
     - $ref: "#/definitions/BaseDTO"
@@ -17323,6 +17714,7 @@ definitions:
     - "MAJOR"
     - "CRITICAL"
     - "FATAL"
+    - "NONE"
     default: "MINOR"
   ALARM_TYPE:
     type: "string"
@@ -17380,6 +17772,8 @@ definitions:
     - "SDNIP"
     - "INTEGRITY"
     - "WAN_PORT"
+    - "IDS"
+    - "SYSLOG"
     default: "NONE"
   ALARM_RESOURCE:
     type: "string"
@@ -17388,6 +17782,7 @@ definitions:
     enum:
     - "DEVICE"
     - "CONTROLLER"
+    - "CONTROLLER_MODE"
     - "MVTN_LINK"
     - "LINK"
     - "MVTN_DEVICE"
@@ -17413,6 +17808,9 @@ definitions:
     - "SDNIP"
     - "INTEGRITY"
     - "EMERGENCY_POLICY"
+    - "INTRUSION_DETECTION_SYSTEM"
+    - "PORT"
+    - "SYSLOG"
     default: "NONE"
   Alarm:
     type: "object"
@@ -19026,7 +19424,9 @@ definitions:
       | STATISTICS_MANAGER  | İstatistik Yönetim Tipi |\n| NAS                 | Ağ\
       \ Erişim Kontrol Tipi  |\n| DHCP                | DHCP Kontrol Tipi       |\n\
       | EDR                 | Olay Kayıt Yönetim Tipi |\n| SDNIP               | BGP\
-      \ Yönetim Tipi        |\n"
+      \ Yönetim Tipi        |\n| NFV_ADAPTER         | NFV ADAPTER Tipi        |\n\
+      | DHCP_CENTRAL_WAN    | DHCP Tipi               |\n| SFC                 | SFC\
+      \ Tipi                |\n"
     enum:
     - "CONTROLLER"
     - "API_CORE"
@@ -19034,7 +19434,11 @@ definitions:
     - "STATISTICS_MANAGER"
     - "NAS"
     - "DHCP"
+    - "EDR"
     - "SDNIP"
+    - "NFV_ADAPTER"
+    - "DHCP_CENTRAL_WAN"
+    - "SFC"
     default: "CONTROLLER"
   ConfigDefinitionDTO:
     allOf:
@@ -19364,6 +19768,47 @@ definitions:
             $ref: "#/definitions/DhcpIpReservedDTO"
     description: "Belirtilen bir dhcp ip menzili (dhcpIpRange) içindeki mac adresi-ip\
       \ adresi çiftlerini içeren nesnelerin listesidir."
+  DhcpIpReservedUserDTO:
+    allOf:
+    - $ref: "#/definitions/BaseDTO"
+    - type: "object"
+      required:
+      - "dhcpRangeId"
+      - "ip"
+      - "userId"
+      - "username"
+      properties:
+        dhcpRangeId:
+          type: "string"
+          description: "Ayrılmış ip adresinin ait olduğu dhcp ip menzil id numarası\
+            dır."
+        userId:
+          type: "string"
+          description: "Belirtilen ip adresi için kullanıcı ID değeridir."
+        username:
+          type: "string"
+          description: "Belirtilen ip adresi için kullanıcı adı değeridir."
+        ip:
+          type: "string"
+          description: "Belirtilen mac adresi ile eşleştirilmiş ip adresidir."
+        description:
+          type: "string"
+          description: "Açıklama"
+    description: "Belirtilen bir dhcp ip menzili (dhcpIpRange) içindeki belirtilen\
+      \ bir kullanıcı-ip adresi çiftini içeren nesnedir."
+  DhcpIpReservedUserListDTO:
+    allOf:
+    - $ref: "#/definitions/BaseListDTO"
+    - type: "object"
+      required:
+      - "list"
+      properties:
+        list:
+          type: "array"
+          items:
+            $ref: "#/definitions/DhcpIpReservedUserDTO"
+    description: "Belirtilen bir dhcp ip menzili (dhcpIpRange) içindeki kullanıcı\
+      -ip adresi çiftlerini içeren nesnelerin listesidir."
   DhcpIpExcludedDTO:
     allOf:
     - $ref: "#/definitions/BaseDTO"
@@ -19471,6 +19916,12 @@ definitions:
             \ adresi çiftleri için ayrılmış ip adreslerinin listesidir."
           items:
             $ref: "#/definitions/DhcpIpReservedDTO"
+        ipsReservedUserDtos:
+          type: "array"
+          description: "Dhcp ip menzili (DhcpIpRange) içinde yeralan belirli kullanı\
+            cı-ip adresi çiftleri için ayrılmış ip adreslerinin listesidir."
+          items:
+            $ref: "#/definitions/DhcpIpReservedUserDTO"
     description: "DhcpIpRange veri transfer modelidir."
   DhcpIpRangeListDTO:
     allOf:
@@ -19685,6 +20136,17 @@ definitions:
           $ref: "#/definitions/DhcpIpReservedDTO"
     description: "Ayrılmış ip adresi (ipReserved) verilerinin sunucuya iletilmesi\
       \ için kullanılan veri yapısıdır."
+  DhcpIpReservedUserRequest:
+    allOf:
+    - $ref: "#/definitions/GenericRequest"
+    - type: "object"
+      required:
+      - "data"
+      properties:
+        data:
+          $ref: "#/definitions/DhcpIpReservedUserDTO"
+    description: "Ayrılmış ip adresi (ipReservedUser) verilerinin sunucuya iletilmesi\
+      \ için kullanılan veri yapısıdır."
   DhcpScopeResponse:
     allOf:
     - $ref: "#/definitions/GenericResponse"
@@ -19816,6 +20278,28 @@ definitions:
           $ref: "#/definitions/DhcpIpReservedListDTO"
     description: "Ayrılmış ip (DhcpIpReserved) ayrıntılarının listelendiği işlemin\
       \ cevap veri yapısıdır."
+  DhcpIpReservedUserResponse:
+    allOf:
+    - $ref: "#/definitions/GenericResponse"
+    - type: "object"
+      required:
+      - "data"
+      properties:
+        data:
+          $ref: "#/definitions/DhcpIpReservedUserDTO"
+    description: "Ayrılmış ip (DhcpIpReserved) isteğine verilecek cevabın veri yapı\
+      sıdır."
+  DhcpIpReservedUserListResponse:
+    allOf:
+    - $ref: "#/definitions/GenericResponse"
+    - type: "object"
+      required:
+      - "data"
+      properties:
+        data:
+          $ref: "#/definitions/DhcpIpReservedUserListDTO"
+    description: "Ayrılmış ip (DhcpIpReservedUser) ayrıntılarının listelendiği iş\
+      lemin cevap veri yapısıdır."
   DhcpOptionKeyResponse:
     allOf:
     - $ref: "#/definitions/GenericResponse"
@@ -19927,6 +20411,9 @@ definitions:
         openflowVersions:
           type: "string"
           description: "Kontrolcünün konuştuğu openflow versiyonları."
+        featureVisible:
+          type: "boolean"
+          description: "Görevler listesinin gösterilip gösterilmeyeceği bilgisi."
     description: "Kontrolcü düğüm veri yapısı."
   ControllerNodeListDTO:
     allOf:
@@ -21032,6 +21519,9 @@ definitions:
         rawData:
           type: "string"
           description: "Ham data"
+        floatingIp:
+          type: "string"
+          description: ""
     description: "Sanal ağ fonksiyonu tanımı bilgisinin bulunduğu veri yapısı."
   InterfaceAttachments:
     type: "object"
@@ -21363,54 +21853,88 @@ definitions:
       sı"
   NetServiceRecordLaunchByPlacementRequest:
     allOf:
-    - $ref: "#/definitions/GenericRequest"
+    - $ref: "#/definitions/NetServiceRecordLaunchRequest"
     - type: "object"
       required:
-      - "data"
+      - "placementData"
       properties:
-        data:
+        placementData:
           $ref: "#/definitions/NetServiceRecordLaunchByPlacementDTO"
     description: "Mevcut NSD'nin hangi host ve zone'da calismasini saglamak icin yonlendirilmesi\
       \ gereken istek"
-  NetServiceRecordLaunchByPlacementResponse:
-    allOf:
-    - $ref: "#/definitions/GenericResponse"
-    - type: "object"
-      properties:
-        responseData:
-          type: "string"
-          description: ""
-    description: "Ağ servis kayıtı detaylarının dönüldüğü veri yapısı."
   NetServiceRecordLaunchByPlacementDTO:
     allOf:
     - $ref: "#/definitions/BaseDTO"
     - type: "object"
       required:
-      - "nsdId"
+      - "vnfInstancePlacementMap"
+      - "vnfMetadataMap"
       properties:
-        nsdId:
-          type: "string"
-          description: "Lokasyon id"
         vnfInstancePlacementMap:
           $ref: "#/definitions/VnfInstancePlacementMap"
+        vnfMetadataMap:
+          $ref: "#/definitions/VnfMetadataMap"
     description: ""
   VnfInstancePlacementMap:
     type: "object"
     required:
-    - "hostName"
-    - "vnfId"
-    - "zone"
+    - "vnfComputeZonePair"
+    - "vnfName"
     properties:
-      vnfId:
+      vnfName:
         type: "string"
         description: ""
+      vnfComputeZonePair:
+        type: "array"
+        description: ""
+        items:
+          $ref: "#/definitions/VnfComputeZonePair"
+    description: ""
+  VnfComputeZonePair:
+    type: "object"
+    required:
+    - "computeHostName"
+    - "zone"
+    properties:
       zone:
         type: "string"
         description: ""
-      hostName:
+      computeHostName:
+        type: "string"
+        description: ""
+      vimInstanceName:
         type: "string"
         description: ""
     description: ""
+  VnfMetadataMap:
+    allOf:
+    - $ref: "#/definitions/BaseListDTO"
+    - type: "object"
+      required:
+      - "vnfMetadataMapArray"
+      - "vnfName"
+      properties:
+        vnfName:
+          type: "string"
+          description: ""
+        vnfMetadataMapArray:
+          type: "array"
+          description: "Her bir VNF objesinin sahip oldugu bilgiler butunlugu"
+          items:
+            $ref: "#/definitions/VnfMetadataMapArray"
+    description: "VNF'lerin metadata bilgileri"
+  VnfMetadataMapArray:
+    allOf:
+    - $ref: "#/definitions/BaseDTO"
+    - type: "object"
+      properties:
+        mdKey:
+          type: "string"
+          description: ""
+        mdValue:
+          type: "string"
+          description: ""
+    description: "VNF metadata bilgileri"
   VimInfoListDTO:
     allOf:
     - $ref: "#/definitions/BaseListDTO"
@@ -21955,6 +22479,41 @@ definitions:
           $ref: "#/definitions/ComputeHostStatisticListDTO"
     description: "VIM uzerinde bulunan butun compute'ların istatistiki bilgilerin\
       \ tumu"
+  VimVmStatusInfoRequest:
+    allOf:
+    - $ref: "#/definitions/GenericRequest"
+    - type: "object"
+      required:
+      - "vmIp"
+      properties:
+        vmIp:
+          type: "string"
+          description: "OS de bulunan VM in ip si"
+    description: "Ağ servis kayıtı verilerinin sunucuya iletilmesi için kullanılan\
+      \ veri yapısı."
+  VimVmStatusInfoResponse:
+    allOf:
+    - $ref: "#/definitions/GenericResponse"
+    - type: "object"
+      properties:
+        data:
+          $ref: "#/definitions/VimVmStatusInfoDTO"
+    description: "Ağ servis kayıtı detaylarının dönüldüğü veri yapısı."
+  VimVmStatusInfoDTO:
+    allOf:
+    - $ref: "#/definitions/BaseDTO"
+    - type: "object"
+      properties:
+        status:
+          type: "string"
+          description: "VM durumu"
+        hostStatus:
+          type: "string"
+          description: "Compute hostta bulunan VM in durumu"
+        vimId:
+          type: "string"
+          description: "Mevcut VIM in id si"
+    description: "Ağ servis kayıtı bilgisinin bulunduğu veri yapısı."
   CertificateDTO:
     allOf:
     - $ref: "#/definitions/BaseDTO"
@@ -22079,6 +22638,7 @@ definitions:
           $ref: "#/definitions/WAN_PORT_INFO_STATUS"
         linkSpeed:
           type: "integer"
+          format: "int64"
           description: "Geniş alan ağlarının bağlantının hızı."
         linkType:
           description: "Geniş alan ağlarınında bağlantı linkinin tipi."

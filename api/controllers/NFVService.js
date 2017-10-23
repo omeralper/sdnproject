@@ -187,6 +187,27 @@ exports.nsrSavePOST = function(args, res, next) {
 
 /**
 * parameters expected in the args:
+* request (NetServiceRecordRequest)
+**/
+exports.nsrUpdatePOST = function(args, res, next) {
+    var val = proxy.getVal(args);
+    var funcName = "nsrUpdatePOST";
+
+    logger.debug(funcName + ' | request:\n%s', JSON.stringify(val, null, '\t'));
+
+    if (!proxy.run('services.NFV.nsrUpdatePOST', args, res)) {
+        var mockup = require('../models/NetServiceRecordDTO');
+        var response = mockup.update(val);
+
+        logger.debug(funcName + ' | response:\n%s', JSON.stringify(response, null, '\t'));
+        res.setHeader('Content-Type', 'application/json');
+        res.send(response);
+    }
+
+}
+
+/**
+* parameters expected in the args:
 * request (ComputeHostRequest)
 **/
 exports.vimComputeHostGetByIpPOST = function(args, res, next) {
@@ -325,6 +346,27 @@ exports.vimVmStartPOST = function(args, res, next) {
 
     if (!proxy.run('services.NFV.vimVmStartPOST', args, res)) {
         var response = mockupHelper.genResponse({});
+
+        logger.debug(funcName + ' | response:\n%s', JSON.stringify(response, null, '\t'));
+        res.setHeader('Content-Type', 'application/json');
+        res.send(response);
+    }
+
+}
+
+/**
+* parameters expected in the args:
+* request (VimVmStatusInfoRequest)
+**/
+exports.vimVmStatusInfoPOST = function(args, res, next) {
+    var val = proxy.getVal(args);
+    var funcName = "vimVmStatusInfoPOST";
+
+    logger.debug(funcName + ' | request:\n%s', JSON.stringify(val, null, '\t'));
+
+    if (!proxy.run('services.NFV.vimVmStatusInfoPOST', args, res)) {
+        var mockup = require('../models/VimVmStatusInfoDTO');
+        var response = mockup.statusInfo(val);
 
         logger.debug(funcName + ' | response:\n%s', JSON.stringify(response, null, '\t'));
         res.setHeader('Content-Type', 'application/json');

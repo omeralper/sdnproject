@@ -29,3 +29,7 @@ module.exports.emergencyPolicySearchPOST = function emergencyPolicySearchPOST (r
 module.exports.emergencyPolicyStartStopVnfPOST = function emergencyPolicyStartStopVnfPOST (req, res, next) {
   EmergencyPolicy.emergencyPolicyStartStopVnfPOST(req.swagger.params, res, next);
 };
+
+module.exports.emergencyPolicyStopProcessPOST = function emergencyPolicyStopProcessPOST (req, res, next) {
+  EmergencyPolicy.emergencyPolicyStopProcessPOST(req.swagger.params, res, next);
+};

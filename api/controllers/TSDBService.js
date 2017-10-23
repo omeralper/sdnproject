@@ -56,7 +56,8 @@ exports.tsdbQueryPOST = function(args, res, next) {
     logger.debug(funcName + ' | request:\n%s', JSON.stringify(val, null, '\t'));
 
     if (!proxy.run('services.TSDB.tsdbQueryPOST', args, res)) {
-        var response = mockupHelper.genResponse({});
+        var mockup = require('../models/TsdbDataSet');
+        var response = mockup.query(val);
 
         logger.debug(funcName + ' | response:\n%s', JSON.stringify(response, null, '\t'));
         res.setHeader('Content-Type', 'application/json');

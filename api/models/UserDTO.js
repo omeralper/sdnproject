@@ -21,8 +21,8 @@ exports.UserDTO =  {
         timestamp : { name: 'timestamp', type: 'Date', isRequired: true }, 
         username : { name: 'username', type: 'String', isRequired: true }, 
         password : { name: 'password', type: 'String' }, 
-        name : { name: 'name', type: 'String' }, 
-        surname : { name: 'surname', type: 'String' }, 
+        name : { name: 'name', type: 'String', isRequired: true }, 
+        surname : { name: 'surname', type: 'String', isRequired: true }, 
         email : { name: 'email', type: 'String' }, 
         notes : { name: 'notes', type: 'String' }, 
         securityLevel : { name: 'securityLevel', type: 'Integer', isRequired: true }, 
@@ -31,9 +31,9 @@ exports.UserDTO =  {
         created : { name: 'created', type: 'Date' }, 
         modified : { name: 'modified', type: 'Date' }, 
         lastAccess : { name: 'lastAccess', type: 'Date' }, 
-        roleList : { name: 'roleList', type: 'Array', subType: 'RoleDTO' }, 
+        roleList : { name: 'roleList', type: 'Array', subType: 'RoleDTO', isRequired: true }, 
         permList : { name: 'permList', type: 'Array', subType: 'PermDTO' }, 
-        appId : { name: 'appId', type: 'Long' }, 
+        appId : { name: 'appId', type: 'Long', isRequired: true }, 
         parentUserId : { name: 'parentUserId', type: 'Long' }, 
         type : { name: 'type', type: 'Integer' }
     }

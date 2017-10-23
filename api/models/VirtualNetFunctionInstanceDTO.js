@@ -38,7 +38,8 @@ exports.VirtualNetFunctionInstanceDTO =  {
         vimInstanceName : { name: 'vimInstanceName', type: 'String' }, 
         vmIp : { name: 'vmIp', type: 'String' }, 
         failOverDescription : { name: 'failOverDescription', type: 'String' }, 
-        rawData : { name: 'rawData', type: 'String' }
+        rawData : { name: 'rawData', type: 'String' }, 
+        floatingIp : { name: 'floatingIp', type: 'String' }
     }
 }
 

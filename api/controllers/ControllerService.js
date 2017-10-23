@@ -49,6 +49,27 @@ exports.controllerGetPOST = function(args, res, next) {
 
 /**
 * parameters expected in the args:
+* request (GenericIdRequest)
+**/
+exports.controllerHaltPOST = function(args, res, next) {
+    var val = proxy.getVal(args);
+    var funcName = "controllerHaltPOST";
+
+    logger.debug(funcName + ' | request:\n%s', JSON.stringify(val, null, '\t'));
+
+    if (!proxy.run('services.Controller.controllerHaltPOST', args, res)) {
+        var mockup = require('../models/ControllerNodeDTO');
+        var response = mockup.halt(val);
+
+        logger.debug(funcName + ' | response:\n%s', JSON.stringify(response, null, '\t'));
+        res.setHeader('Content-Type', 'application/json');
+        res.send(response);
+    }
+
+}
+
+/**
+* parameters expected in the args:
 * request (ControllerNodeRequest)
 **/
 exports.controllerSavePOST = function(args, res, next) {

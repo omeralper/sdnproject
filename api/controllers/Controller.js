@@ -14,6 +14,10 @@ module.exports.controllerGetPOST = function controllerGetPOST (req, res, next) {
   Controller.controllerGetPOST(req.swagger.params, res, next);
 };
 
+module.exports.controllerHaltPOST = function controllerHaltPOST (req, res, next) {
+  Controller.controllerHaltPOST(req.swagger.params, res, next);
+};
+
 module.exports.controllerSavePOST = function controllerSavePOST (req, res, next) {
   Controller.controllerSavePOST(req.swagger.params, res, next);
 };

@@ -353,7 +353,7 @@ module.exports = (function () {
             var lower_name = name.toLowerCase();
             if (lower_name.indexOf('priority') > -1) return "priority";
             if (lower_name.indexOf('bandwidthunit') > -1)
-            return lower_name;
+                return lower_name;
             if (lower_name.indexOf('bandwidth') > -1) return "bandwidth";
             if (lower_name.indexOf('mac') > -1) return "mac";
             if (lower_name.indexOf('username') > -1) return "username";
@@ -423,6 +423,8 @@ module.exports = (function () {
                     return new Date();
                 case 'boolean':
                     return (this.genRandom(0, 1) == 0);
+                case 'map':
+                    return {'map': this.genRandom(0, 100)}
                 case 'array': {
                     var data = [];
                     for (var i = 0, j = this.genRandom(1, 3); i < j; i++) {
@@ -446,7 +448,7 @@ module.exports = (function () {
             return self.genResponse(list);
         },
 
-        genResponse: function (data) {
+        genResponse: function (data, dataSets) {
             var response = {
                 token: {
                     requestId: self.genRequestId(),
@@ -464,6 +466,7 @@ module.exports = (function () {
             };
 
             if (data) response.data = data;
+            if (dataSets) response.datasets  = dataSets;
 
             response.etag = etag(JSON.stringify(response)).replace(/"/g, '');
             response.digest = sha1(JSON.stringify(response));

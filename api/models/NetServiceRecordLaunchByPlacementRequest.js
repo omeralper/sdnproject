@@ -2,8 +2,9 @@
 
 //Model Definition File for NetServiceRecordLaunchByPlacementRequest.js
 
-//var GenericRequest = require('./GenericRequest');
 //var NetServiceRecordLaunchByPlacementDTO = require('./NetServiceRecordLaunchByPlacementDTO');
+//var NetServiceRecordLaunchDTO = require('./NetServiceRecordLaunchDTO');
+//var NetServiceRecordLaunchRequest = require('./NetServiceRecordLaunchRequest');
 //var SecurityToken = require('./SecurityToken');
 
 'use strict';
@@ -17,7 +18,9 @@ exports.NetServiceRecordLaunchByPlacementRequest =  {
         token : { name: 'token', type: 'SecurityToken', isRequired: true }, 
         etag : { name: 'etag', type: 'String' }, 
         digest : { name: 'digest', type: 'String' }, 
-        data : { name: 'data', type: 'NetServiceRecordLaunchByPlacementDTO', isRequired: true }
+        nsdId : { name: 'nsdId', type: 'String' }, 
+        data : { name: 'data', type: 'NetServiceRecordLaunchDTO', isRequired: true }, 
+        placementData : { name: 'placementData', type: 'NetServiceRecordLaunchByPlacementDTO', isRequired: true }
     }
 }
 

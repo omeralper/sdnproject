@@ -101,7 +101,7 @@ function getOptions() {
 
 function shutdown() {
     try {
-        log4js.shutdown(function(){});
+        log4js.shutdown();
     } catch (err) {
         console.log('LOG4JS - shutdown error: %s', err.message);
     }

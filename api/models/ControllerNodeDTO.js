@@ -28,7 +28,8 @@ exports.ControllerNodeDTO =  {
         clusterId : { name: 'clusterId', type: 'String' }, 
         nmNodeId : { name: 'nmNodeId', type: 'String' }, 
         controllerNodeId : { name: 'controllerNodeId', type: 'String' }, 
-        openflowVersions : { name: 'openflowVersions', type: 'String' }
+        openflowVersions : { name: 'openflowVersions', type: 'String' }, 
+        featureVisible : { name: 'featureVisible', type: 'Boolean' }
     }
 }
 

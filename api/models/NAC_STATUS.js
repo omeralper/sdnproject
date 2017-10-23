@@ -4,7 +4,7 @@
 
 'use strict';
 /**
-* Son kullanıcı nesnelerinin genel durumunu belirten ENUM değeri. Değerler şunlardır;  | Adı      | Açıklama    | |:---------|:------------| | ACTIVE   | Aktif nesne | | PASSIVE  | Pasif nesne | 
+* Son kullanıcı nesnelerinin genel durumunu belirten ENUM değeri. Değerler şunlardır;  | Adı          | Açıklama                  | |:---------    |:--------------------------| | ACTIVE       | Aktif nesne               | | PASSIVE      | Pasif nesne               | 
 */
 exports.NAC_STATUS = {
     type:'enum',

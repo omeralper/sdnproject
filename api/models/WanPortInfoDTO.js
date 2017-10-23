@@ -31,7 +31,7 @@ exports.WanPortInfoDTO =  {
         jitter : { name: 'jitter', type: 'String' }, 
         miss : { name: 'miss', type: 'String' }, 
         status : { name: 'status', type: 'WAN_PORT_INFO_STATUS' }, 
-        linkSpeed : { name: 'linkSpeed', type: 'Integer', isRequired: true }, 
+        linkSpeed : { name: 'linkSpeed', type: 'Long', isRequired: true }, 
         linkType : { name: 'linkType', type: 'WAN_PORT_TYPE' }, 
         speedUnit : { name: 'speedUnit', type: 'BW_UNIT', isRequired: true }
     }

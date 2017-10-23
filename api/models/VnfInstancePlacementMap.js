@@ -2,6 +2,7 @@
 
 //Model Definition File for VnfInstancePlacementMap.js
 
+//var VnfComputeZonePair = require('./VnfComputeZonePair');
 
 'use strict';
 /**
@@ -11,9 +12,8 @@ exports.VnfInstancePlacementMap =  {
     type:'class',
     name:'VnfInstancePlacementMap',
     fields: {
-        vnfId : { name: 'vnfId', type: 'String', isRequired: true }, 
-        zone : { name: 'zone', type: 'String', isRequired: true }, 
-        hostName : { name: 'hostName', type: 'String', isRequired: true }
+        vnfName : { name: 'vnfName', type: 'String', isRequired: true }, 
+        vnfComputeZonePair : { name: 'vnfComputeZonePair', type: 'Array', subType: 'VnfComputeZonePair', isRequired: true }
     }
 }
 

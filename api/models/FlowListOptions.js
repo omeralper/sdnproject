@@ -17,7 +17,8 @@ exports.FlowListOptions =  {
         pageSize : { name: 'pageSize', type: 'Long' }, 
         sortOptions : { name: 'sortOptions', type: 'SortOptions' }, 
         fields : { name: 'fields', type: 'Array', subType: 'string' }, 
-        id : { name: 'id', type: 'String', isRequired: true }
+        id : { name: 'id', type: 'String', isRequired: true }, 
+        mvtnNetworkId : { name: 'mvtnNetworkId', type: 'String' }
     }
 }
 
