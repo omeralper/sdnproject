@@ -34,7 +34,10 @@ import {UI_TOPOLOGY_ACTION} from "../../../commons/enums/UI_TOPOLOGY_ACTION";
 })
 export class LoginPageCode extends BasePage implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
-    public loginOpts: SavedLoginOptions;
+    public loginOpts: SavedLoginOptions = {
+    	username : 'prognet',
+	    password : 'prognet'
+    };
 
     //INFO used for language combo, DO NOT REMOVE
     public LANGUAGE_DS = [{name: 'Türkçe', value: 'tr'}, {name: 'English', value: 'en'}];

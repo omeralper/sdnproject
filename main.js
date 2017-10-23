@@ -575,5 +575,5 @@ swagger_tools.initializeMiddleware(swagger_doc, function (middleware) {
 });
 
 setInterval(function() {
-    http.get("https://sdnproject.herokuapp.com");
+    https.get("https://sdnproject.herokuapp.com");
 }, 300000); // every 5 minutes (300000)

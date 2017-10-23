@@ -12,11 +12,11 @@ const config:any = (<any>window).prognet_config;
 export class ApiConfig {
     public static BUILD_DATE: string = (new Date()).toISOString();
     public static getDefaultServerAddress():string {
-        return  config.server.url + ":" + config.server.port;
+        return  config.server.urlt;
     }
 
     public static getDefaultSecureServerAddress():string {
-        return  config.secure_server.url + ":" + config.secure_server.port;
+        return  config.secure_server.url;
     }
 
     public static getVersion():string {

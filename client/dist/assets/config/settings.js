@@ -1,11 +1,11 @@
 window.prognet_config = {
     "server": {
         "url": "sdnproject.herokuapp.com",
-        "port": 5000
+        "port": ''
     },
     "secure_server": {
         "url": "sdnproject.herokuapp.com",
-        "port": 5000
+        "port": ''
     },
     "version": {
         "sprint": "Milat-UI-1.4.3-Develop",
