@@ -46,3 +46,4 @@ Thumbs.db
 /src/*.js
 /src/**/*.js.map
 /src/**/*.js
+!/src/assets/config/settings.js

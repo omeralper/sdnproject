@@ -39,3 +39,22 @@ config/runtime.yaml
 /ssl/signed-freessl/milat.info/b/
 /ssl/signed-freessl/milat.online/b/
 
+dist/inline.bundle.js
+dist/inline.bundle.js.map
+dist/main.bundle.js
+dist/main.bundle.js.map
+dist/polyfills.bundle.js
+dist/polyfills.bundle.js.map
+dist/scripts.bundle.js
+dist/scripts.bundle.js.map
+dist/styles.bundle.js
+dist/styles.bundle.js.map
+dist/vendor.bundle.js
+dist/vendor.bundle.js.map
+src/assets/config/
+src/assets/global/plugins/bootstrap-datetimepicker/js/
+src/assets/global/scripts/
+src/assets/layouts/global/
+src/assets/layouts/layout5/scripts/
+src/assets/pages/scripts/
+src/libs/idle-timer/

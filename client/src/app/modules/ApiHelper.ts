@@ -178,7 +178,7 @@ export class ApiHelper {
     }
 
     getServerPingAddress() {
-        return this.getServerUrl() + '/prognetnm/favicon.ico?_=' + this.utils.genTimestamp().getTime();
+        return this.getServerUrl() + '/favicon.ico?_=' + this.utils.genTimestamp().getTime();
     }
 
     getAuthorizationKey() {
@@ -186,11 +186,11 @@ export class ApiHelper {
     }
 
     getEventsWebSocketUrl() {
-        return this.getWebSocketUrl() + "/prognetnm/events";
+        return this.getWebSocketUrl() + "/events";
     }
 
     getAlarmsWebSocketUrl() {
-        return this.getWebSocketUrl() + "/prognetnm/alarms";
+        return this.getWebSocketUrl() + "/alarms";
     }
 
     isSecureConnection(): boolean {
