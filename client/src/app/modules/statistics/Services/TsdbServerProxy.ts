@@ -19,7 +19,7 @@ export class TsdbServerProxy {
 
 	}
 
-	tsdbQueryPOST(request: TsdbQueryRequest): Observable<TsdbQueryResponse> {
+	tsdbQueryPOST(request: TsdbQueryRequest) {
 		let response = this.tsdbApi.tsdbQueryPOST(request, false).mergeMap((response: TsdbQueryResponse) => {
 			if (this.randomData) {
 				response = this.generator.generateRandomData(request);

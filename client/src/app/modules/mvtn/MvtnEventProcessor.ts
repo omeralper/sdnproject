@@ -36,36 +36,39 @@ export class MvtnEventProcessor extends EVENT_SYSTEM implements IEventProcessor 
         public uiHelper: UIHelper) {
         super();
     }
-
-    public process(event: IEventData<AlarmDTO>, lastStatus: IEventProcessStatus): IEventProcessStatus {
-        if (event.eventData.source == ALARMSOURCE.MVTN) {
-            this.eventsManager.emit(MvtnEventProcessor.EVENT, event.eventData);
-
-            switch (event.eventData.name) {
-                case "MvtnCreated":
-                    this.eventsManager.emit(MvtnEventProcessor.VTN_REQUEST_ACCEPTED, event.eventData);
-                    this.notifyVTNRequest(event.eventData, DIALOG_TYPES.SUCCESS);
-                    break;
-                case "MvtnRejected":
-                    this.eventsManager.emit(MvtnEventProcessor.VTN_REQUEST_REJECTED, event.eventData);
-                    this.notifyVTNRequest(event.eventData, DIALOG_TYPES.SUCCESS);
-                    break;
-                case "MvtnUpdateAccepted":
-                    this.eventsManager.emit(MvtnEventProcessor.VTN_UPDATE_REQUEST_ACCEPTED, event.eventData);
-                    this.notifyVTNRequest(event.eventData, DIALOG_TYPES.SUCCESS);
-                    break;
-                case "MvtnUpdateRejected":
-                    this.eventsManager.emit(MvtnEventProcessor.VTN_UPDATE_REQUEST_REJECTED, event.eventData);
-                    this.notifyVTNRequest(event.eventData, DIALOG_TYPES.SUCCESS);
-                    break;
-                default:
-                    this.notifyVTNRequest(event.eventData, DIALOG_TYPES.INFO);
-            }
-
-            return <IEventProcessStatus>{isHandled: true, isEmitEvent: false};
-        }
-        return lastStatus;// <IEventProcessStatus>{ isHandled:false, isEmitEvent: true};
+    public process (event: IEventData<{}>, lastStatus: IEventProcessStatus) : IEventProcessStatus{
+        return <IEventProcessStatus>{isHandled: true, isEmitEvent: false};
     }
+
+    // public process(event: IEventData<AlarmDTO>, lastStatus: IEventProcessStatus): IEventProcessStatus {
+    //     if (event.eventData.source == ALARMSOURCE.MVTN) {
+    //         this.eventsManager.emit(MvtnEventProcessor.EVENT, event.eventData);
+    //
+    //         switch (event.eventData.name) {
+    //             case "MvtnCreated":
+    //                 this.eventsManager.emit(MvtnEventProcessor.VTN_REQUEST_ACCEPTED, event.eventData);
+    //                 this.notifyVTNRequest(event.eventData, DIALOG_TYPES.SUCCESS);
+    //                 break;
+    //             case "MvtnRejected":
+    //                 this.eventsManager.emit(MvtnEventProcessor.VTN_REQUEST_REJECTED, event.eventData);
+    //                 this.notifyVTNRequest(event.eventData, DIALOG_TYPES.SUCCESS);
+    //                 break;
+    //             case "MvtnUpdateAccepted":
+    //                 this.eventsManager.emit(MvtnEventProcessor.VTN_UPDATE_REQUEST_ACCEPTED, event.eventData);
+    //                 this.notifyVTNRequest(event.eventData, DIALOG_TYPES.SUCCESS);
+    //                 break;
+    //             case "MvtnUpdateRejected":
+    //                 this.eventsManager.emit(MvtnEventProcessor.VTN_UPDATE_REQUEST_REJECTED, event.eventData);
+    //                 this.notifyVTNRequest(event.eventData, DIALOG_TYPES.SUCCESS);
+    //                 break;
+    //             default:
+    //                 this.notifyVTNRequest(event.eventData, DIALOG_TYPES.INFO);
+    //         }
+    //
+    //         return <IEventProcessStatus>{isHandled: true, isEmitEvent: false};
+    //     }
+    //     return lastStatus;// <IEventProcessStatus>{ isHandled:false, isEmitEvent: true};
+    // }
 
     public notifyVTNRequest(eventData: AlarmDTO, dialogType: DIALOG_TYPES) {
         if (eventData.guiNotification == GUINOTIFICATION.VISIBLE

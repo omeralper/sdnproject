@@ -1,7 +1,6 @@
 /**
  * Created by yildirayme on 01.05.2016.
  */
-/// <reference path="../../../libs/perm_parser/permParser.d.ts" />
 import {Injectable} from "@angular/core";
 import {Utils} from "../Utils";
 import {BaseServices} from "../BaseServices";
@@ -320,14 +319,15 @@ export class PermManager {
     }
 
     public isSatisfied(targetPerms: (string | string[]| PermParseTree), allPerms: string[]): boolean {
-        if (is.string(targetPerms)) {
-            return (allPerms.indexOf(<string>targetPerms) >= 0);
-        } else if (is.array(targetPerms)) {
-            return this.areAllSatisfied(<string[]>targetPerms, allPerms);
-        } else {
-            var permGroup = <PermParseTree>targetPerms;
-            return this.executePermParseTree(permGroup, allPerms);
-        }
+        return true;
+        // if (is.string(targetPerms)) {
+        //     return (allPerms.indexOf(<string>targetPerms) >= 0);
+        // } else if (is.array(targetPerms)) {
+        //     return this.areAllSatisfied(<string[]>targetPerms, allPerms);
+        // } else {
+        //     var permGroup = <PermParseTree>targetPerms;
+        //     return this.executePermParseTree(permGroup, allPerms);
+        // }
     }
 
     public executePermParseTree(permTree: PermParseTree, allPerms: string[]): boolean {
@@ -399,7 +399,7 @@ export class PermManager {
     public parsePerm(permStr: string): any {
         var permGroup = this.parseCache[permStr];
         if (is.not.existy(permGroup)) {
-            permGroup = PermParser.parse((is.existy(permStr) && is.not.empty(permStr)) ? permStr : "true");//if no perm string then return true;
+            permGroup = permStr; // PermParser.parse((is.existy(permStr) && is.not.empty(permStr)) ? permStr : "true");//if no perm string then return true;
             this.parseCache[permStr] = permGroup;
         }
         return permGroup;
